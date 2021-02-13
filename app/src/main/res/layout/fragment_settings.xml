@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    tools:context=".ui.main.settings.SettingsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:drawableStart="@drawable/ic_rules"
+        android:drawablePadding="16dp"
+        android:layout_marginEnd="@dimen/two_space"
+        android:id="@+id/filters_link"
+        android:background="?selectableItemBackground"
+        android:drawableEnd="@drawable/ic_caret_right"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        android:text="Filters" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:background="@color/colorGrey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_shield_protected"
+        android:drawablePadding="16dp"
+        android:gravity="center|start"
+        android:layout_marginEnd="@dimen/two_space"
+        android:id="@+id/protection_link"
+        android:background="?selectableItemBackground"
+        android:drawableEnd="@drawable/ic_caret_right"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        android:text="Protection Report" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:background="@color/colorGrey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorRed"
+        android:drawablePadding="16dp"
+        android:gravity="center|start"
+        android:id="@+id/logout_link"
+        android:background="?selectableItemBackground"
+        android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/two_space"
+        android:text="Logout" />
+
+</LinearLayout>

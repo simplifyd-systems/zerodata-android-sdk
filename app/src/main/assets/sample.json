@@ -1,0 +1,975 @@
+{
+  "statusDistribution": {
+    "allowed": 9502,
+    "blocked_customer_policy": 1752,
+    "blocked_global_policy": 685,
+    "blocked_malicious": 6,
+    "domain_intelligence_error": 1035,
+    "malicious_allowed": 3,
+    "unclassified": 12825
+  },
+  "timeSeriesDistributionPerHour": [
+    {
+      "unclassified": [
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T20:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T19:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T18:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T17:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T16:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T15:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T14:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T13:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T12:00:00Z"
+        },
+        {
+          "sum_value": 9,
+          "time": "2020-06-30T11:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T10:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T09:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T08:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T07:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T06:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T05:00:00Z"
+        },
+        {
+          "sum_value": 4,
+          "time": "2020-06-30T04:00:00Z"
+        },
+        {
+          "sum_value": 10,
+          "time": "2020-06-30T03:00:00Z"
+        },
+        {
+          "sum_value": 6,
+          "time": "2020-06-30T02:00:00Z"
+        },
+        {
+          "sum_value": 8,
+          "time": "2020-06-30T01:00:00Z"
+        },
+        {
+          "sum_value": 10,
+          "time": "2020-06-30T00:00:00Z"
+        },
+        {
+          "sum_value": 5,
+          "time": "2020-06-29T23:00:00Z"
+        },
+        {
+          "sum_value": 23,
+          "time": "2020-06-29T22:00:00Z"
+        },
+        {
+          "sum_value": 89,
+          "time": "2020-06-29T21:00:00Z"
+        },
+        {
+          "sum_value": 14,
+          "time": "2020-06-29T20:00:00Z"
+        }
+      ]
+    },
+    {
+      "passthrough": [
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T18:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T17:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T16:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T15:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T14:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T13:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T12:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T11:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T10:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T09:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T08:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T07:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T06:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T05:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T04:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T03:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T02:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T01:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T00:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-29T23:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-29T22:00:00Z"
+        },
+        {
+          "sum_value": 3,
+          "time": "2020-06-29T21:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-29T20:00:00Z"
+        }
+      ]
+    },
+    {
+      "allowed": [
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T18:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T17:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T16:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T15:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T14:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T13:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T12:00:00Z"
+        },
+        {
+          "sum_value": 17,
+          "time": "2020-06-30T11:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T10:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T09:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T08:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T07:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T06:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T05:00:00Z"
+        },
+        {
+          "sum_value": 4,
+          "time": "2020-06-30T04:00:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T03:00:00Z"
+        },
+        {
+          "sum_value": 3,
+          "time": "2020-06-30T02:00:00Z"
+        },
+        {
+          "sum_value": 5,
+          "time": "2020-06-30T01:00:00Z"
+        },
+        {
+          "sum_value": 15,
+          "time": "2020-06-30T00:00:00Z"
+        },
+        {
+          "sum_value": 2,
+          "time": "2020-06-29T23:00:00Z"
+        },
+        {
+          "sum_value": 40,
+          "time": "2020-06-29T22:00:00Z"
+        },
+        {
+          "sum_value": 97,
+          "time": "2020-06-29T21:00:00Z"
+        },
+        {
+          "sum_value": 23,
+          "time": "2020-06-29T20:00:00Z"
+        }
+      ]
+    }
+  ],
+  "timeSeriesDistributionPerMinute": [
+    {
+      "unclassified": [
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:54:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:53:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:52:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:51:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:50:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:49:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:48:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:47:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:46:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:45:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:44:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:43:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:42:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:41:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:40:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:39:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:38:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:37:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:36:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:35:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:34:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:33:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:32:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:31:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:30:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:29:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:28:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:27:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:26:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:25:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:24:00Z"
+        },
+        {
+          "sum_value": 1,
+          "time": "2020-06-30T20:23:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:22:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:21:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:20:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:19:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:18:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:17:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:16:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:15:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:14:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:13:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:12:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:11:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:10:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:09:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:08:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:07:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:06:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:05:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:04:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:03:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:02:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:01:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T20:00:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:59:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:58:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:57:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:56:00Z"
+        },
+        {
+          "sum_value": 0,
+          "time": "2020-06-30T19:55:00Z"
+        }
+      ]
+    }
+  ],
+  "timeSeriesPerHour": [
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T20:00:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T19:00:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T18:00:00Z"
+    },
+    {
+      "sum_value": 2,
+      "time": "2020-06-30T17:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T16:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T15:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T14:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T13:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T12:00:00Z"
+    },
+    {
+      "sum_value": 26,
+      "time": "2020-06-30T11:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T10:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T09:00:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T08:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T07:00:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T06:00:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T05:00:00Z"
+    },
+    {
+      "sum_value": 8,
+      "time": "2020-06-30T04:00:00Z"
+    },
+    {
+      "sum_value": 11,
+      "time": "2020-06-30T03:00:00Z"
+    },
+    {
+      "sum_value": 9,
+      "time": "2020-06-30T02:00:00Z"
+    },
+    {
+      "sum_value": 13,
+      "time": "2020-06-30T01:00:00Z"
+    },
+    {
+      "sum_value": 25,
+      "time": "2020-06-30T00:00:00Z"
+    },
+    {
+      "sum_value": 7,
+      "time": "2020-06-29T23:00:00Z"
+    },
+    {
+      "sum_value": 63,
+      "time": "2020-06-29T22:00:00Z"
+    },
+    {
+      "sum_value": 189,
+      "time": "2020-06-29T21:00:00Z"
+    },
+    {
+      "sum_value": 37,
+      "time": "2020-06-29T20:00:00Z"
+    }
+  ],
+  "timeSeriesPerMinute": [
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:54:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:53:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:52:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:51:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:50:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:49:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:48:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:47:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:46:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:45:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:44:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:43:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:42:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:41:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:40:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:39:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:38:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:37:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:36:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:35:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:34:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:33:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:32:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:31:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:30:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:29:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:28:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:27:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:26:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:25:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:24:00Z"
+    },
+    {
+      "sum_value": 1,
+      "time": "2020-06-30T20:23:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:22:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:21:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:20:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:19:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:18:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:17:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:16:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:15:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:14:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:13:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:12:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:11:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:10:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:09:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:08:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:07:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:06:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:05:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:04:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:03:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:02:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:01:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T20:00:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T19:59:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T19:58:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T19:57:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T19:56:00Z"
+    },
+    {
+      "sum_value": 0,
+      "time": "2020-06-30T19:55:00Z"
+    }
+  ],
+  "topContentCategories": {
+    "Business Services": 3348,
+    "Chat": 484,
+    "Ecommerce/Shopping": 924,
+    "File Storage": 476,
+    "Financial Institutions": 166,
+    "Forums/Message boards": 113,
+    "Infrastructure": 2032,
+    "Instant Messaging": 290,
+    "Movies": 980,
+    "News/Media": 339,
+    "Non-Profits": 4667,
+    "Professional Networking": 224,
+    "SaaS and B2B": 637,
+    "Search Engines": 3522,
+    "Social Networking": 657,
+    "Software Updates": 126,
+    "Software/Technology": 10846,
+    "Video Sharing": 262,
+    "Webmail": 416
+  },
+  "topCustomersByRequests": {
+    "Test User": 484,
+    "Test User1": 784,
+    "Test User2": 4484,
+    "Test User3": 4874,
+    "abiola fajimi": 17559,
+    "unnamed customers": 7765
+  },
+  "topDomains": {
+    "chat-pa.clients6.google.com": 317,
+    "clients4.google.com": 324,
+    "clients6.google.com": 244,
+    "cloud-ec-asn.amp.cisco.com": 606,
+    "embeds.driftcdn.com": 236,
+    "isc.org": 4583,
+    "live.github.com": 311,
+    "local": 280,
+    "mail.google.com": 210,
+    "ocsp.apple.com": 312,
+    "play.google.com": 873,
+    "safebrowsing.googleapis.com": 331,
+    "ssl.gstatic.com": 387,
+    "version.bind": 2039,
+    "web.whatsapp.com": 202,
+    "www.facebook.com": 263,
+    "www.google.com": 261
+  },
+  "topMaliciousCustomers": {
+    "": 2,
+    "Unknown": 4,
+    "Unknown1": 5,
+    "Unknown3": 9,
+    "Unknown2": 10
+  },
+  "topSecurityCategories": {
+    "Malware": 9,
+    "Phishing": 8,
+    "Potentially Harmful": 1
+  }
+}

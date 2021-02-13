@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemBankContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/intro_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_intro_1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.4"
+        android:visibility="gone"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".50" />
+
+
+    <TextView
+        android:id="@+id/intro_title"
+        style="@style/Theme.Simplifyd.BoldIntroText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/six_space"
+        android:layout_marginBottom="@dimen/two_space"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/one_space"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_24"
+        app:layout_constraintEnd_toEndOf="@id/intro_desc"
+        app:layout_constraintStart_toStartOf="@+id/intro_desc"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        tools:text="See where your \n money is going." />
+
+    <TextView
+        android:id="@+id/intro_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_space"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/four_space"
+        android:textSize="@dimen/text_16"
+        android:lineSpacingMultiplier="1.5"
+        app:layout_constraintTop_toBottomOf="@+id/intro_title"
+        app:layout_constraintEnd_toEndOf="@+id/intro_bg"
+        app:layout_constraintStart_toStartOf="@+id/intro_bg"
+        tools:text="Effortlessly track your money and stay on top on your spendings." />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

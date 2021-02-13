@@ -1,0 +1,55 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->O
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorGrey</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/gt_walsheim_medium_web</item>
+    </style>
+
+    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="Theme.Simplifyd.BoldIntroText" parent="">
+        <item name="android:fontFamily">@font/gt_walsheim_medium_web</item>
+        <item name="fontFamily">@font/gt_walsheim_medium_web</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.Simplifyd.ActionButton" parent="Theme.MaterialComponents.Light">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/action_button_text_selector</item>
+        <item name="backgroundTint">@color/action_button_bg_selector</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="Theme.ToggleButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="backgroundTint">@color/tab_bg_selector</item>
+        <item name="android:textColor">@color/tab_text_selector</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="Theme.Simplifyd.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

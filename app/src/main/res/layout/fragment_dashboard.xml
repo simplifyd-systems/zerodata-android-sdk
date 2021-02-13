@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:id="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/nine_space"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/connect_switch"
+            android:layout_width="140dp"
+            android:layout_height="85dp"
+            android:layout_marginBottom="?actionBarSize"
+            android:background="@drawable/switch_selector"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/protection_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/two_space"
+            android:gravity="center|start"
+            android:text="Your Internet is Not Protected."
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/connect_switch"
+            app:layout_constraintStart_toStartOf="@+id/connect_switch"
+            app:layout_constraintTop_toBottomOf="@+id/connect_switch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-16dp"
+        app:cardBackgroundColor="#F9F9F9"
+        app:cardCornerRadius="@dimen/two_space"
+        app:cardElevation="@dimen/half_space">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_margin="@dimen/four_space"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:id="@+id/help_text"
+                android:lineSpacingMultiplier="1.2"
+                android:gravity="center"
+                android:text="@string/how_does_simplifyd_work_we"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
