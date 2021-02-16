@@ -55,78 +55,7 @@
         android:id="@+id/top_domains_parent"
         app:strokeWidth="1dp">
 
-        <TextView
-            android:id="@+id/top_domains"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:text="@string/top_domains"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBlack"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/domains_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="@dimen/three_space"
-            android:gravity="center"
-            android:text="@string/domain"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_domains" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:gravity="center"
-            android:text="@string/request_count_label"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/guideline"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/domains_label" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginVertical="@dimen/two_space"
-            android:layout_marginHorizontal="@dimen/two_space"
-            android:layout_marginTop="@dimen/one_space"
-            android:id="@+id/horizontal_div"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/domains_label"
-            android:background="#DFE2E6" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/guideline"
-            app:layout_constraintGuide_percent=".75"
-            android:layout_height="wrap_content" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/six_space"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/verticalDivider"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#DFE2E6" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/topDomainsRv"
@@ -135,8 +64,9 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/two_space"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@+id/horizontal_div" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ProgressBar

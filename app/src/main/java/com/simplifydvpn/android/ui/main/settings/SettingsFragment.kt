@@ -3,13 +3,12 @@ package com.simplifydvpn.android.ui.main.settings
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.ui.login.LoginActivity
+import com.simplifydvpn.android.ui.main.MainActivity
 import com.simplifydvpn.android.ui.main.profile.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -30,9 +29,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
 
         logout_link.setOnClickListener {
-            viewModel.logOut()
-            startActivity(Intent(context, LoginActivity::class.java))
-            activity?.finish()
+            (requireActivity() as? MainActivity)?.let{
+                if(it.isVPNConnected()){
+                    it.disconnectVPN()
+                }else{
+                    viewModel.logOut()
+                    startActivity(Intent(context, LoginActivity::class.java))
+                    activity?.finish()
+                }
+            }
         }
     }
 

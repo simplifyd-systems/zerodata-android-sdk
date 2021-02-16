@@ -24,6 +24,8 @@
         <activity
             android:name="com.simplifydvpn.android.ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan"/>
+
+
     </application>
 
 </manifest>

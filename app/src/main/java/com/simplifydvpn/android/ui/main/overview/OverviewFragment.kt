@@ -1,49 +1,65 @@
 package com.simplifydvpn.android.ui.main.overview
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.work.Constraints
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.google.android.material.button.MaterialButton
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.data.local.PreferenceManager
+import com.simplifydvpn.android.scheduling.RestartWorkWM
 import com.simplifydvpn.android.ui.main.MainActivity
 import com.simplifydvpn.android.ui.main.MainViewModel
+import com.simplifydvpn.android.ui.main.bottomsheets.InventorySortBottomDialogFragment
+import com.simplifydvpn.android.ui.main.bottomsheets.PauseMode
 import com.simplifydvpn.android.utils.Status
+import com.simplifydvpn.android.utils.getColorInt
 import com.simplifydvpn.android.utils.showRetrySnackBar
-import de.blinkt.openvpn.LaunchVPN
-import de.blinkt.openvpn.VpnProfile
-import de.blinkt.openvpn.activities.DisconnectVPN
 import de.blinkt.openvpn.core.ConnectionStatus
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import java.util.concurrent.TimeUnit
 
 
 @ExperimentalStdlibApi
-class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener {
+class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
+    InventorySortBottomDialogFragment.Companion.Callback {
 
     private val viewModel by viewModels<OverviewViewModel>()
     private val mainViewModel by activityViewModels<MainViewModel>()
+    private var btnProtectMe: MaterialButton? = null
 
-
-    private val checkChangedListener = object : CompoundButton.OnCheckedChangeListener {
-        override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-            PreferenceManager.getProfileName()?.let {
-                startOrStopOpenVPN(ProfileManager.get(requireContext(), it))
+    private val checkChangedListener =
+        CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked.not()) {
+                connect_switch.isChecked = true
+                InventorySortBottomDialogFragment
+                    .newInstance()
+                    .show(childFragmentManager, DISCONNECT_FRAGMENT)
+            } else {
+                PreferenceManager.getProfileName()?.let {
+                    (requireActivity() as MainActivity).startOrStopOpenVPN(
+                        ProfileManager.get(
+                            requireContext(),
+                            it
+                        )
+                    )
+                }
             }
         }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,12 +78,13 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             null
         )
 
+        btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
+
         requireActivity().findViewById<View>(R.id.hamburger).setOnClickListener {
             findNavController().navigate(R.id.action_navigation_overview_to_navigation_settings)
         }
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
-        connect_switch.setOnCheckedChangeListener(checkChangedListener)
 
     }
 
@@ -114,22 +131,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         })
     }
 
-    private fun startOrStopOpenVPN(profile: VpnProfile) {
-        if (VpnStatus.isVPNActive() && profile.uuidString == VpnStatus.getLastConnectedVPNProfile()) {
-            val disconnectVPN = Intent(activity, DisconnectVPN::class.java)
-            startActivity(disconnectVPN)
-        } else {
-            startOpenVPN(profile)
-        }
-    }
-
-
-    private fun startOpenVPN(profile: VpnProfile) {
-        val intent = Intent(activity, LaunchVPN::class.java)
-        intent.putExtra(LaunchVPN.EXTRA_KEY, profile.uuid.toString())
-        intent.action = Intent.ACTION_MAIN
-        startActivity(intent)
-    }
 
     override fun updateState(
         state: String?,
@@ -147,30 +148,97 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                (requireActivity() as MainActivity).customiseProtectMeButton(true)
+                btnProtectMe?.apply {
+                    backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.colorGreen)
+                    strokeColor = ColorStateList.valueOf(getColorInt(R.color.colorGreen))
+                    icon = ContextCompat.getDrawable(context, R.drawable.ic_check_shield)
+                    iconTint = ColorStateList.valueOf(getColorInt(R.color.white))
+                    setTextColor(getColorInt(R.color.white))
+                    toggle_to_protect.isVisible = false
+                    text = getString(R.string.you_re_protected)
+                }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
                 protection_status.text = "Connecting"
                 connect_switch.setOnCheckedChangeListener(null)
-                connect_switch.isChecked = false
+                connect_switch.isChecked = true
                 connect_switch.isEnabled = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                (requireActivity() as MainActivity).customiseProtectMeButton(false)
+            }else if (level == ConnectionStatus.LEVEL_VPNPAUSED ) {
+                progressBar.isVisible = false
+                protection_status.text = "Paused"
+                connect_switch.setOnCheckedChangeListener(null)
+                connect_switch.isChecked = false
+                connect_switch.isEnabled = false
+                showNotProtectedBtn()
+                connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_NOTCONNECTED) {
                 protection_status.text = "Your Internet is Not Protected."
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
+                toggle_to_protect.isVisible = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                (requireActivity() as MainActivity).customiseProtectMeButton(false)
+                showNotProtectedBtn()
             }
         }
+    }
+
+    private fun showNotProtectedBtn() {
+        btnProtectMe?.apply {
+            backgroundTintList =
+                ContextCompat.getColorStateList(context, R.color.colorDarkRed)
+            strokeColor = ColorStateList.valueOf(getColorInt(R.color.colorDarkRed))
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_remove_shield)
+            iconTint = ColorStateList.valueOf(getColorInt(R.color.white))
+            setTextColor(getColorInt(R.color.white))
+            text = getString(R.string.protect_me)
+        }
+    }
+
+    private fun enqueueRestart(minutes:Int){
+
+        WorkManager.getInstance(requireContext()).cancelAllWorkByTag(RestartWorkWM.TAG)
+
+        val constraintsBuilder = Constraints.Builder()
+        val constraints = constraintsBuilder.build()
+        val work = OneTimeWorkRequestBuilder<RestartWorkWM>()
+            .setConstraints(constraints)
+            .setInitialDelay(minutes.toLong(), TimeUnit.MINUTES)
+            .addTag(RestartWorkWM.TAG)
+            .build()
+        val workManager = WorkManager.getInstance(requireContext())
+        workManager.enqueue(work)
     }
 
     override fun setConnectedVPN(uuid: String?) {
 
     }
 
+    override fun onSelectSortParameter(pauseMode: PauseMode) {
+        when(pauseMode){
+            PauseMode.PAUSE_FOR_FIFTEEN_MINUTES -> {
+                enqueueRestart(15)
+                (requireActivity() as? MainActivity)?.pauseVPN()
+            }
+            PauseMode.PAUSE_FOR_ONE_HOUR -> {
+                enqueueRestart(60)
+                (requireActivity() as? MainActivity)?.pauseVPN()
+            }
+            PauseMode.DISABLE -> {
+                (requireActivity() as? MainActivity)?.disconnectVPN()
+            }
+            PauseMode.CANCEL -> {
+
+            }
+        }
+    }
+
+
+    companion object{
+        private const val DISCONNECT_FRAGMENT = "DISCONNECT_FRAGMENT"
+    }
 
 }

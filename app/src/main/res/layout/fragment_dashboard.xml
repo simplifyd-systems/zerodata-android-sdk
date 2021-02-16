@@ -21,6 +21,16 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:src="@drawable/toggle_to_protect_view"
+            android:layout_width="155dp"
+            android:id="@+id/toggle_to_protect"
+            app:layout_constraintBottom_toBottomOf="@+id/connect_switch"
+            android:layout_marginBottom="75dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="40dp"/>
+
         <androidx.appcompat.widget.AppCompatToggleButton
             android:id="@+id/connect_switch"
             android:layout_width="140dp"

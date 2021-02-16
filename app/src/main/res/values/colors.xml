@@ -20,4 +20,6 @@
 
     <color name="intro_indicator_unselected">#DBDBDB</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorSecondaryText">#59617B</color>
+    <color name="colorDivider">#DFE2E6</color>
 </resources>

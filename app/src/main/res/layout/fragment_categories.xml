@@ -44,6 +44,7 @@
         android:layout_marginEnd="16dp"
         app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="@color/colorLightGrey"
+        android:textColorHint="@color/colorLightGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbShowOnlyBlocked">

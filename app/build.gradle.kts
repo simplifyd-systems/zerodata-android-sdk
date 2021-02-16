@@ -4,8 +4,6 @@ plugins {
     id("checkstyle")
     id("kotlin-android")
     id("kotlin-android-extensions")
-//    id("com.google.gms.google-services")
-//    id("com.google.firebase.crashlytics")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("android")

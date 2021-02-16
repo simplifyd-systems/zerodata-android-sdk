@@ -64,7 +64,7 @@ object OpenVpnConfigurator {
 
     private suspend fun saveOVPNProfile(result: VpnProfile): VpnProfile {
         val profile = result
-        profile.mName = "simplifyd-vpn-profile"
+        profile.mName = "vpn-profile"
         profile.mAllowedAppsVpn.add(BuildConfig.APPLICATION_ID)
         profile.mAllowedAppsVpnAreDisallowed = true
         GlobalScope.launch(Dispatchers.Main) {

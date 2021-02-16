@@ -74,8 +74,8 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
 
     public static final String VPNSERVICE_TUN = "vpnservice-tun";
     public final static String ORBOT_PACKAGE_NAME = "org.torproject.android";
-    private static final String PAUSE_VPN = "de.blinkt.openvpn.PAUSE_VPN";
-    private static final String RESUME_VPN = "de.blinkt.openvpn.RESUME_VPN";
+    public static final String PAUSE_VPN = "de.blinkt.openvpn.PAUSE_VPN";
+    public static final String RESUME_VPN = "de.blinkt.openvpn.RESUME_VPN";
 
     public static final String EXTRA_CHALLENGE_TXT = "de.blinkt.openvpn.core.CR_TEXT_CHALLENGE";
     public static final String EXTRA_CHALLENGE_OPENURL = "de.blinkt.openvpn.core.OPENURL_CHALLENGE";
@@ -264,7 +264,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
             priority = PRIORITY_DEFAULT;
 
         if (mProfile != null)
-            nbuilder.setContentTitle(getString(R.string.notifcation_title, mProfile.mName));
+            nbuilder.setContentTitle(mProfile.mName);
         else
             nbuilder.setContentTitle(getString(R.string.notifcation_title_notconnect));
 

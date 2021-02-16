@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.ui.main.rules
+package com.simplifydvpn.android.ui.main.protection
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -20,13 +20,12 @@ import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.item_domain.view.*
 
 @ExperimentalStdlibApi
-class DomainsAdapter(
-    private val onClearDomain: (Rule) -> Unit,
+class ProtectionAdapter(
     @DrawableRes private val emptyStateImage: Int,
     @StringRes private val emptyStateDesc: Int,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var domains = listOf<Rule>()
+    var domains = listOf<String>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -36,7 +35,7 @@ class DomainsAdapter(
         return when (viewType) {
             0 -> EmptyStateViewHolder.create(parent)
             else -> DomainViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_domain, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_domain_small, parent, false)
             )
         }
     }
@@ -74,13 +73,10 @@ class DomainsAdapter(
             return shape
         }
 
-        fun bind(domain: Rule) {
-            itemView.tvDomainName.text = domain.domain
-            itemView.tvDomainTitle.text = domain.domain?.getUrlHost()
-            itemView.btnClear.setOnClickListener { onClearDomain(domain) }
-
+        fun bind(domain: String) {
+            itemView.tvDomainName.text = domain
             Picasso.get()
-                .load(domain.domain + "/favicon.ico")
+                .load("$domain/favicon.ico")
                 .error(R.drawable.ic_domain_placeholder)
                 .into(object : Target {
                     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {

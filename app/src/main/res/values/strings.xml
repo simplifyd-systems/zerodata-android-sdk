@@ -78,4 +78,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="protection_count_text"><![CDATA[In the last 30 days, Simplifyd has protected you from <b>%1$d</b> Threats <br/><br/><font color=\'#C60505\'>How does Simplifyd work?</font>]]></string>
     <string name="how_does_simplifyd_work_we"><![CDATA[<font color=\'#C60505\'>How does Simplifyd work?</font><br/><br/> We route your internet traffic through our servers and serve it through a VPN.]]></string>
+    <string name="how_long_disable">How long do you want to disbale Simplifyd for?</string>
+    <string name="pause_for_fifteen_minutes">Pause for 15 minutes</string>
+    <string name="pause_for_hour">Pause for 1 hour</string>
+    <string name="disable_simplifyd">Disable Simplifyd</string>
 </resources>
