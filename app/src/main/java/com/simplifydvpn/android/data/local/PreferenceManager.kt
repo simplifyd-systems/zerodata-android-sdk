@@ -9,10 +9,29 @@ object PreferenceManager {
     private const val APP_NAME = "APP_NAME"
     private const val VPN_PROFILE_NAME = "VPN_PROFILE_NAME"
 
+    private const val VPN_USERNAME_NAME = "VPN_PROFILE_NAME"
+    private const val VPN_PASSWORD = "VPN_PROFILE_PASSWORD"
+
     lateinit var context: Context
 
     private val preferences by lazy {
         context.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE)
+    }
+
+    fun getAccountPassword():String? = preferences.getString(VPN_PASSWORD, null)
+
+    fun getAccountLogin():String? = preferences.getString(VPN_USERNAME_NAME, null)
+
+    fun saveAccountPassword(password: String) {
+        preferences.edit().apply {
+            putString(VPN_PASSWORD, password)
+        }.apply()
+    }
+
+    fun saveAccountLogin(login: String) {
+        preferences.edit().apply {
+            putString(VPN_USERNAME_NAME, login)
+        }.apply()
     }
 
     fun saveProfileName(name: String) {

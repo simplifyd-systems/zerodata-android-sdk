@@ -8,17 +8,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object APIServiceFactory {
+object SimplerAPIServiceFactory {
 
-    val apiService: APIService
+    val simplerApiService: APIService
         get() {
             val dispatcher = makeDispatcher()
             val loggingInterceptor = makeLoggingInterceptor()
-            val okHttpClient = makeOkHttpClient(loggingInterceptor, dispatcher)
+            val okHttpClient = makeSimplerOkHttpClient(loggingInterceptor, dispatcher)
             val retrofit = makeRetrofit(okHttpClient)
 
             return retrofit.create(APIService::class.java)
         }
+
 
     private fun makeDispatcher(): Dispatcher {
         val dispatcher = Dispatcher()
@@ -36,21 +37,20 @@ object APIServiceFactory {
         }
     }
 
-
-    private fun makeOkHttpClient(
+    private fun makeSimplerOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         dispatcher: Dispatcher
     ): OkHttpClient {
         val httpClientBuilder = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(AuthInterceptor())
-            .addInterceptor(AccessTokenAuthenticator())
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .dispatcher(dispatcher)
 
         return httpClientBuilder.build()
     }
+
 
     private fun makeRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()

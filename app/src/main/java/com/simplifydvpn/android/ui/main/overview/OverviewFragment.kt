@@ -170,7 +170,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 protection_status.text = "Paused"
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
-                connect_switch.isEnabled = false
+                connect_switch.isEnabled = true
                 showNotProtectedBtn()
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_NOTCONNECTED) {

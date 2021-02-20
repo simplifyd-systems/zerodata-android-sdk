@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
+import com.simplifydvpn.android.data.local.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -40,33 +41,36 @@ class FileDownloader @Inject constructor(private val context: Context) {
     }
 
 
-    private fun downloadConfigFile( configFileURL: String): Flow<Result<File>> {
+    private fun downloadConfigFile(configFileURL: String): Flow<Result<File>> {
         val fileName = "ovpn_config.ovpn".replace(" ", "_")
         val channel = ConflatedBroadcastChannel<Result<File>>()
 
         val filePath = "${getRootDirPath(context)}/${fileName}"
         PRDownloader.download(configFileURL, getRootDirPath(context), fileName)
-                .build()
-                .setOnStartOrResumeListener { }
-                .setOnPauseListener { }
-                .setOnProgressListener { }
-                .start(object : OnDownloadListener {
-                    override fun onDownloadComplete() {
-                        GlobalScope.launch(Dispatchers.IO) {
-                            Log.d(FileDownloader::class.java.simpleName, "Downloaded: $filePath")
-                            channel.send(Result.success(File(filePath)))
-                        }
+            .setHeader("Authorization", "Bearer " + PreferenceManager.getToken())
+            .build()
+            .setOnStartOrResumeListener { }
+            .setOnPauseListener { }
+            .setOnProgressListener { }
+            .start(object : OnDownloadListener {
+                override fun onDownloadComplete() {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        Log.d(FileDownloader::class.java.simpleName, "Downloaded: $filePath")
+                        channel.send(Result.success(File(filePath)))
                     }
+                }
 
-                    override fun onError(error: com.downloader.Error?) {
-                        GlobalScope.launch(Dispatchers.IO) {
-                            Log.d(
-                                FileDownloader::class.java.simpleName, "Error downloading ${configFileURL}, :" +
-                                    " ${error?.isConnectionError} ${error?.isServerError} ${error?.connectionException?.localizedMessage} ${error?.serverErrorMessage}")
-                            channel.send(Result.failure(FileDownloaderException(error.toString())))
-                        }
+                override fun onError(error: com.downloader.Error?) {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        Log.d(
+                            FileDownloader::class.java.simpleName,
+                            "Error downloading ${configFileURL}, :" +
+                                    " ${error?.isConnectionError} ${error?.isServerError} ${error?.connectionException?.localizedMessage} ${error?.serverErrorMessage}"
+                        )
+                        channel.send(Result.failure(FileDownloaderException(error.toString())))
                     }
-                })
+                }
+            })
 
         return channel.asFlow()
     }

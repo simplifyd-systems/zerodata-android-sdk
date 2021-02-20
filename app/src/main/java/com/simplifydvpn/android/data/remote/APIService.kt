@@ -4,10 +4,14 @@ import com.simplifydvpn.android.data.model.DashboardData
 import com.simplifydvpn.android.data.model.Rule
 import com.simplifydvpn.android.data.model.User
 import com.simplifydvpn.android.data.model.apiresponse.LoginResponse
+import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
 
 interface APIService {
+
+    @POST("customer/auth/login")
+    fun executeLogin(@Body body: Map<String, @JvmSuppressWildcards Any>): Call<LoginResponse>
 
     @POST("customer/auth/login")
     suspend fun login(@Body body: Map<String, @JvmSuppressWildcards Any>): LoginResponse
