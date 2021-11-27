@@ -190,5 +190,6 @@ dependencies {
 
     kapt("androidx.room:room-compiler:$roomVersion")
     kapt("com.google.dagger:dagger-compiler:$dagger")
+    kapt ("org.xerial:sqlite-jdbc:3.34.0")
 
 }

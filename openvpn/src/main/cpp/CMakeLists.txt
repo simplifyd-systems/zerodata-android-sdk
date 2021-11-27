@@ -34,7 +34,14 @@ endif()
     # Super hacky way to determine flavour
 #-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/arne/software/icsopenvpn/main/build/intermediates/cmake/normal/debug/obj/arm64-v8a
 if (NOT ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} MATCHES "build/intermediates/cmake/.*skeleton.*/")
-    FIND_PACKAGE(SWIG 3.0 REQUIRED)
+    FIND_PACKAGE(SWIG)
+
+    if(SWIG_FOUND)
+        message("SWIG found: ${SWIG_EXECUTABLE}")
+        if(NOT SWIG_fortran_FOUND)
+            message(WARNING "SWIG Fortran bindings cannot be generated")
+        endif()
+    endif()
 
     add_custom_command(OUTPUT "ovpncli_wrap.cxx"
             COMMAND ${CMAKE_COMMAND} -E make_directory ovpn3

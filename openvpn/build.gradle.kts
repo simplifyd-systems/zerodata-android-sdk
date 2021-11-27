@@ -15,18 +15,35 @@ tasks.register<Exec>("generateOpenVPN3Swig") {
     var swigcmd = "swig"
     // Workaround for Mac OS X since it otherwise does not find swig and I cannot get
     // the Exec task to respect the PATH environment :(
-    if (File("/usr/local/bin/swig").exists())
+    if (File("/usr/local/bin/swig").exists()) {
         swigcmd = "/usr/local/bin/swig"
-//    else
-//        print("File not found")
+        print("File found")
+    } else {
+        print("File not found")
+    }
 
     doFirst {
         mkdir(openvpn3SwigFiles)
     }
-    commandLine(listOf(swigcmd, "-outdir", openvpn3SwigFiles, "-outcurrentdir", "-c++", "-java", "-package", "net.openvpn.ovpn3",
-            "-Isrc/main/cpp/openvpn3/client", "-Isrc/main/cpp/openvpn3/",
-            "-o", "${openvpn3SwigFiles}/ovpncli_wrap.cxx", "-oh", "${openvpn3SwigFiles}/ovpncli_wrap.h",
-            "src/main/cpp/openvpn3/javacli/ovpncli.i"))
+    commandLine(
+        listOf(
+            swigcmd,
+            "-outdir",
+            openvpn3SwigFiles,
+            "-outcurrentdir",
+            "-c++",
+            "-java",
+            "-package",
+            "net.openvpn.ovpn3",
+            "-Isrc/main/cpp/openvpn3/client",
+            "-Isrc/main/cpp/openvpn3/",
+            "-o",
+            "${openvpn3SwigFiles}/ovpncli_wrap.cxx",
+            "-oh",
+            "${openvpn3SwigFiles}/ovpncli_wrap.h",
+            "src/main/cpp/openvpn3/javacli/ovpncli.i"
+        )
+    )
 }
 
 val swigTask = tasks.named("generateOpenVPN3Swig")
@@ -107,7 +124,9 @@ android {
             isUniversalApk = true
         }
     }
+
     ndkVersion = "21.0.6113669"
+
 }
 
 
@@ -122,7 +141,7 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:$coreVersion")
     implementation("androidx.annotation:annotation:1.1.0")
-    implementation( "androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.70")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.0.0")
