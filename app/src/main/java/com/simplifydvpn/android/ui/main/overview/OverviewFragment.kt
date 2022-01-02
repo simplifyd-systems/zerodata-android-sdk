@@ -33,6 +33,7 @@ import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.concurrent.TimeUnit
 import com.simplifydvpn.android.ui.login.LoginActivity
+import android.net.Uri
 
 @ExperimentalStdlibApi
 class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
@@ -94,6 +95,12 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
 
+        help_text.setOnClickListener {
+            val url = "https://edge.simplifyd.com/howtos"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
