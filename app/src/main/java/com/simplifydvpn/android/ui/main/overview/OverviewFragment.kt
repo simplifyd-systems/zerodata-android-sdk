@@ -32,7 +32,7 @@ import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.concurrent.TimeUnit
-
+import com.simplifydvpn.android.ui.login.LoginActivity
 
 @ExperimentalStdlibApi
 class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
@@ -81,7 +81,15 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
 
         requireActivity().findViewById<View>(R.id.logout_link).setOnClickListener {
-        //logout
+            (requireActivity() as? MainActivity)?.let{
+                if(it.isVPNConnected()){
+                    it.disconnectVPN()
+                }else{
+                    viewModel.logOut()
+                    startActivity(Intent(context, LoginActivity::class.java))
+                    activity?.finish()
+                }
+            }
         }
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null

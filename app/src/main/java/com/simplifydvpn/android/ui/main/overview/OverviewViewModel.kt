@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.simplifydvpn.android.data.model.DashboardData
 import com.simplifydvpn.android.data.repo.DashboardRepository
+import com.simplifydvpn.android.data.repo.SettingsRepository
 import com.simplifydvpn.android.utils.Status
 import kotlinx.coroutines.launch
 
 class OverviewViewModel : ViewModel() {
 
     private val dashboardRepository = DashboardRepository()
+    private val settingsRepository = SettingsRepository()
 
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
 
@@ -26,5 +28,12 @@ class OverviewViewModel : ViewModel() {
             getDashboardDataStatus.postValue(result)
         }
 
+    }
+
+
+    fun logOut() {
+        viewModelScope.launch {
+            settingsRepository.logOut()
+        }
     }
 }
