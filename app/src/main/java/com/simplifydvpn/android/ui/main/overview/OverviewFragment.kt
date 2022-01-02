@@ -32,7 +32,7 @@ import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.concurrent.TimeUnit
-import com.simplifydvpn.android.ui.login.LoginActivity
+import com.simplifydvpn.android.ui.auth.LoginActivity
 import android.net.Uri
 
 @ExperimentalStdlibApi

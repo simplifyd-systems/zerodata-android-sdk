@@ -54,7 +54,7 @@
         android:layout_marginEnd="@dimen/two_space"
         android:background="?selectableItemBackground"
         android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
-        android:drawablePadding="16dp"
+        android:drawablePadding="8dp"
         android:paddingVertical="@dimen/activity_vertical_margin"
         android:text="Logout"
         android:textColor="@color/colorRed"

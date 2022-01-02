@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.data.model.User
-import com.simplifydvpn.android.ui.login.LoginActivity
+import com.simplifydvpn.android.ui.auth.LoginActivity
 import com.simplifydvpn.android.ui.main.MainViewModel
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.showToast

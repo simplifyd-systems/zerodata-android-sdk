@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.ui.login
+package com.simplifydvpn.android.ui.auth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

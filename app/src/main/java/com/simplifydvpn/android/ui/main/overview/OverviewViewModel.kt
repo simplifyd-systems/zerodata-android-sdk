@@ -16,21 +16,6 @@ class OverviewViewModel : ViewModel() {
 
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
 
-    init {
-        getDashboardData()
-    }
-
-    fun getDashboardData() {
-        getDashboardDataStatus.postValue(Status.Loading)
-
-        viewModelScope.launch {
-            val result = dashboardRepository.getDashboardData()
-            getDashboardDataStatus.postValue(result)
-        }
-
-    }
-
-
     fun logOut() {
         viewModelScope.launch {
             settingsRepository.logOut()
