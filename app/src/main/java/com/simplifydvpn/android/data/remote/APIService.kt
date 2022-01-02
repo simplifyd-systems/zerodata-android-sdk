@@ -10,10 +10,10 @@ import java.util.*
 
 interface APIService {
 
-    @POST("customer/auth/login")
+    @POST("customer/auth/login2")
     fun executeLogin(@Body body: Map<String, @JvmSuppressWildcards Any>): Call<LoginResponse>
 
-    @POST("customer/auth/login")
+    @POST("customer/auth/login2")
     suspend fun login(@Body body: Map<String, @JvmSuppressWildcards Any>): LoginResponse
 
     @PATCH("customer/subscriptions/protect")

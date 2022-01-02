@@ -80,8 +80,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
         btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
 
-        requireActivity().findViewById<View>(R.id.hamburger).setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_overview_to_navigation_settings)
+        requireActivity().findViewById<View>(R.id.logout_link).setOnClickListener {
+        //logout
         }
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
@@ -141,23 +141,13 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     ) {
         requireActivity().runOnUiThread {
             if (level == ConnectionStatus.LEVEL_CONNECTED) {
-                protection_status.text = "Your Internet is Protected."
+                protection_status.text = "Your are conected to Edge."
                 connect_switch.isEnabled = PreferenceManager.getProfileName() != null
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                btnProtectMe?.apply {
-                    backgroundTintList =
-                        ContextCompat.getColorStateList(context, R.color.colorGreen)
-                    strokeColor = ColorStateList.valueOf(getColorInt(R.color.colorGreen))
-                    icon = ContextCompat.getDrawable(context, R.drawable.ic_check_shield)
-                    iconTint = ColorStateList.valueOf(getColorInt(R.color.white))
-                    setTextColor(getColorInt(R.color.white))
-                    toggle_to_protect.isVisible = false
-                    text = getString(R.string.you_re_protected)
-                }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
                 protection_status.text = "Connecting"
@@ -171,30 +161,16 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
-                showNotProtectedBtn()
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_NOTCONNECTED) {
-                protection_status.text = "Your Internet is Not Protected."
+                protection_status.text = "Your are not connected to Edge."
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
                 toggle_to_protect.isVisible = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                showNotProtectedBtn()
             }
-        }
-    }
-
-    private fun showNotProtectedBtn() {
-        btnProtectMe?.apply {
-            backgroundTintList =
-                ContextCompat.getColorStateList(context, R.color.colorDarkRed)
-            strokeColor = ColorStateList.valueOf(getColorInt(R.color.colorDarkRed))
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_remove_shield)
-            iconTint = ColorStateList.valueOf(getColorInt(R.color.white))
-            setTextColor(getColorInt(R.color.white))
-            text = getString(R.string.protect_me)
         }
     }
 

@@ -11,48 +11,7 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
 
-        <action
-            android:id="@+id/action_navigation_overview_to_navigation_settings"
-            app:destination="@id/navigation_settings"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.simplifydvpn.android.ui.main.settings.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_dashboard">
-        <action
-            android:id="@+id/action_navigation_settings_to_navigation_filters"
-            app:destination="@id/navigation_filters"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-        <action
-            android:id="@+id/action_navigation_settings_to_navigation_protection"
-            app:destination="@id/navigation_protection"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_filters"
-        android:name="com.simplifydvpn.android.ui.main.rules.categories.CategoriesFragment"
-        android:label="Filters"
-        tools:layout="@layout/fragment_categories" />
-
-    <fragment
-        android:id="@+id/navigation_protection"
-        android:name="com.simplifydvpn.android.ui.main.protection.ProtectionFragment"
-        android:label="Protection Report"
-        tools:layout="@layout/fragment_protection" />
 
 </navigation>

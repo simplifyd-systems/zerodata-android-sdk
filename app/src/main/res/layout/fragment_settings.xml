@@ -10,42 +10,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|start"
-        android:drawableStart="@drawable/ic_rules"
-        android:drawablePadding="16dp"
-        android:layout_marginEnd="@dimen/two_space"
-        android:id="@+id/filters_link"
-        android:background="?selectableItemBackground"
-        android:drawableEnd="@drawable/ic_caret_right"
-        android:paddingVertical="@dimen/activity_vertical_margin"
-        android:text="Filters" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height=".5dp"
-        android:background="@color/colorGrey" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_shield_protected"
-        android:drawablePadding="16dp"
-        android:gravity="center|start"
-        android:layout_marginEnd="@dimen/two_space"
-        android:id="@+id/protection_link"
-        android:background="?selectableItemBackground"
-        android:drawableEnd="@drawable/ic_caret_right"
-        android:paddingVertical="@dimen/activity_vertical_margin"
-        android:text="Protection Report" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height=".5dp"
-        android:background="@color/colorGrey" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:textColor="@color/colorRed"
         android:drawablePadding="16dp"
         android:gravity="center|start"

@@ -3,8 +3,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:animateLayoutChanges="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -19,23 +19,23 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             android:clickable="true"
-            app:navigationIcon="@drawable/ic_back"
             android:focusable="true"
+            app:navigationIcon="@drawable/ic_back"
             app:popupTheme="@style/Theme.Simplifyd.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:navGraph="@navigation/overview"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProtectMe" />
+        app:layout_constraintTop_toBottomOf="@+id/btnProtectMe"
+        app:navGraph="@navigation/overview" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -47,45 +47,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <ImageView
-        android:id="@+id/hamburger"
+    <TextView
+        android:id="@+id/logout_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_marginEnd="@dimen/two_space"
+        android:background="?selectableItemBackground"
+        android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+        android:drawablePadding="16dp"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        android:text="Logout"
+        android:textColor="@color/colorRed"
         android:layout_gravity="end"
-        android:src="@drawable/ic_navigation_menu"
+        android:gravity="center|end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnProtectMe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="@string/protect_me"
-        android:layout_marginTop="?actionBarSize"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:layout_gravity="top"
-        app:icon="@drawable/ic_remove_shield"
-        app:iconGravity="textStart"
-        style="@style/Widget.MaterialComponents.Button"
-        app:cornerRadius="12dp"
-        app:iconPadding="8dp"
-         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:itemIconTint="@drawable/tab_icon_selector"
         app:itemTextColor="@drawable/tab_icon_selector"
-        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_main_bottom_navigation" />
 
