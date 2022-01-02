@@ -10,20 +10,23 @@ import com.simplifydvpn.android.R
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.getColorInt
 import com.simplifydvpn.android.utils.showToast
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_signup.*
+import com.simplifydvpn.android.ui.main.MainActivity
+import com.simplifydvpn.android.utils.isValidEmail
 
-class SignUpFragment : Fragment(R.layout.fragment_login) {
+class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<SignUpViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeLogin()
+        observeSignUp()
         setUpSwipeRefresh()
         showLoading(false)
-        btnSubmit.setOnClickListener { performLogin() }
-        btnForgotPassword.setOnClickListener { goToForgotPasswordScreen() }
+        btnSubmit.setOnClickListener {
+            performSignUp()
+        }
     }
 
     private fun goToForgotPasswordScreen() {
@@ -52,7 +55,7 @@ class SignUpFragment : Fragment(R.layout.fragment_login) {
         requireActivity().finish()
     }
 
-    private fun observeLogin() {
+    private fun observeSignUp() {
         viewModel.loginStatus.observe(viewLifecycleOwner, Observer{
             when (it) {
                 is Status.Success -> {
@@ -69,29 +72,44 @@ class SignUpFragment : Fragment(R.layout.fragment_login) {
     }
 
 
-    private fun performLogin() {
+    private fun performSignUp() {
+        val firstName = etFirstName.text.toString().trim()
+        val lastName = etLastName.text.toString().trim()
+        val etPhoneNumber = etPhoneNumber.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
+        val passwordConfirm = etConfirmPassword.text.toString().trim()
 
-        if (email.isEmpty()) {
-            showToast(getString(R.string.error_enter_email))
+        if (firstName.length < 5) {
+            showToast(getString(R.string.error_empty_name))
             return
         }
 
-        if (!email.isValidEmail()) {
+        if (lastName.length < 5) {
+            showToast(getString(R.string.error_empty_last_name))
+            return
+        }
+
+        if (email.isEmpty() || !email.isValidEmail()) {
             showToast(getString(R.string.error_enter_valid_email))
             return
         }
 
-        if (password.isEmpty()) {
+        if (password.isEmpty() || passwordConfirm.isEmpty()) {
             showToast(getString(R.string.error_enter_password))
             return
         }
 
-        if (password.length < 5) {
+        if (password.length < 5 || passwordConfirm.length < 5) {
             showToast(getString(R.string.error_short_password))
             return
         }
+
+        if (password!= passwordConfirm) {
+            showToast(getString(R.string.password_dont_match))
+            return
+        }
+
 
         viewModel.login(email, password)
     }

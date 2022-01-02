@@ -20,11 +20,14 @@
     <string name="profile_updated">Profile updated.</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
-    <string name="error_empty_name">Name cannot be empty.</string>
+    <string name="error_empty_name">First Name cannot be empty.</string>
+    <string name="error_empty_last_name">Last Name cannot be empty.</string>
     <string name="error_enter_email">Enter an email address.</string>
     <string name="error_enter_valid_email">Enter a valid email address.</string>
     <string name="error_enter_password">Enter a password.</string>
     <string name="error_short_password">Password can\'t be less than 5 characters</string>
+    <string name="password_dont_match">Passwords don\'t match</string>
+
     <string name="you_were_protected_from">You were protected from</string>
     <string name="you_were_exposed_to">You were exposed to</string>
     <string name="malware">Malware Threats</string>

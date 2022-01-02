@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
     }
 
 
-
     private fun goToForgotPasswordScreen() {
 
     }

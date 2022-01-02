@@ -125,7 +125,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                 }
                 is Status.Error -> {
-                    showRetrySnackBar(it.error.localizedMessage) { viewModel.getDashboardData() }
+                    showRetrySnackBar(it.error.localizedMessage) { }
                 }
                 is Status.Success -> {
                     help_text.text = Html.fromHtml(
