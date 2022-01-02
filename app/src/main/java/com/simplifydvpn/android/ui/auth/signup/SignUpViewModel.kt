@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.ui.auth
+package com.simplifydvpn.android.ui.auth.signup
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.simplifydvpn.android.data.repo.UserRepository
 import com.simplifydvpn.android.utils.Status
 import kotlinx.coroutines.launch
 
-class LoginViewModel: ViewModel() {
+class SignUpViewModel: ViewModel() {
 
     private val userRepository = UserRepository()
 

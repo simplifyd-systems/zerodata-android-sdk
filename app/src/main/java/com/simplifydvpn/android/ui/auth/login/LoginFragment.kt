@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.ui.auth
+package com.simplifydvpn.android.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.simplifydvpn.android.R
-import com.simplifydvpn.android.ui.main.MainActivity
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.getColorInt
-import com.simplifydvpn.android.utils.isValidEmail
 import com.simplifydvpn.android.utils.showToast
 import kotlinx.android.synthetic.main.fragment_login.*
 

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Simplifyd VPN</string>
     <string name="email">Email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
     <string name="forgot_password">Forgot your Password</string>
@@ -58,6 +61,8 @@
     <string name="intro_two_desc">Protect your devices from malicious websites through our VPN network.</string>
     <string name="intro_three_desc">Protect your devices from malicious websites through our VPN network.</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome_text">Welcome to Edge by Simplifyd</string>
     <string name="welcome_back">Welcome back to Simplifyd</string>
     <string name="filter_by">Filter by</string>
     <string name="blocked_categories">Blocked Categories</string>
