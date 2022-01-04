@@ -14,12 +14,37 @@ import kotlinx.coroutines.withContext
 @ExperimentalCoroutinesApi
 class UserRepository : BaseRepository() {
 
+    suspend fun signUp(
+        firstName: String,
+        lastName: String,
+        email: String,
+        phoneNumber: String,
+        password: String
+    ): Status<Unit> {
+        return try {
+            val signUpResponse = apiService.signUp(
+                hashMapOf(
+                    "fname" to firstName,
+                    "lname" to lastName,
+                    "email" to email,
+                    "mobile" to phoneNumber,
+                    "password" to password
+                )
+            )
+            Status.Success(Unit)
+        } catch (error: Throwable) {
+            Status.Error(handleError(error))
+        }
+    }
+
     suspend fun login(email: String, password: String): Status<Unit> {
         return try {
-            val loginResponse = apiService.login(hashMapOf(
+            val loginResponse = apiService.login(
+                hashMapOf(
                     "username" to email,
                     "password" to password
-                ))
+                )
+            )
 
             saveAuthToken(loginResponse.jwt)
             saveUserDetails(loginResponse.user)
@@ -49,6 +74,7 @@ class UserRepository : BaseRepository() {
             PreferenceManager.saveAccountPassword(password)
         }
     }
+
     private suspend fun saveAuthToken(token: String) {
         withContext(Dispatchers.IO) {
             PreferenceManager.saveToken(token)
@@ -59,7 +85,7 @@ class UserRepository : BaseRepository() {
         return database.userDao().getUser()
     }
 
-    companion object{
+    companion object {
 
         const val OPEN_VPN_URL = "https://api2.dns.simplifyd.systems/v1/customer/vpn/profile"
 

@@ -16,6 +16,9 @@ interface APIService {
     @POST("customer/auth/login2")
     suspend fun login(@Body body: Map<String, @JvmSuppressWildcards Any>): LoginResponse
 
+    @POST("customer/auth/register")
+    suspend fun signUp(@Body body: Map<String, @JvmSuppressWildcards Any>): LoginResponse
+
     @PATCH("customer/subscriptions/protect")
     suspend fun protectUser(): User
 

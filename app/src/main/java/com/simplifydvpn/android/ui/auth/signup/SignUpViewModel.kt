@@ -7,17 +7,23 @@ import com.simplifydvpn.android.data.repo.UserRepository
 import com.simplifydvpn.android.utils.Status
 import kotlinx.coroutines.launch
 
-class SignUpViewModel: ViewModel() {
+class SignUpViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
 
     val loginStatus = MutableLiveData<Status<Unit>>()
 
-    fun login(email: String, password: String) {
+    fun signUp(
+        firstName: String,
+        lastName: String,
+        email: String,
+        phoneNumber: String,
+        password: String
+    ) {
         loginStatus.postValue(Status.Loading)
 
         viewModelScope.launch {
-            val result = userRepository.login(email, password)
+            val result = userRepository.signUp(firstName, lastName, email, phoneNumber, password)
             loginStatus.postValue(result)
         }
     }

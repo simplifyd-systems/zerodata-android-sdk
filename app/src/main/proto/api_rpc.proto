@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package pb;
+option go_package  = "edge-api-rpc/pb";
+
+service Edge {
+    rpc Register(RegisterReq) returns (StandardResponse) {};
+    rpc Login(LoginReq) returns (LoginResponse) {};
+    rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+}
+
+message RegisterReq {
+    string fname = 1;
+    string lname = 2;
+    string email = 3;
+    string mobile = 4;
+    string password = 5;
+}
+message LoginReq {
+    string username = 1;
+    string password = 2;
+}
+message PubKey {
+    bytes x = 1;
+    bytes y = 2;
+}
+message ConnectProfileReq {
+    PubKey client_pub_key = 1;
+}
+message EmptyReq {}
+
+message ConnectProfileResponse {
+    PubKey server_pub_key = 1; // used to generate ECDH pre key
+    bytes encrypted_connect_profile = 2; // encrypted connect profile using AES
+    bytes nonce = 3; // used for AES decryption
+    string open_browser_to_url = 4; // url to open browser to
+}
+
+message User {
+    string fname = 1;
+    string lname = 2;
+    string email = 3;
+    string mobile = 4;
+    string id = 5;
+}
+message LoginResponse {
+    bool success = 1;
+    string msg = 2;
+    repeated string errors = 3;
+    User user = 4;
+    string jwt = 5;
+}
+message StandardResponse {
+    bool success = 1;
+    string msg = 2;
+    repeated string errors = 3;
+}

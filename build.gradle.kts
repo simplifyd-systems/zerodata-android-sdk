@@ -18,6 +18,7 @@ buildscript {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.2.0")
         classpath("gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.8")
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.17")
     }
 }
 
@@ -27,4 +28,5 @@ allprojects {
         jcenter()
         maven(url = "https://jitpack.io")
     }
+
 }

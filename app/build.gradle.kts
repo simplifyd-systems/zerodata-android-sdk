@@ -5,6 +5,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("com.google.protobuf")
     id("androidx.navigation.safeargs.kotlin")
     kotlin("android")
     kotlin("android.extensions")
@@ -59,12 +60,6 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
-//        create("debuggableRelease") {
-//            isMinifyEnabled = false
-//            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-//            signingConfig = signingConfigs.getByName("release")
-//            isDebuggable = true
-//        }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
@@ -170,14 +165,14 @@ dependencies {
     implementation( "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
     implementation( "com.squareup.picasso:picasso:2.71828")
     implementation( "androidx.palette:palette-ktx:1.0.0")
-
-    implementation("com.google.firebase:firebase-analytics:17.4.4")
-    implementation("com.google.firebase:firebase-crashlytics:17.1.1")
-    implementation( "com.google.android.play:core-ktx:1.8.0")
-    implementation("com.android.billingclient:billing-ktx:$billing_version")
+    implementation( "com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation( "androidx.work:work-runtime-ktx:$work_version")
-    implementation( "com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2")
+
+    api( "io.grpc:grpc-kotlin-stub:1.2.0")
+    api( "io.grpc:grpc-android:1.43.1")
+    api( "io.grpc:grpc-okhttp:1.43.1")
+    api( "com.google.protobuf:protobuf-kotlin:3.18.0")
 
     dependencies.add("uiImplementation", project(":openvpn"))
     dependencies.add("skeletonImplementation", project(":openvpn"))
@@ -193,3 +188,5 @@ dependencies {
     kapt ("org.xerial:sqlite-jdbc:3.34.0")
 
 }
+
+apply(from = "${rootProject.rootDir}/app/proto.gradle")

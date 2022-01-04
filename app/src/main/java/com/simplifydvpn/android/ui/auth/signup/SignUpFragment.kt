@@ -111,6 +111,6 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
         }
 
 
-        viewModel.login(email, password)
+        //viewModel.login(firstName, lastName, etPhoneNumber, )
     }
 }
