@@ -4,12 +4,18 @@ import androidx.lifecycle.LiveData
 import com.simplifydvpn.android.data.config.OpenVpnConfigurator
 import com.simplifydvpn.android.data.local.PreferenceManager
 import com.simplifydvpn.android.data.model.User
+import com.simplifydvpn.android.data.remote.grpc.GRPCChannelFactory
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.handleError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import io.grpc.ManagedChannelBuilder
+import pb.ApiRpc
+import pb.ApiRpc.LoginReq
+import pb.EdgeGrpc
+import pb.ApiRpc.RegisterReq
 
 @ExperimentalCoroutinesApi
 class UserRepository : BaseRepository() {
@@ -22,15 +28,12 @@ class UserRepository : BaseRepository() {
         password: String
     ): Status<Unit> {
         return try {
-            val signUpResponse = apiService.signUp(
-                hashMapOf(
-                    "fname" to firstName,
-                    "lname" to lastName,
-                    "email" to email,
-                    "mobile" to phoneNumber,
-                    "password" to password
-                )
-            )
+            val registerRequest =
+                RegisterReq.newBuilder().setFname(firstName).setLname(lastName).setEmail(email)
+                    .setMobile(phoneNumber).setPassword(password).build()
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+            val response = blockingStub.register(registerRequest)
+            print(response)
             Status.Success(Unit)
         } catch (error: Throwable) {
             Status.Error(handleError(error))
@@ -39,26 +42,29 @@ class UserRepository : BaseRepository() {
 
     suspend fun login(email: String, password: String): Status<Unit> {
         return try {
-            val loginResponse = apiService.login(
-                hashMapOf(
-                    "username" to email,
-                    "password" to password
-                )
-            )
+            val loginRequest =
+                LoginReq.newBuilder().setUsername(email).setPassword(password)
+                    .build();
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+            val response = blockingStub.login(loginRequest)
+            print(response)
 
-            saveAuthToken(loginResponse.jwt)
-            saveUserDetails(loginResponse.user)
-            saveLoginInfo(email, password)
+            if (response.success) {
+                saveAuthToken(response.jwt)
+                //saveUserDetails(response.user)
+                saveLoginInfo(email, password)
 
-            if (loginResponse.user.is_protected == null) {
-                database.userDao().setProtectMe(false)
+                OpenVpnConfigurator.configureOVPNServers(OPEN_VPN_URL).first().let {
+                    PreferenceManager.saveProfileName(it.uuidString)
+                }
+
+                val eCDHGenerator = ECDHGenerator()
+                eCDHGenerator.generateKey()
+
+                Status.Success(Unit)
+            } else {
+                Status.Error(Throwable(response.getErrors(0) ))
             }
-
-            OpenVpnConfigurator.configureOVPNServers(OPEN_VPN_URL).first().let {
-                PreferenceManager.saveProfileName(it.uuidString)
-            }
-
-            Status.Success(Unit)
         } catch (error: Throwable) {
             Status.Error(handleError(error))
         }

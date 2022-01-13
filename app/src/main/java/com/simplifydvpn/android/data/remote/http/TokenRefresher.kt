@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.data.remote
+package com.simplifydvpn.android.data.remote.http
 
 import android.util.Log
 import com.google.gson.Gson

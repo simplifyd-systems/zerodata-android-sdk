@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.data.remote
+package com.simplifydvpn.android.data.remote.http
 
 import android.util.Log
 import com.simplifydvpn.android.data.local.PreferenceManager

@@ -85,7 +85,7 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
             return
         }
 
-        if (lastName.length < 5) {
+        if (lastName.length < 2) {
             showToast(getString(R.string.error_empty_last_name))
             return
         }

@@ -1,16 +1,39 @@
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.18.0"
-    }
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.18.0"
+//    }
+//
+//    generateProtoTasks {
+//        all().each { task ->
+//            task.builtins {
+//                remove javanano
+//                java {
+//                    option 'lite'
+//                }
+//                kotlin { }
+//            }
+//        }
+//    }
+//}
 
+protobuf {
+    protoc { artifact = 'com.google.protobuf:protoc:3.19.1:osx-x86_64' }
+    plugins {
+        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.43.1:osx-x86_64'}
+    }
     generateProtoTasks {
         all().each { task ->
             task.builtins {
-                remove javanano
                 java {
                     option 'lite'
                 }
-                kotlin { }
+            }
+
+            task.plugins {
+                grpc {
+                    // Options added to --grpc_out
+                    option 'lite'
+                }
             }
         }
     }

@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.simplifydvpn.android.data.repo.UserRepository
 import com.simplifydvpn.android.utils.Status
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignUpViewModel : ViewModel() {
 
@@ -23,8 +25,11 @@ class SignUpViewModel : ViewModel() {
         loginStatus.postValue(Status.Loading)
 
         viewModelScope.launch {
-            val result = userRepository.signUp(firstName, lastName, email, phoneNumber, password)
-            loginStatus.postValue(result)
+            withContext(Dispatchers.IO) {
+                val result =
+                    userRepository.signUp(firstName, lastName, email, phoneNumber, password)
+                loginStatus.postValue(result)
+            }
         }
     }
 }

@@ -15,13 +15,16 @@ android {
     compileSdkVersion(29)
 
     defaultConfig {
-        applicationId  = "com.simplifydvpn.android"
+        applicationId = "com.simplifydvpn.android"
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = 11
         versionName = "1.0.7"
         resConfigs(listOf("en"))
-        manifestPlaceholders = mapOf("onesignal_app_id" to "fbbec493-6975-4e4f-9a8d-e49ce27f0bea", "onesignal_google_project_number" to "REMOTE")
+        manifestPlaceholders = mapOf(
+            "onesignal_app_id" to "fbbec493-6975-4e4f-9a8d-e49ce27f0bea",
+            "onesignal_google_project_number" to "REMOTE"
+        )
     }
 
     compileOptions {
@@ -57,7 +60,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("release")
         }
         getByName("debug") {
@@ -156,23 +162,29 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.mindorks.android:prdownloader:0.6.0")
     implementation("com.onesignal:OneSignal:3.15.2")
-    implementation ("com.github.skydoves:balloon:1.1.5")
+    implementation("com.github.skydoves:balloon:1.1.5")
     implementation("net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("io.cabriole:decorator:1.0.0")
     implementation("com.wireguard.android:tunnel:1.0.20200407")
-    implementation( "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
-    implementation( "com.squareup.picasso:picasso:2.71828")
-    implementation( "androidx.palette:palette-ktx:1.0.0")
-    implementation( "com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2")
+    implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("androidx.palette:palette-ktx:1.0.0")
+    implementation("com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation( "androidx.work:work-runtime-ktx:$work_version")
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 
-    api( "io.grpc:grpc-kotlin-stub:1.2.0")
-    api( "io.grpc:grpc-android:1.43.1")
-    api( "io.grpc:grpc-okhttp:1.43.1")
-    api( "com.google.protobuf:protobuf-kotlin:3.18.0")
+    api("io.grpc:grpc-android:1.43.1")
+    api("io.grpc:grpc-okhttp:1.43.1")
+    api("com.google.protobuf:protobuf-javalite:3.19.1")
+    api( "io.grpc:grpc-core:1.27.1")
+    api("io.grpc:grpc-protobuf-lite:1.43.1") {
+        exclude(module = "protobuf-lite")
+    }
+    api("javax.annotation:javax.annotation-api:1.3.2")
+    api("io.grpc:grpc-stub:1.43.1")
+    api( "commons-codec:commons-codec:1.3")
 
     dependencies.add("uiImplementation", project(":openvpn"))
     dependencies.add("skeletonImplementation", project(":openvpn"))
@@ -185,7 +197,7 @@ dependencies {
 
     kapt("androidx.room:room-compiler:$roomVersion")
     kapt("com.google.dagger:dagger-compiler:$dagger")
-    kapt ("org.xerial:sqlite-jdbc:3.34.0")
+    kapt("org.xerial:sqlite-jdbc:3.34.0")
 
 }
 

@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.data.local.PreferenceManager
 import com.simplifydvpn.android.ui.main.MainActivity
+import io.grpc.ManagedChannelBuilder
+import pb.ApiRpc.LoginReq
+import pb.EdgeGrpc
+
 
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +20,22 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
             goToMainScreen()
         }
 
+        connectToChannel()
     }
 
+    fun connectToChannel() {
+        val channel = ManagedChannelBuilder
+            .forAddress("edge2.simplifyd.net", 30000)
+            .usePlaintext()
+            .build()
+
+        val loginRequest =
+            LoginReq.newBuilder().setUsername("aliumuib@aliumujib.com").setPassword("password")
+                .build();
+        val blockingStub = EdgeGrpc.newBlockingStub(channel)
+        val response = blockingStub.login(loginRequest)
+        print(response)
+    }
 
     private fun goToForgotPasswordScreen() {
 

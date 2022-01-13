@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -17,6 +18,7 @@ import de.blinkt.openvpn.activities.DisconnectVPN
 import de.blinkt.openvpn.core.OpenVPNService
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -39,24 +41,24 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         toolbar.setNavigationOnClickListener {
             navController.navigateUp() || super.onSupportNavigateUp()
         }
-
-
     }
 
-     fun startOrStopOpenVPN(profile: VpnProfile) {
-        if (isVPNConnected()&& profile.uuidString == VpnStatus.getLastConnectedVPNProfile()) {
+
+
+    fun startOrStopOpenVPN(profile: VpnProfile) {
+        if (isVPNConnected() && profile.uuidString == VpnStatus.getLastConnectedVPNProfile()) {
             disconnectVPN()
         } else {
             startOpenVPN(profile)
         }
     }
 
-     fun disconnectVPN() {
+    fun disconnectVPN() {
         val disconnectVPN = Intent(this, DisconnectVPN::class.java)
         startActivity(disconnectVPN)
     }
 
-     fun isVPNConnected() =
+    fun isVPNConnected() =
         VpnStatus.isVPNActive()
 
 

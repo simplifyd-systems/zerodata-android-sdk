@@ -1,7 +1,7 @@
 package com.simplifydvpn.android.data.repo
 
 import com.simplifydvpn.android.data.local.DatabaseManager
-import com.simplifydvpn.android.data.remote.APIServiceFactory
+import com.simplifydvpn.android.data.remote.http.APIServiceFactory
 
 abstract class BaseRepository {
     protected val apiService = APIServiceFactory.apiService

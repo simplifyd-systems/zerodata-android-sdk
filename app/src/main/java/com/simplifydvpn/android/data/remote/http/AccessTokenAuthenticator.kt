@@ -1,12 +1,14 @@
-package com.simplifydvpn.android.data.remote
+package com.simplifydvpn.android.data.remote.http
 
 import android.util.Log
-import com.google.gson.Gson
 import com.simplifydvpn.android.data.local.PreferenceManager
 import okhttp3.*
+import com.google.gson.Gson
 
 class AccessTokenAuthenticator  constructor(
-    private val tokenRefresher: TokenRefresher = TokenRefresher(Gson()),
+    private val tokenRefresher: TokenRefresher = com.simplifydvpn.android.data.remote.http.TokenRefresher(
+        Gson()
+    ),
     private val preferenceManager: PreferenceManager = PreferenceManager,
     ) : Interceptor {
 

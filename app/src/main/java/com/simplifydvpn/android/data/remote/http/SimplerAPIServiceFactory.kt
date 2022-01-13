@@ -1,4 +1,4 @@
-package com.simplifydvpn.android.data.remote
+package com.simplifydvpn.android.data.remote.http
 
 import com.simplifydvpn.android.BuildConfig
 import okhttp3.Dispatcher
