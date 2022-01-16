@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
             goToMainScreen()
         }
 
-        connectToChannel()
+        // connectToChannel()
     }
 
     fun connectToChannel() {
@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
             .build()
 
         val loginRequest =
-            LoginReq.newBuilder().setUsername("aliumuib@aliumujib.com").setPassword("password")
+            LoginReq.newBuilder().setUsername("tomi@amao.io").setPassword("password")
                 .build();
         val blockingStub = EdgeGrpc.newBlockingStub(channel)
         val response = blockingStub.login(loginRequest)

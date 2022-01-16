@@ -17,43 +17,30 @@ import android.util.Log;
 
 public class ECDHGenerator {
 
-    public void generateKey() throws Exception {
+    public KeyPair generateKeyPair() throws Exception {
         Console console = System.console();
         // Generate ephemeral ECDH keypair
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("EC");
         kpg.initialize(256);
         KeyPair kp = kpg.generateKeyPair();
-        byte[] ourPk = kp.getPublic().getEncoded();
 
-        // Display our public key
-        Log.d("ECDH", encodeToString(ourPk, 16));
+        return kp;
+    }
 
-        // Read other's public key:
-        byte[] otherPk = decodeHex(console.readLine("Other PK: ").toCharArray());
-
+    public byte[] generateSharedSecret(KeyPair ourKp, byte[] serverPubKey) throws Exception {
         KeyFactory kf = KeyFactory.getInstance("EC");
-        X509EncodedKeySpec pkSpec = new X509EncodedKeySpec(otherPk);
-        PublicKey otherPublicKey = kf.generatePublic(pkSpec);
+        X509EncodedKeySpec pkSpec = new X509EncodedKeySpec(serverPubKey);
+        PublicKey serverPublicKey = kf.generatePublic(pkSpec);
 
         // Perform key agreement
         KeyAgreement ka = KeyAgreement.getInstance("ECDH");
-        ka.init(kp.getPrivate());
-        ka.doPhase(otherPublicKey, true);
+        ka.init(ourKp.getPrivate());
+        ka.doPhase(serverPublicKey, true);
 
         // Read shared secret
         byte[] sharedSecret = ka.generateSecret();
         Log.d("ECDH", decodeHex(sharedSecret.toString().toCharArray()).toString());
 
-        // Derive a key from the shared secret and both public keys
-        MessageDigest hash = MessageDigest.getInstance("SHA-256");
-        hash.update(sharedSecret);
-        // Simple deterministic ordering
-        List<ByteBuffer> keys = Arrays.asList(ByteBuffer.wrap(ourPk), ByteBuffer.wrap(otherPk));
-        Collections.sort(keys);
-        hash.update(keys.get(0));
-        hash.update(keys.get(1));
-
-        byte[] derivedKey = hash.digest();
-        Log.d("ECDH", encodeToString(derivedKey, 16));
+        return sharedSecret;
     }
 }

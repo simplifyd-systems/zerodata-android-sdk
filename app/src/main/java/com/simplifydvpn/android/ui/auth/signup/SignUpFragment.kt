@@ -80,12 +80,12 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
         val password = etPassword.text.toString().trim()
         val passwordConfirm = etConfirmPassword.text.toString().trim()
 
-        if (firstName.length < 5) {
+        if (firstName.isEmpty()) {
             showToast(getString(R.string.error_empty_name))
             return
         }
 
-        if (lastName.length < 2) {
+        if (lastName.isEmpty()) {
             showToast(getString(R.string.error_empty_last_name))
             return
         }

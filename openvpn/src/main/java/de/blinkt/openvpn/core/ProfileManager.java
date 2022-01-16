@@ -245,9 +245,7 @@ public class ProfileManager {
             int ver = profile == null ? -1 : profile.mVersion;
         }
 
-        if (tried > 5)
-
-        {
+        if (tried > 5) {
             int ver = profile == null ? -1 : profile.mVersion;
             VpnStatus.logError(String.format(Locale.US, "Used x %d tries to get current version (%d/%d) of the profile", tried, ver, version));
         }

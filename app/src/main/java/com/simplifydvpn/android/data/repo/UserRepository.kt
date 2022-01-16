@@ -54,12 +54,16 @@ class UserRepository : BaseRepository() {
                 //saveUserDetails(response.user)
                 saveLoginInfo(email, password)
 
+
                 OpenVpnConfigurator.configureOVPNServers(OPEN_VPN_URL).first().let {
                     PreferenceManager.saveProfileName(it.uuidString)
                 }
 
+
+                /*
                 val eCDHGenerator = ECDHGenerator()
-                eCDHGenerator.generateKey()
+                val keypair = eCDHGenerator.generateKeyPair()
+                 */
 
                 Status.Success(Unit)
             } else {
