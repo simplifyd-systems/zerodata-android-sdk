@@ -1,30 +1,35 @@
 package com.simplifydvpn.android.data.repo;
-
 import java.security.*;
-import java.security.spec.ECParameterSpec;
+import java.security.spec.ECGenParameterSpec;
 import java.security.spec.X509EncodedKeySpec;
-
 import javax.crypto.KeyAgreement;
-
-import java.util.*;
-import java.nio.ByteBuffer;
-import java.io.Console;
-
 import static org.apache.commons.codec.binary.Hex.decodeHex;
-import static android.util.Base64.encodeToString;
-
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyProperties;
 import android.util.Log;
 
 public class ECDHGenerator {
 
     public KeyPair generateKeyPair() throws Exception {
-        Console console = System.console();
-        // Generate ephemeral ECDH keypair
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("EC");
         kpg.initialize(256);
         KeyPair kp = kpg.generateKeyPair();
-
         return kp;
+
+/*
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
+                KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
+        keyPairGenerator.initialize(
+                new KeyGenParameterSpec.Builder(
+                        "eckeypair",
+                        KeyProperties.PURPOSE_AGREE_KEY)
+                        .setAlgorithmParameterSpec(new ECGenParameterSpec("secp256r1"))
+                        .build());
+        KeyPair myKeyPair = keyPairGenerator.generateKeyPair();
+
+        return myKeyPair;
+
+ */
     }
 
     public byte[] generateSharedSecret(KeyPair ourKp, byte[] serverPubKey) throws Exception {

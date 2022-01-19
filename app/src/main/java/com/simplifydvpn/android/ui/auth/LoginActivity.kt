@@ -35,6 +35,8 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
         val blockingStub = EdgeGrpc.newBlockingStub(channel)
         val response = blockingStub.login(loginRequest)
         print(response)
+        channel.shutdown();
+        PreferenceManager.saveToken(response.jwt)
     }
 
     private fun goToForgotPasswordScreen() {

@@ -11,7 +11,7 @@ class AuthInterceptor : Interceptor {
         val requestBuilder = chain.request().newBuilder()
 
         if (!PreferenceManager.getToken().isNullOrEmpty()) {
-            Log.d("TOKE",  PreferenceManager.getToken())
+            // Log.d("TOKEN",  PreferenceManager.getToken())
             requestBuilder.addHeader("Authorization", "Bearer " + PreferenceManager.getToken())
         }
 

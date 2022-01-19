@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(31)
 
     defaultConfig {
         applicationId = "com.simplifydvpn.android"
-        minSdkVersion(21)
+        minSdkVersion(23)
         targetSdkVersion(29)
         versionCode = 11
         versionName = "1.0.7"
@@ -124,6 +124,8 @@ dependencies {
     val work_version = "2.4.0"
 
 
+    implementation ("org.bouncycastle:bcprov-jdk15to18:1.68")
+    implementation ("org.bouncycastle:bcpkix-jdk15to18:1.68")
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:$coreVersion")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")

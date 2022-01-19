@@ -51,6 +51,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     .newInstance()
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
+                viewModel.connect()
+                /*
                 PreferenceManager.getProfileName()?.let {
                     (requireActivity() as MainActivity).startOrStopOpenVPN(
                         ProfileManager.get(
@@ -59,6 +61,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                         )
                     )
                 }
+                */
             }
         }
 

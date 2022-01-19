@@ -34,6 +34,7 @@ message ConnectProfileResponse {
     bytes encrypted_connect_profile = 2; // encrypted connect profile using AES
     bytes nonce = 3; // used for AES decryption
     string open_browser_to_url = 4; // url to open browser to
+    string unencrypted_connect_profile = 5; // unencrypted connect profile
 }
 
 message User {
