@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.getColorInt
@@ -55,12 +56,16 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
         requireActivity().finish()
     }
 
+    private fun goToLoginScreen() {
+        findNavController().navigate(R.id.navigation_sign_in)
+    }
+
     private fun observeSignUp() {
         viewModel.loginStatus.observe(viewLifecycleOwner, Observer{
             when (it) {
                 is Status.Success -> {
                     showLoading(false)
-                    goToMainScreen()
+                    goToLoginScreen()
                 }
                 is Status.Loading -> showLoading(true)
                 is Status.Error -> {
@@ -75,7 +80,7 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
     private fun performSignUp() {
         val firstName = etFirstName.text.toString().trim()
         val lastName = etLastName.text.toString().trim()
-        val etPhoneNumber = etPhoneNumber.text.toString().trim()
+        val phoneNumber = etPhoneNumber.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
         val passwordConfirm = etConfirmPassword.text.toString().trim()
@@ -110,7 +115,6 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
             return
         }
 
-
-        //viewModel.login(firstName, lastName, etPhoneNumber, )
+        viewModel.signUp(firstName, lastName, email, phoneNumber, password)
     }
 }

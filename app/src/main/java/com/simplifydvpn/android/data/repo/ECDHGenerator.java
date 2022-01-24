@@ -15,21 +15,6 @@ public class ECDHGenerator {
         kpg.initialize(256);
         KeyPair kp = kpg.generateKeyPair();
         return kp;
-
-/*
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
-                KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
-        keyPairGenerator.initialize(
-                new KeyGenParameterSpec.Builder(
-                        "eckeypair",
-                        KeyProperties.PURPOSE_AGREE_KEY)
-                        .setAlgorithmParameterSpec(new ECGenParameterSpec("secp256r1"))
-                        .build());
-        KeyPair myKeyPair = keyPairGenerator.generateKeyPair();
-
-        return myKeyPair;
-
- */
     }
 
     public byte[] generateSharedSecret(KeyPair ourKp, byte[] serverPubKey) throws Exception {

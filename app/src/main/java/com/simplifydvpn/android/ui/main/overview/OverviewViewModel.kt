@@ -13,6 +13,7 @@ import com.simplifydvpn.android.data.repo.ECDHGenerator
 import com.simplifydvpn.android.data.repo.SettingsRepository
 import com.simplifydvpn.android.data.repo.UserRepository
 import com.simplifydvpn.android.data.repo.AuthenticationCallCredentials
+import com.simplifydvpn.android.data.repo.CredentialsRepository
 import com.simplifydvpn.android.utils.Status
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.Dispatchers
@@ -33,10 +34,14 @@ import javax.crypto.KeyAgreement
 class OverviewViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
-    private val dashboardRepository = DashboardRepository()
+    private val credentialsRepository = CredentialsRepository()
     private val settingsRepository = SettingsRepository()
 
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
+    
+    init{
+        connect()
+    }
 
     fun logOut() {
         viewModelScope.launch {
@@ -49,89 +54,9 @@ class OverviewViewModel : ViewModel() {
     fun connect() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                /*
-                    val channel = ManagedChannelBuilder
-                        .forAddress("edge2.simplifyd.net", 30000)
-                        .usePlaintext()
-                        .build()
-
-                    val loginRequest =
-                        ApiRpc.LoginReq.newBuilder().setUsername("tomi@amao.io").setPassword("password")
-                            .build();
-                    val blockingStub = EdgeGrpc.newBlockingStub(channel)
-                    val response = blockingStub.login(loginRequest)
-                    print(response)
-*/
-                val channel = ManagedChannelBuilder
-                    .forAddress("edge2.simplifyd.net", 30000)
-                    .usePlaintext()
-                    .build()
-
-                val eCDHGenerator = ECDHGenerator()
-                val keypair = eCDHGenerator.generateKeyPair()
-
-                val publicKey = keypair.public
-
-                val affineX: BigInteger = (publicKey as ECPublicKey).w.affineX
-                val affineY: BigInteger = (publicKey as ECPublicKey).w.affineY
-
-                val pubKey: ApiRpc.PubKey.Builder = ApiRpc.PubKey.newBuilder()
-                    .setX(ByteString.copyFrom(affineX.toByteArray()))
-                    .setY(ByteString.copyFrom(affineY.toByteArray()))
-
-                val connectProfileRequest =
-                    ApiRpc.ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
-                        .build();
-
-                val token = PreferenceManager.getToken()
-                print(token)
-                val creds = AuthenticationCallCredentials(token)
-                val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
-                    .withCallCredentials(creds)
-                val response = blockingStub.getConnectProfile(connectProfileRequest)
-                print(response)
-
-                //load KEY2 from server public key
-                val ecParameters = publicKey.params
-                val lengthX = response.serverPubKey.x.toByteArray().size
-                val lengthY = response.serverPubKey.y.toByteArray().size
-                val x = BigInteger(response.serverPubKey.x.toByteArray());
-                val y = BigInteger(response.serverPubKey.y.toByteArray());
-                val ecPoint = ECPoint(x, y);
-                val keySpec = ECPublicKeySpec(ecPoint, ecParameters);
-                val keyFactory = KeyFactory.getInstance("EC")
-                val serverPublicKey: PublicKey
-                try {
-                    serverPublicKey = keyFactory.generatePublic(keySpec)
-
-
-                // Perform key agreement
-                // Perform key agreement
-                /*
-                val ka: KeyAgreement = KeyAgreement.getInstance("ECDH")
-                ka.init(keypair.private)
-                ka.doPhase(serverPublicKey, true)
-
-                // Read shared secret
-                val sharedSecret: ByteArray = ka.generateSecret()
-                val sharedSecretStr = String(sharedSecret)
-                 */
-
-                // Create a shared secret based on our private key and the other party's public key.
-                // Create a shared secret based on our private key and the other party's public key.
-                val keyAgreement = KeyAgreement.getInstance("ECDH", "AndroidKeyStore")
-                keyAgreement.init(keypair.private)
-                keyAgreement.doPhase(serverPublicKey, true)
-                val sharedSecret = keyAgreement.generateSecret()
-                val sharedSecretStr = String(sharedSecret)
-                // val result = userRepository.connectProfile()
-                // connectProfileStatus.postValue(result)
-            }
-                catch(e: InvalidKeySpecException) {
-                    println(e)
-                }
-
-                Log.d("***************************", "HEREEEEEEEEEEE")
+                val result = credentialsRepository.getConnectProfile()
+                print(result)
+                connectProfileStatus.postValue(result)
             }
         }
     }

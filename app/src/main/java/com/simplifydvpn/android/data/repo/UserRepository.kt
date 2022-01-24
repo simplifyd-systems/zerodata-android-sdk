@@ -1,5 +1,6 @@
 package com.simplifydvpn.android.data.repo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.protobuf.ByteString
 import com.simplifydvpn.android.data.config.OpenVpnConfigurator
@@ -17,9 +18,7 @@ import pb.ApiRpc
 import pb.ApiRpc.LoginReq
 import pb.EdgeGrpc
 import pb.ApiRpc.RegisterReq
-import pb.ApiRpc.ConnectProfileReq
-import java.math.BigInteger
-import java.security.interfaces.ECPublicKey
+
 
 @ExperimentalCoroutinesApi
 class UserRepository : BaseRepository() {
@@ -37,9 +36,15 @@ class UserRepository : BaseRepository() {
                     .setMobile(phoneNumber).setPassword(password).build()
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.register(registerRequest)
-            print(response)
-            Status.Success(Unit)
+            if (response.success) {
+                Log.d("REPOSITORY","USER REPOSITORY: ${response}")
+                Status.Success(Unit)
+            } else {
+                Log.d("REPOSITORY","USER REPOSITORY: ${response.getErrors(0)}")
+                Status.Error(Throwable(response.getErrors(0) ))
+            }
         } catch (error: Throwable) {
+            Log.d("REPOSITORY","USER REPOSITORY: ${error}")
             Status.Error(handleError(error))
         }
     }
@@ -66,34 +71,6 @@ class UserRepository : BaseRepository() {
             } else {
                 Status.Error(Throwable(response.getErrors(0) ))
             }
-        } catch (error: Throwable) {
-            Status.Error(handleError(error))
-        }
-    }
-
-    fun connectProfile(): Status<Unit> {
-        return try {
-            // generate our key pair
-            val eCDHGenerator = ECDHGenerator()
-            val keypair = eCDHGenerator.generateKeyPair()
-
-            val publicKey = keypair.public.encoded
-
-            val affineX: BigInteger = (publicKey as ECPublicKey).w.affineX
-            val affineY: BigInteger = (publicKey as ECPublicKey).w.affineY
-
-            val pubKey: ApiRpc.PubKey.Builder = ApiRpc.PubKey.newBuilder()
-                .setX(ByteString.copyFrom(affineX.toByteArray()))
-                .setY(ByteString.copyFrom(affineY.toByteArray()))
-
-            val connectProfileRequest =
-                ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
-                    .build();
-            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
-            val response = blockingStub.getConnectProfile(connectProfileRequest)
-            print(response)
-
-            Status.Success(Unit)
         } catch (error: Throwable) {
             Status.Error(handleError(error))
         }
