@@ -38,10 +38,7 @@ class OverviewViewModel : ViewModel() {
     private val settingsRepository = SettingsRepository()
 
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
-    
-    init{
-        connect()
-    }
+    val connectProfileStatus = MutableLiveData<Status<Unit>>()
 
     fun logOut() {
         viewModelScope.launch {
@@ -49,7 +46,6 @@ class OverviewViewModel : ViewModel() {
         }
     }
 
-    val connectProfileStatus = MutableLiveData<Status<Unit>>()
 
     fun connect() {
         viewModelScope.launch {

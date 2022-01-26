@@ -63,10 +63,6 @@ class UserRepository : BaseRepository() {
                 //saveUserDetails(response.user)
                 saveLoginInfo(email, password)
 
-                OpenVpnConfigurator.configureOVPNServers(OPEN_VPN_URL).first().let {
-                    PreferenceManager.saveProfileName(it.uuidString)
-                }
-
                 Status.Success(Unit)
             } else {
                 Status.Error(Throwable(response.getErrors(0) ))

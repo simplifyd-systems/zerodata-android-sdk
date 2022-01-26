@@ -6,6 +6,7 @@
 package com.simplifydvpn.android.data.config
 
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toFile
 import de.blinkt.openvpn.VpnProfile
 import de.blinkt.openvpn.core.ConfigParser
@@ -18,6 +19,12 @@ class OVPNProfileImporter @Inject constructor() {
     fun importServerConfig(fileUri: Uri): VpnProfile {
         val inputStream: InputStream = fileUri.toFile().inputStream()
         val result = doImport(inputStream)
+        return result!!
+    }
+
+    fun parseServerConfig(serverConfig:String): VpnProfile {
+        val result = doImport(serverConfig.byteInputStream())
+        Log.d("OVPN:", "${result!!.uuid}")
         return result!!
     }
 

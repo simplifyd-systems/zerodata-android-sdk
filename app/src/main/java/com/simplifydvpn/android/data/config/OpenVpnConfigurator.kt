@@ -6,7 +6,6 @@
 package com.simplifydvpn.android.data.config
 
 import android.content.Context
-import android.util.Log
 import androidx.core.net.toUri
 import com.simplifydvpn.android.BuildConfig
 import com.simplifydvpn.android.data.config.downloader.FileDownloader
@@ -16,10 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.io.File
-import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 object OpenVpnConfigurator {
@@ -33,26 +32,17 @@ object OpenVpnConfigurator {
         ProfileManager.getInstance(context)
     }
     private val ovpnProfileImporter: OVPNProfileImporter by lazy {
-         OVPNProfileImporter()
+        OVPNProfileImporter()
     }
 
-    fun configureOVPNServers(ovpnFileUrl:String): Flow<VpnProfile> {
-        return (configureOVPNServer(ovpnFileUrl))
+    fun configureOVPNServers(profileData: String): Flow<VpnProfile> {
+        return (configureOVPNServer(profileData = profileData))
     }
 
-    private fun configureOVPNServer(configDetails: String): Flow<VpnProfile> {
-        return fileDownloader.downloadOVPNConfig(configDetails)
-            .map {
-                Log.d(
-                    OpenVpnConfigurator::class.java.simpleName,
-                    "Configuring OVPN: ${it.getOrNull()}"
-                )
-                configureOVPNProfileForServer(it.getOrNull() as File)
-            }.map { server ->
-                Log.d(OpenVpnConfigurator::class.java.simpleName, "Saving OVPN: $server")
-                val serverCacheModel = saveOVPNProfile(server)
-                serverCacheModel
-            }
+    private fun configureOVPNServer(profileData: String): Flow<VpnProfile> {
+        return flow{
+            emit(saveOVPNProfile(ovpnProfileImporter.parseServerConfig(profileData)))
+        }
     }
 
     private fun configureOVPNProfileForServer(file: File): VpnProfile {

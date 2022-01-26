@@ -26,14 +26,17 @@ import java.security.spec.ECPoint
 import java.security.spec.ECPublicKeySpec
 import java.security.spec.InvalidKeySpecException
 import javax.crypto.KeyAgreement
+import java.util.Arrays
 
-class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator = ECDHGenerator()) {
+class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator = ECDHGenerator(),
+                                        private val preferenceManager: PreferenceManager = PreferenceManager,
+                                        private val openVpnConfigurator: OpenVpnConfigurator = OpenVpnConfigurator) {
 
-    fun getConnectProfile(): Status<Unit> {
+    suspend fun getConnectProfile(): Status<Unit> {
         return try {
             // generate our key pair
             val keypair = eCDHGenerator.generateKeyPair()
-            val publicKey = keypair.public.encoded
+            val publicKey = keypair.public
 
             val affineX: BigInteger = (publicKey as ECPublicKey).w.affineX
             val affineY: BigInteger = (publicKey as ECPublicKey).w.affineY
@@ -42,19 +45,28 @@ class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator
                 .setX(ByteString.copyFrom(affineX.toByteArray()))
                 .setY(ByteString.copyFrom(affineY.toByteArray()))
 
+            Log.d("OVPN:", "${Arrays.toString(affineX.toByteArray())}")
+            Log.d("OVPN:", "${Arrays.toString(affineY.toByteArray())}")
+
+
             val connectProfileRequest =
                 ApiRpc.ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
                     .build();
 
-            val token = PreferenceManager.getToken()
-            print(token)
+            val token = preferenceManager.getToken()
             val creds = AuthenticationCallCredentials(token)
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)
             val response = blockingStub.getConnectProfile(connectProfileRequest)
+
+            openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile).first().let {
+                preferenceManager.saveProfileName(it.uuidString)
+            }
+
             print(response)
             Status.Success(Unit)
         } catch (error: Throwable) {
+            error.printStackTrace()
             Status.Error(handleError(error))
         }
     }

@@ -52,16 +52,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
                 viewModel.connect()
-                /*
-                PreferenceManager.getProfileName()?.let {
-                    (requireActivity() as MainActivity).startOrStopOpenVPN(
-                        ProfileManager.get(
-                            requireContext(),
-                            it
-                        )
-                    )
-                }
-                */
             }
         }
 
@@ -85,10 +75,10 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
 
         requireActivity().findViewById<View>(R.id.logout_link).setOnClickListener {
-            (requireActivity() as? MainActivity)?.let{
-                if(it.isVPNConnected()){
+            (requireActivity() as? MainActivity)?.let {
+                if (it.isVPNConnected()) {
                     it.disconnectVPN()
-                }else{
+                } else {
                     viewModel.logOut()
                     startActivity(Intent(context, LoginActivity::class.java))
                     activity?.finish()
@@ -128,6 +118,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                 }
                 is Status.Error -> {
+                    connect_switch.isChecked = false
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
                 is Status.Success -> {
@@ -147,6 +138,28 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 }
             }
         })
+
+        viewModel.connectProfileStatus.observe(viewLifecycleOwner, {
+            when (it) {
+                is Status.Loading -> {
+
+                }
+                is Status.Error -> {
+                    showRetrySnackBar(it.error.localizedMessage) { }
+                }
+                is Status.Success -> {
+                    PreferenceManager.getProfileName()?.let {
+                        (requireActivity() as MainActivity).startOrStopOpenVPN(
+                            ProfileManager.get(
+                                requireContext(),
+                                it
+                            )
+                        )
+                    }
+                }
+            }
+        })
+
     }
 
 
@@ -173,7 +186,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-            }else if (level == ConnectionStatus.LEVEL_VPNPAUSED ) {
+            } else if (level == ConnectionStatus.LEVEL_VPNPAUSED) {
                 progressBar.isVisible = false
                 protection_status.text = "Paused"
                 connect_switch.setOnCheckedChangeListener(null)
@@ -192,7 +205,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         }
     }
 
-    private fun enqueueRestart(minutes:Int){
+    private fun enqueueRestart(minutes: Int) {
 
         WorkManager.getInstance(requireContext()).cancelAllWorkByTag(RestartWorkWM.TAG)
 
@@ -212,7 +225,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     }
 
     override fun onSelectSortParameter(pauseMode: PauseMode) {
-        when(pauseMode){
+        when (pauseMode) {
             PauseMode.PAUSE_FOR_FIFTEEN_MINUTES -> {
                 enqueueRestart(15)
                 (requireActivity() as? MainActivity)?.pauseVPN()
@@ -231,7 +244,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     }
 
 
-    companion object{
+    companion object {
         private const val DISCONNECT_FRAGMENT = "DISCONNECT_FRAGMENT"
     }
 
