@@ -34,6 +34,8 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.concurrent.TimeUnit
 import com.simplifydvpn.android.ui.auth.LoginActivity
 import android.net.Uri
+import androidx.core.os.bundleOf
+import com.simplifydvpn.android.ui.main.webview.WebViewFragment
 
 @ExperimentalStdlibApi
 class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
@@ -179,6 +181,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
+                findNavController().navigate(R.id.action_navigation_overview_to_navigation_webview, bundleOf("webUrl" to viewModel.connectUrl))
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
                 protection_status.text = "Connecting"

@@ -11,7 +11,22 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
 
+        <action
+            android:id="@+id/action_navigation_overview_to_navigation_webview"
+            app:destination="@id/navigation_webview" />
+
     </fragment>
 
+
+    <fragment
+        android:id="@+id/navigation_webview"
+        android:name="com.simplifydvpn.android.ui.main.webview.WebViewFragment"
+        android:label="Webpage"
+        tools:layout="@layout/fragment_webview">
+
+        <argument
+            android:name="webUrl"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

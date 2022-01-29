@@ -32,7 +32,7 @@ class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator
                                         private val preferenceManager: PreferenceManager = PreferenceManager,
                                         private val openVpnConfigurator: OpenVpnConfigurator = OpenVpnConfigurator) {
 
-    suspend fun getConnectProfile(): Status<Unit> {
+    suspend fun getConnectProfile(): Status<String> {
         return try {
             // generate our key pair
             val keypair = eCDHGenerator.generateKeyPair()
@@ -47,7 +47,6 @@ class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator
 
             Log.d("OVPN:", "${Arrays.toString(affineX.toByteArray())}")
             Log.d("OVPN:", "${Arrays.toString(affineY.toByteArray())}")
-
 
             val connectProfileRequest =
                 ApiRpc.ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
@@ -64,7 +63,7 @@ class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator
             }
 
             print(response)
-            Status.Success(Unit)
+            Status.Success(response.openBrowserToUrl)
         } catch (error: Throwable) {
             error.printStackTrace()
             Status.Error(handleError(error))

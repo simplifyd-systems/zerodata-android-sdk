@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             toolbar?.setNavigationIcon(R.drawable.ic_back)
             val isOverviewScreenActive = destination.id == R.id.navigation_overview
+            logout_link.isGone = isOverviewScreenActive.not()
             imageView2.isGone = isOverviewScreenActive.not()
             toolbar.isInvisible = isOverviewScreenActive
         }
