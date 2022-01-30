@@ -2,7 +2,9 @@ package com.simplifydvpn.android.ui.main.webview
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -11,14 +13,42 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import com.simplifydvpn.android.R
 import kotlinx.android.synthetic.main.fragment_webview.*
 
-class WebViewFragment : Fragment(R.layout.fragment_webview) {
+class WebViewFragment : DialogFragment(R.layout.fragment_webview) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.Theme_Simplifyd_FullScreenDialog_Normal)
+    }
+
+    private fun disableBackClick() {
+       view?.let{
+           it.isFocusableInTouchMode = true
+           it.requestFocus()
+           it.setOnKeyListener { _, i, keyEvent ->
+               if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                   if (i == KeyEvent.KEYCODE_BACK) {
+                       dismiss()
+                   }
+               }
+               return@setOnKeyListener false
+           }
+       }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.run {
+            window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            disableBackClick()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
     }
 
@@ -26,6 +56,13 @@ class WebViewFragment : Fragment(R.layout.fragment_webview) {
         setUpWebView()
         showLoading()
         loadWebPage()
+        setUpToolbar()
+    }
+
+    private fun setUpToolbar(){
+        toolbar.setNavigationOnClickListener{
+            dismiss()
+        }
     }
 
     private fun setUpWebView() {
@@ -50,7 +87,6 @@ class WebViewFragment : Fragment(R.layout.fragment_webview) {
             }
 
             loading_error_state.isVisible = false
-
             web_view.isVisible = true
         }
 
@@ -81,5 +117,17 @@ class WebViewFragment : Fragment(R.layout.fragment_webview) {
     companion object {
         private val TAG: String = WebViewFragment::class.java.name
         private const val WEB_URL = "webUrl"
+
+        fun display(
+            fragmentManager: FragmentManager,
+            webUrl: String
+        ): WebViewFragment {
+            val dialogFragment = WebViewFragment()
+            dialogFragment.arguments = Bundle().apply {
+                putString(WEB_URL, webUrl)
+            }
+            dialogFragment.show(fragmentManager, TAG)
+            return dialogFragment
+        }
     }
 }

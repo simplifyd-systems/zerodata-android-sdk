@@ -70,4 +70,10 @@
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
+    <style name="Theme.Simplifyd.FullScreenDialog.Normal" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
 </resources>

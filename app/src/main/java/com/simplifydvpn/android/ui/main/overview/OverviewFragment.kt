@@ -181,7 +181,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                findNavController().navigate(R.id.action_navigation_overview_to_navigation_webview, bundleOf("webUrl" to viewModel.connectUrl))
+                WebViewFragment.display(fragmentManager!!, viewModel.connectUrl)
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
                 protection_status.text = "Connecting"
