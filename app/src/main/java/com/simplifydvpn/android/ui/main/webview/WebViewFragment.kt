@@ -66,13 +66,13 @@ class WebViewFragment : DialogFragment(R.layout.fragment_webview) {
     }
 
     private fun setUpWebView() {
-        web_view.webViewClient = ChangeLogWebViewClient()
+        web_view.webViewClient = CustomWebViewClient()
         web_view.webChromeClient = WebChromeClient()
         web_view.settings.javaScriptCanOpenWindowsAutomatically = true
         web_view.settings.setSupportMultipleWindows(true)
     }
 
-    inner class ChangeLogWebViewClient : WebViewClient() {
+    inner class CustomWebViewClient : WebViewClient() {
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             super.onPageStarted(view, url, favicon)
             if (this@WebViewFragment.view == null) {

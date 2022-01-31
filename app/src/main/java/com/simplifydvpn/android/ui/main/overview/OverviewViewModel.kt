@@ -40,9 +40,9 @@ class OverviewViewModel : ViewModel() {
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
     val connectProfileStatus = MutableLiveData<Status<String>>()
 
-    val connectUrl : String
+    val connectUrl : String?
         get(){
-            return (connectProfileStatus.value as Status.Success<String>).data
+            return (connectProfileStatus.value as? Status.Success<String>)?.data
         }
 
     fun logOut() {

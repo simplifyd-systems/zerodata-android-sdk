@@ -92,10 +92,14 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
         help_text.setOnClickListener {
             val url = "https://edge.simplifyd.com/howtos"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
+            openWebUrl(url)
         }
+    }
+
+    private fun openWebUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
     override fun onResume() {
@@ -181,7 +185,9 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                WebViewFragment.display(fragmentManager!!, viewModel.connectUrl)
+                viewModel.connectUrl?.let{
+                    openWebUrl(it)
+                }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
                 protection_status.text = "Connecting"
