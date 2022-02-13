@@ -8,12 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.simplifydvpn.android.R
+import com.simplifydvpn.android.ui.main.MainActivity
 import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.getColorInt
+import com.simplifydvpn.android.utils.isValidEmail
 import com.simplifydvpn.android.utils.showToast
 import kotlinx.android.synthetic.main.fragment_login.*
-import com.simplifydvpn.android.ui.main.MainActivity
-import com.simplifydvpn.android.utils.isValidEmail
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -59,7 +59,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun observeLogin() {
-        viewModel.loginStatus.observe(viewLifecycleOwner, Observer{
+        viewModel.loginStatus.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Status.Success -> {
                     showLoading(false)

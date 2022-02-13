@@ -25,9 +25,8 @@
 
     <fragment
         android:id="@+id/navigation_sign_in"
-        android:name="com.simplifydvpn.android.ui.auth.login.LoginFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_login">
+        android:name="com.simplifydvpn.android.ui.auth.getStarted.GetStartedFragment"
+        android:label="fragment_sign_in">
 
         <action
             android:id="@+id/action_navigation_sign_in_to_navigation_sign_up"
@@ -41,9 +40,12 @@
 
     <fragment
         android:id="@+id/navigation_sign_up"
-        android:name="com.simplifydvpn.android.ui.auth.signup.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_signup">
+        android:name="com.simplifydvpn.android.ui.auth.verify.VerificationFragment"
+        android:label="fragment_sign_up">
+
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
 
     </fragment>
 

@@ -1,16 +1,17 @@
 package com.simplifydvpn.android.data.remote.http
 
 import android.util.Log
-import com.simplifydvpn.android.data.local.PreferenceManager
-import okhttp3.*
 import com.google.gson.Gson
+import com.simplifydvpn.android.data.local.PreferenceManager
+import okhttp3.Interceptor
+import okhttp3.Response
 
-class AccessTokenAuthenticator  constructor(
+class AccessTokenAuthenticator constructor(
     private val tokenRefresher: TokenRefresher = com.simplifydvpn.android.data.remote.http.TokenRefresher(
         Gson()
     ),
     private val preferenceManager: PreferenceManager = PreferenceManager,
-    ) : Interceptor {
+) : Interceptor {
 
     private var countOfRetry: Int = 0
 
@@ -39,9 +40,11 @@ class AccessTokenAuthenticator  constructor(
                 "Re authenticating token success on retry $countOfRetry"
             )
             response.close()
-            return chain.proceed(response.request().newBuilder()
-                .header("Authorization", "Bearer " + preferenceManager.getToken())
-                .build())
+            return chain.proceed(
+                response.request().newBuilder()
+                    .header("Authorization", "Bearer " + preferenceManager.getToken())
+                    .build()
+            )
         } else {
             countOfRetry = 0
             Log.d(AccessTokenAuthenticator::class.java.simpleName, "No need to refresh token")

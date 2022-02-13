@@ -6,7 +6,6 @@ import com.simplifydvpn.android.data.model.User
 import com.simplifydvpn.android.data.model.apiresponse.LoginResponse
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface APIService {
 

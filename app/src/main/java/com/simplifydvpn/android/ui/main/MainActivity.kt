@@ -2,12 +2,10 @@ package com.simplifydvpn.android.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -34,8 +32,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             toolbar?.setNavigationIcon(R.drawable.ic_back)
             val isOverviewScreenActive = destination.id == R.id.navigation_overview
-            logout_link.isGone = isOverviewScreenActive.not()
-            imageView2.isGone = isOverviewScreenActive.not()
+            settings_link.isGone = isOverviewScreenActive.not()
+            notifications_link.isGone = isOverviewScreenActive.not()
+            imageViNew2.isGone = isOverviewScreenActive.not()
             toolbar.isInvisible = isOverviewScreenActive
         }
 
@@ -43,7 +42,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             navController.navigateUp() || super.onSupportNavigateUp()
         }
     }
-
 
 
     fun startOrStopOpenVPN(profile: VpnProfile) {

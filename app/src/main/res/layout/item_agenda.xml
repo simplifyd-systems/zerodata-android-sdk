@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:strokeColor="@color/colorOverviewStatusBar"
-    app:strokeWidth="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="12dp"
+    app:strokeColor="@color/colorOverviewStatusBar"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,12 +29,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            tools:text="www.internetbadguys.com"
             android:textColor="@color/colorBlack"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            tools:text="www.internetbadguys.com" />
 
         <TextView
             android:id="@+id/textView4"
@@ -52,22 +52,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:lineSpacingExtra="8dp"
             android:text="@string/agenda_warning"
             android:textSize="12sp"
-            android:lineSpacingExtra="8dp"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAllowButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/allow"
             android:textAllCaps="false"
             android:textColor="@color/colorGreen"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 

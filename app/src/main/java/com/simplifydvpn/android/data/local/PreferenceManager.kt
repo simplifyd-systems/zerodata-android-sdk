@@ -5,7 +5,9 @@ import android.content.Context
 object PreferenceManager {
 
     private const val BEARER_TOKEN = "BEARER_TOKEN"
+    private const val TOKEN = "TOKEN"
     private const val NOTIFY_ME = "NOTIFY_ME"
+    private const val IS_SEEN = "IS_SEEN"
     private const val APP_NAME = "APP_NAME"
     private const val VPN_PROFILE_NAME = "VPN_PROFILE_NAME"
 
@@ -50,6 +52,14 @@ object PreferenceManager {
 
     fun getToken(): String? = preferences.getString(BEARER_TOKEN, null)
 
+    fun saveTokenInitation(token: String) {
+        preferences.edit().apply {
+            putString(TOKEN, token)
+        }.apply()
+    }
+
+    fun getTokenInitation(): String? = preferences.getString(TOKEN, null)
+
     fun setNotifyMe(notifyMe: Boolean) {
         preferences.edit().apply {
             putBoolean(NOTIFY_ME, notifyMe)
@@ -57,6 +67,14 @@ object PreferenceManager {
     }
 
     fun getNotifyMe(): Boolean = preferences.getBoolean(NOTIFY_ME, false)
+
+    fun setIsSeen(isSeen: Boolean) {
+        preferences.edit().apply {
+            putBoolean(IS_SEEN, isSeen)
+        }.apply()
+    }
+
+    fun getIsSeen(): Boolean = preferences.getBoolean(IS_SEEN, false)
 
     fun clearAll() {
         preferences.edit().clear().apply()

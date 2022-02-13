@@ -24,6 +24,8 @@
 
 package de.blinkt.openvpn.core;
 
+import static de.blinkt.openvpn.core.OpenVPNService.ORBOT_PACKAGE_NAME;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,8 +38,6 @@ import android.text.TextUtils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static de.blinkt.openvpn.core.OpenVPNService.ORBOT_PACKAGE_NAME;
 
 public class OrbotHelper {
     //! Based on the class from NetCipher but stripped down and modified for icsopenvpn

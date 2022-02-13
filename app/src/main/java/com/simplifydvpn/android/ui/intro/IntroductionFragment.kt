@@ -26,11 +26,11 @@ class IntroductionFragment : Fragment(R.layout.fragment_introduction) {
         }
     }
 
-    companion object{
+    companion object {
         val intros = listOf(
             Intro(1, R.string.intro_one_title, R.string.intro_one_desc, R.drawable.ic_intro_1),
-            Intro(2, R.string.intro_two_title, R.string.intro_two_desc,  R.drawable.ic_intro_2),
-            Intro(3, R.string.intro_three_title, R.string.intro_three_desc,  R.drawable.ic_intro_3)
+            Intro(2, R.string.intro_two_title, R.string.intro_two_desc, R.drawable.ic_intro_2),
+            Intro(3, R.string.intro_three_title, R.string.intro_three_desc, R.drawable.ic_intro_3)
         )
     }
 }

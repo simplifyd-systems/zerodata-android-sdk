@@ -2,8 +2,6 @@ package com.simplifydvpn.android.data.repo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.google.protobuf.ByteString
-import com.simplifydvpn.android.data.config.OpenVpnConfigurator
 import com.simplifydvpn.android.data.local.PreferenceManager
 import com.simplifydvpn.android.data.model.User
 import com.simplifydvpn.android.data.remote.grpc.GRPCChannelFactory
@@ -11,13 +9,11 @@ import com.simplifydvpn.android.utils.Status
 import com.simplifydvpn.android.utils.handleError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
-import io.grpc.ManagedChannelBuilder
 import pb.ApiRpc
 import pb.ApiRpc.LoginReq
-import pb.EdgeGrpc
 import pb.ApiRpc.RegisterReq
+import pb.EdgeGrpc
 
 
 @ExperimentalCoroutinesApi
@@ -37,14 +33,14 @@ class UserRepository : BaseRepository() {
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.register(registerRequest)
             if (response.success) {
-                Log.d("REPOSITORY","USER REPOSITORY: ${response}")
+                Log.d("REPOSITORY", "USER REPOSITORY: ${response}")
                 Status.Success(Unit)
             } else {
-                Log.d("REPOSITORY","USER REPOSITORY: ${response.getErrors(0)}")
-                Status.Error(Throwable(response.getErrors(0) ))
+                Log.d("REPOSITORY", "USER REPOSITORY: ${response.getErrors(0)}")
+                Status.Error(Throwable(response.getErrors(0)))
             }
         } catch (error: Throwable) {
-            Log.d("REPOSITORY","USER REPOSITORY: ${error}")
+            Log.d("REPOSITORY", "USER REPOSITORY: ${error}")
             Status.Error(handleError(error))
         }
     }
@@ -53,24 +49,65 @@ class UserRepository : BaseRepository() {
         return try {
             val loginRequest =
                 LoginReq.newBuilder().setUsername(email).setPassword(password)
-                    .build();
+                    .build()
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.login(loginRequest)
             print(response)
 
             if (response.success) {
                 saveAuthToken(response.jwt)
-                //saveUserDetails(response.user)
+//                saveUserDetails(response.user)
                 saveLoginInfo(email, password)
 
                 Status.Success(Unit)
             } else {
-                Status.Error(Throwable(response.getErrors(0) ))
+                Status.Error(Throwable(response.getErrors(0)))
             }
         } catch (error: Throwable) {
             Status.Error(handleError(error))
         }
     }
+
+    suspend fun loginInitiate(mobile: String): Status<Unit> {
+
+        return try {
+            val loginInitiateRq = ApiRpc.Username.newBuilder().setMobile(mobile).build()
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+            val response = blockingStub.initiateLogin(loginInitiateRq)
+            print("Response Now $response")
+
+            if (response.success) {
+                saveToken(response.initiateLoginJwt)
+                Status.Success(Unit)
+            } else {
+                Status.Error(Throwable(response.getErrors(0)))
+            }
+        } catch (error: Throwable) {
+            Status.Error(handleError(error))
+        }
+
+    }
+
+    suspend fun loginValidate(otp: String): Status<Unit> {
+
+        return try {
+            val loginValidateRq = ApiRpc.OTP.newBuilder().setOtp(otp)
+                .setInitiateLoginJwt(PreferenceManager.getTokenInitation()).build()
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+            val response = blockingStub.loginValidate(loginValidateRq)
+
+            if (response.success) {
+                saveAuthToken(response.jwt)
+                Status.Success(Unit)
+            } else {
+                Status.Error(Throwable(response.getErrors(0)))
+            }
+        } catch (error: Throwable) {
+            Status.Error(handleError(error))
+        }
+
+    }
+
 
     private suspend fun saveUserDetails(user: User) {
         database.userDao().saveUser(user)
@@ -86,6 +123,12 @@ class UserRepository : BaseRepository() {
     private suspend fun saveAuthToken(token: String) {
         withContext(Dispatchers.IO) {
             PreferenceManager.saveToken(token)
+        }
+    }
+
+    private suspend fun saveToken(token: String) {
+        withContext(Dispatchers.IO) {
+            PreferenceManager.saveTokenInitation(token)
         }
     }
 

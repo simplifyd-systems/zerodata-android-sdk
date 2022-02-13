@@ -5,31 +5,26 @@
 
 package de.blinkt.externalcertprovider;
 
+import static de.blinkt.externalcertprovider.SelectCertificateActivity.EXTRA_ALIAS;
+import static de.blinkt.externalcertprovider.SelectCertificateActivity.EXTRA_DESCRIPTION;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import de.blinkt.openvpn.api.ExternalCertificateProvider;
-import org.bouncycastle.openssl.PEMKeyPair;
-import org.bouncycastle.openssl.PEMParser;
+
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
-import java.io.StringReader;
-import java.security.InvalidKeyException;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 
-import static de.blinkt.externalcertprovider.SelectCertificateActivity.EXTRA_ALIAS;
-import static de.blinkt.externalcertprovider.SelectCertificateActivity.EXTRA_DESCRIPTION;
+import de.blinkt.openvpn.api.ExternalCertificateProvider;
 
 /**
  * This is a VERY basic implementation.

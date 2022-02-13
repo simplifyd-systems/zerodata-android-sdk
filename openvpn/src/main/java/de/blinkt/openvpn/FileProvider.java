@@ -5,13 +5,6 @@
 
 package de.blinkt.openvpn;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.content.ContentProvider;
 import android.content.ContentProvider.PipeDataWriter;
 import android.content.ContentValues;
@@ -23,6 +16,14 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import de.blinkt.openvpn.core.VpnStatus;
 
 /**

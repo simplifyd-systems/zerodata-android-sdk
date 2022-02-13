@@ -5,7 +5,7 @@ import com.google.gson.Gson
 
 class TokenRefresher constructor(var gson: Gson) {
 
-    fun refreshToken(password: String, email:String): String? {
+    fun refreshToken(password: String, email: String): String? {
         val hashMap = HashMap<String, Any>()
         hashMap["password"] = password
         hashMap["email"] = email

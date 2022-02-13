@@ -1,23 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingStart="24dp"
     tools:context=".ui.main.settings.SettingsFragment">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorRed"
-        android:drawablePadding="16dp"
-        android:gravity="center|start"
-        android:id="@+id/logout_link"
-        android:background="?selectableItemBackground"
-        android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
-        android:paddingVertical="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/two_space"
-        android:text="Logout" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:animateLayoutChanges="true"-->
+            <!--                android:gravity="center_horizontal"-->
+            <!--                android:padding="@dimen/one_half_space"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/ic_back"-->
+            <!--                    android:layout_width="24dp"-->
+            <!--                    android:layout_height="24dp"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:contentDescription="@string/brand_logo"-->
+            <!--                    android:src="@drawable/ic_back" />-->
+
+            <!--                <Space-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:contentDescription="@string/brand_logo"-->
+            <!--                    android:src="@drawable/ic_back" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                    android:id="@+id/textViewSettings"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:textSize="@dimen/text_16"-->
+            <!--                    android:layout_marginStart="@dimen/two_space"-->
+            <!--                    android:layout_marginLeft="@dimen/two_space"-->
+            <!--                    android:text="Settings"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    />-->
+
+            <!--                <Space-->
+            <!--                    android:id="@+id/imageView2"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    />-->
+
+            <!--            </LinearLayout>-->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/allowedSitesView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/three_space"
+                android:background="@color/white"
+                android:padding="@dimen/two_half_space"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_vw_profile"
+                    android:layout_width="@dimen/two_half_space"
+                    android:layout_height="@dimen/two_half_space"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_allowed_sites" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewAllowedSites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/two_space"
+                    android:layout_marginLeft="@dimen/two_space"
+                    android:text="@string/view_portal"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/img_vw_profile"
+                    app:layout_constraintStart_toEndOf="@id/img_vw_profile"
+                    app:layout_constraintTop_toTopOf="@id/img_vw_profile" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/one_half_space"
+                    android:layout_height="@dimen/one_half_space"
+                    android:layout_marginStart="@dimen/two_space"
+                    android:layout_marginLeft="@dimen/two_space"
+                    android:src="@drawable/ic_forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view_separtor1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/one_space"
+                android:layout_marginEnd="@dimen/one_space"
+                android:background="@color/demacation"
+                app:layout_constraintTop_toBottomOf="@id/allowedSitesView" />
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:id="@+id/dataSavingView"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/toolbar"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:padding="@dimen/two_half_space">-->
+
+            <!--                <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                    android:id="@+id/img_vw_datasaving"-->
+            <!--                    android:layout_width="@dimen/two_half_space"-->
+            <!--                    android:layout_height="@dimen/two_half_space"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:srcCompat="@drawable/ic_shield_protected" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                    android:id="@+id/textViewDataSaving"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="@dimen/two_space"-->
+            <!--                    android:layout_marginLeft="@dimen/two_space"-->
+            <!--                    android:text="Data Savings Report"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="@id/img_vw_datasaving"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img_vw_datasaving"-->
+            <!--                    app:layout_constraintTop_toTopOf="@id/img_vw_datasaving" />-->
+
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="@dimen/one_half_space"-->
+            <!--                    android:layout_height="@dimen/one_half_space"-->
+            <!--                    android:layout_marginStart="@dimen/two_space"-->
+            <!--                    android:layout_marginLeft="@dimen/two_space"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    android:src="@drawable/ic_forward_arrow"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/view_separtor2"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:layout_marginStart="@dimen/one_space"-->
+            <!--                android:layout_marginEnd="@dimen/one_space"-->
+            <!--                android:background="@color/demacation"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/dataSavingView"/>-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logoutView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/two_half_space"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_vw_logout"
+                    android:layout_width="@dimen/two_half_space"
+                    android:layout_height="@dimen/two_half_space"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/two_space"
+                    android:layout_marginLeft="@dimen/two_space"
+                    android:text="@string/sign_out"
+                    android:textColor="@color/colorRed"
+                    app:layout_constraintBottom_toBottomOf="@id/img_vw_logout"
+                    app:layout_constraintStart_toEndOf="@id/img_vw_logout"
+                    app:layout_constraintTop_toTopOf="@id/img_vw_logout" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/one_half_space"
+                    android:layout_height="@dimen/one_half_space"
+                    android:layout_marginStart="@dimen/two_space"
+                    android:layout_marginLeft="@dimen/two_space"
+                    android:src="@drawable/ic_forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view_separtor3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/one_space"
+                android:layout_marginEnd="@dimen/one_space"
+                android:background="@color/demacation"
+                app:layout_constraintTop_toBottomOf="@id/logoutView" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

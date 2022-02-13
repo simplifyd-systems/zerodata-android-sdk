@@ -21,19 +21,18 @@ android {
         versionCode = 11
         versionName = "1.0.7"
         resConfigs(listOf("en"))
-        manifestPlaceholders = mapOf(
-            "onesignal_app_id" to "fbbec493-6975-4e4f-9a8d-e49ce27f0bea",
-            "onesignal_google_project_number" to "REMOTE"
-        )
+//        manifestPlaceholders = mapOf(
+//            "onesignal_app_id" to "ccf04af8-42e5-40cf-ac4c-e8be7e2b89a9",
+//            "onesignal_google_project_number" to "REMOTE"
+//        )
     }
 
     compileOptions {
         targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = "1.8"
     }
 
     signingConfigs {
@@ -114,7 +113,7 @@ dependencies {
     val okDownload = "1.0.3"
     val activityVersion = "1.2.0-alpha04"
     val fragmentVersion = "1.3.0-alpha04"
-    val roomVersion = "2.2.5"
+    val roomVersion = "2.3.0"
     val coroutines = "1.3.4"
     val dagger = "2.27"
     val okhttp3LoggingInterceptorVersion = "3.9.0"
@@ -163,7 +162,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.mindorks.android:prdownloader:0.6.0")
-    implementation("com.onesignal:OneSignal:3.15.2")
+    implementation("com.onesignal:OneSignal:[4.0.0, 4.99.99]")
     implementation("com.github.skydoves:balloon:1.1.5")
     implementation("net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
@@ -176,6 +175,7 @@ dependencies {
     implementation("com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.work:work-runtime-ktx:$work_version")
+    implementation("org.apache.commons:commons-lang3:3.4")
 
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-   >
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivDomainIcon"
@@ -13,31 +12,31 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:scaleType="fitCenter"
+        android:src="@drawable/ic_domain_placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_domain_placeholder" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/tvDomainName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:maxLines="1"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
+        android:maxLines="1"
         android:paddingVertical="@dimen/two_space"
         android:textColor="@color/colorGrey"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDomainIcon"
         app:layout_constraintStart_toEndOf="@+id/ivDomainIcon"
         app:layout_constraintTop_toTopOf="@+id/ivDomainIcon"
-        app:layout_constraintBottom_toBottomOf="@+id/ivDomainIcon"
         tools:text="www.google.com" />
 
     <View
-        android:layout_width="match_parent"
         android:id="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/tvDomainName"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:background="@color/browser_actions_divider_color"
-        android:layout_height="0.5dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvDomainName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,16 @@
 package com.simplifydvpn.android.data.repo;
-import java.security.*;
-import java.security.spec.ECGenParameterSpec;
-import java.security.spec.X509EncodedKeySpec;
-import javax.crypto.KeyAgreement;
+
 import static org.apache.commons.codec.binary.Hex.decodeHex;
-import android.security.keystore.KeyGenParameterSpec;
-import android.security.keystore.KeyProperties;
+
 import android.util.Log;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+
+import javax.crypto.KeyAgreement;
 
 public class ECDHGenerator {
 

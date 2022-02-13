@@ -1,11 +1,29 @@
 syntax = "proto3";
 
 package pb;
+option go_package  = "edge-api-rpc/pb";
 
 service Edge {
     rpc Register(RegisterReq) returns (StandardResponse) {};
+    rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
+    rpc LoginValidate(OTP) returns (LoginResponse) {};
     rpc Login(LoginReq) returns (LoginResponse) {};
     rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+}
+
+message Username {
+    string mobile = 1;
+}
+message InitiateLoginResponse {
+    bool success = 1;
+    string msg = 2;
+    repeated string errors = 3;
+    string initiate_login_jwt = 4;
+}
+
+message OTP {
+    string otp = 1;
+    string initiate_login_jwt = 4;
 }
 
 message RegisterReq {

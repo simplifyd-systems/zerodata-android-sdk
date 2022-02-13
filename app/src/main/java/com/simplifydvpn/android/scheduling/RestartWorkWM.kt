@@ -16,7 +16,7 @@ import de.blinkt.openvpn.core.OpenVPNService
 import de.blinkt.openvpn.core.ProfileManager
 
 class RestartWorkWM(appContext: Context, workerParams: WorkerParameters) :
-        Worker(appContext, workerParams) {
+    Worker(appContext, workerParams) {
 
 
     private fun resumeVPN(profile: VpnProfile) {
@@ -32,7 +32,7 @@ class RestartWorkWM(appContext: Context, workerParams: WorkerParameters) :
             try {
                 Log.d(TAG, "STARTING VPN with id: $it")
                 resumeVPN(ProfileManager.get(applicationContext, it))
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d(TAG, "FAILED STARTING VPN with id: $it")
             }

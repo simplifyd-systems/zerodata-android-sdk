@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.simplifydvpn.android.R
 import kotlinx.android.synthetic.main.item_introduction.view.*
 
-class IntroAdapter : ListAdapter<Intro, IntroAdapter.ItemIntroductionViewHolder>(IntroItemDiffUtilCallback()) {
+class IntroAdapter :
+    ListAdapter<Intro, IntroAdapter.ItemIntroductionViewHolder>(IntroItemDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemIntroductionViewHolder {
         val view = LayoutInflater.from(parent.context)

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/social"
@@ -31,13 +31,13 @@
 
 
             <TextView
+                android:id="@+id/protection_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/two_space"
                 android:drawableStart="@drawable/ic_shield_protected"
                 android:drawablePadding="@dimen/two_space"
                 android:text="--"
-                android:id="@+id/protection_count"
                 android:textColor="@color/colorGreen"
                 android:textSize="@dimen/text_32"
                 app:drawableTint="@color/colorGreen"
@@ -49,34 +49,33 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_domains_parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/top_domains_parent"
         app:strokeWidth="1dp">
-
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/topDomainsRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/two_space"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginHorizontal="@dimen/two_space"
-            android:overScrollMode="never"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <ProgressBar
-            android:layout_width="wrap_content"
             android:id="@+id/progressBar"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

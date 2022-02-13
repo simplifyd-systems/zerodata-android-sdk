@@ -21,8 +21,12 @@
 
 // TESTING_ONLY
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public class Main {
     // utility method to read a file and return as a String

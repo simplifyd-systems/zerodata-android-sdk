@@ -20,7 +20,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.ui.LoadingDialog
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.math.roundToInt
+
 
 fun Context.showToast(message: String?) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -57,6 +59,31 @@ fun Fragment.hideLoadingDialog() {
 fun String.isValidEmail(): Boolean {
     return this matches Patterns.EMAIL_ADDRESS.toRegex()
 }
+
+fun String.isValidCode(): Boolean {
+    var status = false
+    if (this.length < 4) {
+    } else {
+        status = true
+    }
+
+    return status
+}
+
+
+fun String.isValidPhoneNumber(): Boolean {
+    val clearDigitsRegex = "[^\\d]"
+    val phoneNumber = replace(clearDigitsRegex.toRegex(), "")
+
+    val regInternationalised = "^234[7,8,9]\\d{9}\$"
+    val regNorm = "^0[7,8,9]\\d{9}\$"
+
+    val pattern: Pattern = Pattern.compile(regNorm)
+    val internationalizedPattern: Pattern = Pattern.compile(regInternationalised)
+    return pattern.matcher(phoneNumber).find()
+        .or(internationalizedPattern.matcher(phoneNumber).find())
+}
+
 
 fun String.isValidDomain(): Boolean {
     return this matches Patterns.WEB_URL.toRegex()
@@ -119,7 +146,7 @@ fun Fragment.showRetrySnackBar(message: String?, retryAction: (View) -> Unit) {
         .setActionTextColor(getColorInt(R.color.colorWhite))
 
     val view = snackBar.view
-    view.setBackgroundColor(getColorInt(R.color.colorPrimary))
+    view.setBackgroundColor(getColorInt(R.color.colorDarkRed))
 
     snackBar.show()
 }

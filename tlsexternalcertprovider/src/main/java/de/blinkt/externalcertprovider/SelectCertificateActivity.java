@@ -7,7 +7,6 @@ package de.blinkt.externalcertprovider;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.security.KeyChain;
 import android.os.Bundle;
 
 public class SelectCertificateActivity extends Activity {

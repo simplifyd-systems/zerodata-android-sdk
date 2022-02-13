@@ -5,8 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize @Entity
-data class User (
+@Parcelize
+@Entity
+data class User(
     @PrimaryKey
     val id: String,
     val fname: String,
@@ -18,5 +19,5 @@ data class User (
     val organization: String
 ) : Parcelable {
 
-    val customer get() =  "$fname $lname"
+    val customer get() = "$fname $lname"
 }

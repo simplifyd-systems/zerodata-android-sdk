@@ -36,26 +36,26 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColorHint="@color/colorLightGrey"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:startIconDrawable="@drawable/ic_search"
-        app:startIconTint="@color/colorLightGrey"
-        android:textColorHint="@color/colorLightGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbShowOnlyBlocked">
+        app:layout_constraintTop_toBottomOf="@+id/cbShowOnlyBlocked"
+        app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="@color/colorLightGrey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search"
-            android:textSize="14sp"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -63,6 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +71,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:spanCount="2"
         tools:itemCount="10"
-        android:overScrollMode="never"
         tools:listitem="@layout/item_category" />
 
     <ProgressBar

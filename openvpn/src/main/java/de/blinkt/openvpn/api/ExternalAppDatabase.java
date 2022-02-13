@@ -5,7 +5,8 @@
 
 package de.blinkt.openvpn.api;
 
-import android.app.Activity;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import de.blinkt.openvpn.core.Preferences;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class ExternalAppDatabase {
 

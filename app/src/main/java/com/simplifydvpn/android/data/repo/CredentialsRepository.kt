@@ -1,36 +1,24 @@
 package com.simplifydvpn.android.data.repo
 
 import android.util.Log
-import pb.ApiRpc.ConnectProfileReq
-import java.math.BigInteger
-import java.security.interfaces.ECPublicKey
-import com.simplifydvpn.android.data.remote.grpc.GRPCChannelFactory
-import com.simplifydvpn.android.utils.Status
-import com.simplifydvpn.android.utils.handleError
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withContext
-import io.grpc.ManagedChannelBuilder
-import pb.ApiRpc
-import pb.ApiRpc.LoginReq
-import pb.EdgeGrpc
-import pb.ApiRpc.RegisterReq
-import androidx.lifecycle.LiveData
 import com.google.protobuf.ByteString
 import com.simplifydvpn.android.data.config.OpenVpnConfigurator
 import com.simplifydvpn.android.data.local.PreferenceManager
-import java.security.KeyFactory
-import java.security.PublicKey
-import java.security.spec.ECPoint
-import java.security.spec.ECPublicKeySpec
-import java.security.spec.InvalidKeySpecException
-import javax.crypto.KeyAgreement
-import java.util.Arrays
+import com.simplifydvpn.android.data.remote.grpc.GRPCChannelFactory
+import com.simplifydvpn.android.utils.Status
+import com.simplifydvpn.android.utils.handleError
+import kotlinx.coroutines.flow.first
+import pb.ApiRpc
+import pb.EdgeGrpc
+import java.math.BigInteger
+import java.security.interfaces.ECPublicKey
+import java.util.*
 
-class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator = ECDHGenerator(),
-                                        private val preferenceManager: PreferenceManager = PreferenceManager,
-                                        private val openVpnConfigurator: OpenVpnConfigurator = OpenVpnConfigurator) {
+class CredentialsRepository constructor(
+    private val eCDHGenerator: ECDHGenerator = ECDHGenerator(),
+    private val preferenceManager: PreferenceManager = PreferenceManager,
+    private val openVpnConfigurator: OpenVpnConfigurator = OpenVpnConfigurator
+) {
 
     suspend fun getConnectProfile(): Status<String> {
         return try {
@@ -58,7 +46,8 @@ class CredentialsRepository constructor(private val eCDHGenerator: ECDHGenerator
                 .withCallCredentials(creds)
             val response = blockingStub.getConnectProfile(connectProfileRequest)
 
-            openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile).first().let {
+            openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
+                .first().let {
                 preferenceManager.saveProfileName(it.uuidString)
             }
 

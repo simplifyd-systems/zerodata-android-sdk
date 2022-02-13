@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.data.model.Rule
 import com.simplifydvpn.android.ui.main.rules.RulesViewModel
@@ -14,7 +15,6 @@ import com.simplifydvpn.android.utils.hideLoadingDialog
 import com.simplifydvpn.android.utils.showLoadingDialog
 import com.simplifydvpn.android.utils.showToast
 import kotlinx.android.synthetic.main.fragment_categories.*
-import androidx.lifecycle.Observer
 
 class CategoriesFragment : Fragment(R.layout.fragment_categories), (Rule) -> Unit {
 

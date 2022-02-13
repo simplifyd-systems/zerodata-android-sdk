@@ -23,7 +23,11 @@ class RulesFragment : Fragment(R.layout.fragment_rules) {
     }
 
     private val titles by lazy {
-        listOf(getString(R.string.blocked), getString(R.string.allowed), getString(R.string.categories))
+        listOf(
+            getString(R.string.blocked),
+            getString(R.string.allowed),
+            getString(R.string.categories)
+        )
     }
 
     private val rulesTabAdapter by lazy {
@@ -38,7 +42,7 @@ class RulesFragment : Fragment(R.layout.fragment_rules) {
     }
 
     private fun observeGetCustomerRules() {
-        viewModel.getCustomerRulesStatus.observe(viewLifecycleOwner, Observer{
+        viewModel.getCustomerRulesStatus.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Status.Error -> {
                     showRetrySnackBar(it.error.localizedMessage) {

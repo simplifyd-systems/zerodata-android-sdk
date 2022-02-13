@@ -21,8 +21,6 @@
 
 // package OPENVPN_PACKAGE
 
-import java.util.HashSet;
-
 public class OpenVPNClientThread extends ClientAPI_OpenVPNClient implements Runnable {
     private EventReceiver parent;
     private TunBuilder tun_builder;

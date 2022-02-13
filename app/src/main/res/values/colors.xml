@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EC3944</color>
+    <!--    <color name="colorPrimary">#EC3944</color>-->
+    <color name="colorPrimary">#495FFA</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#4CAF50</color>
     <color name="colorBlack">#000000</color>
@@ -17,6 +18,8 @@
     <color name="colorOverviewStatusBar">#F8FAFB</color>
     <color name="action_button_enabled_text">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="demacation">#D2D9E1</color>
+
 
     <color name="intro_indicator_unselected">#DBDBDB</color>
     <color name="white">#FFFFFF</color>

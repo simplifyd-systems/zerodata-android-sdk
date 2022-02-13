@@ -10,7 +10,7 @@
         android:id="@+id/intro_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_intro_1"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -42,7 +42,7 @@
         style="@style/Theme.Simplifyd.BoldIntroText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/six_space"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="@dimen/two_space"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/one_space"
@@ -69,11 +69,11 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/app_logo_width"
+        android:layout_height="@dimen/app_logo_height"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo" />
+        app:srcCompat="@drawable/ic_app_zerodata_black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

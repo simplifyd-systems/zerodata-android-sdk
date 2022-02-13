@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.simplifydvpn.android.R
 import com.simplifydvpn.android.data.model.Rule
@@ -14,7 +15,6 @@ import com.simplifydvpn.android.ui.main.rules.RulesViewModel
 import com.simplifydvpn.android.utils.*
 import kotlinx.android.synthetic.main.fragment_blocked.*
 import java.util.*
-import androidx.lifecycle.Observer
 
 @ExperimentalStdlibApi
 class BlockedFragment : Fragment(R.layout.fragment_blocked), (Rule) -> Unit {
@@ -39,7 +39,7 @@ class BlockedFragment : Fragment(R.layout.fragment_blocked), (Rule) -> Unit {
     }
 
     private fun observeLoading() {
-        viewModel.loadingStatus.observe(viewLifecycleOwner, Observer{
+        viewModel.loadingStatus.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Status.Loading -> showLoadingDialog()
                 else -> {
@@ -49,12 +49,13 @@ class BlockedFragment : Fragment(R.layout.fragment_blocked), (Rule) -> Unit {
     }
 
     private fun observeGetBlockedDomains() {
-        viewModel.getDomainsStatus.observe(viewLifecycleOwner, Observer{
+        viewModel.getDomainsStatus.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Status.Success -> {
                     showListLoading(false)
                     hideLoadingDialog()
-                    domainsAdapter.domains = it.data.filter { rule -> rule.action == RuleAction.BLOCK }
+                    domainsAdapter.domains =
+                        it.data.filter { rule -> rule.action == RuleAction.BLOCK }
                 }
                 is Status.Loading -> showListLoading(true)
                 is Status.Error -> showListLoading(false)

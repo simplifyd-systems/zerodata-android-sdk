@@ -5,6 +5,9 @@
 
 package de.blinkt.openvpn.core;
 
+import static de.blinkt.openvpn.VpnProfile.AUTH_RETRY_NOINTERACT;
+import static de.blinkt.openvpn.VpnProfile.TYPE_USERPASS;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -18,9 +21,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import de.blinkt.openvpn.VpnProfile;
-
-import static de.blinkt.openvpn.VpnProfile.AUTH_RETRY_NOINTERACT;
-import static de.blinkt.openvpn.VpnProfile.TYPE_USERPASS;
 
 /**
  * Created by arne on 14.03.18.

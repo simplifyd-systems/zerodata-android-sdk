@@ -5,15 +5,10 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import android.webkit.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.simplifydvpn.android.R
 import kotlinx.android.synthetic.main.fragment_webview.*
 
@@ -25,24 +20,27 @@ class WebViewFragment : DialogFragment(R.layout.fragment_webview) {
     }
 
     private fun disableBackClick() {
-       view?.let{
-           it.isFocusableInTouchMode = true
-           it.requestFocus()
-           it.setOnKeyListener { _, i, keyEvent ->
-               if (keyEvent.action == KeyEvent.ACTION_DOWN) {
-                   if (i == KeyEvent.KEYCODE_BACK) {
-                       dismiss()
-                   }
-               }
-               return@setOnKeyListener false
-           }
-       }
+        view?.let {
+            it.isFocusableInTouchMode = true
+            it.requestFocus()
+            it.setOnKeyListener { _, i, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                    if (i == KeyEvent.KEYCODE_BACK) {
+                        dismiss()
+                    }
+                }
+                return@setOnKeyListener false
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         dialog?.run {
-            window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
             disableBackClick()
         }
     }
@@ -59,8 +57,8 @@ class WebViewFragment : DialogFragment(R.layout.fragment_webview) {
         setUpToolbar()
     }
 
-    private fun setUpToolbar(){
-        toolbar.setNavigationOnClickListener{
+    private fun setUpToolbar() {
+        toolbar.setNavigationOnClickListener {
             dismiss()
         }
     }
@@ -105,7 +103,7 @@ class WebViewFragment : DialogFragment(R.layout.fragment_webview) {
     }
 
     private fun loadWebPage() {
-        arguments?.getString(WEB_URL)?.let{
+        arguments?.getString(WEB_URL)?.let {
             web_view.loadUrl(it)
         }
     }

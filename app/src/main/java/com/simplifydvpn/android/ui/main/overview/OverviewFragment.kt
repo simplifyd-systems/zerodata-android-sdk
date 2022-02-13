@@ -1,13 +1,13 @@
 package com.simplifydvpn.android.ui.main.overview
 
 import android.content.Intent
-import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,17 +25,13 @@ import com.simplifydvpn.android.ui.main.MainViewModel
 import com.simplifydvpn.android.ui.main.bottomsheets.InventorySortBottomDialogFragment
 import com.simplifydvpn.android.ui.main.bottomsheets.PauseMode
 import com.simplifydvpn.android.utils.Status
-import com.simplifydvpn.android.utils.getColorInt
 import com.simplifydvpn.android.utils.showRetrySnackBar
 import de.blinkt.openvpn.core.ConnectionStatus
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.concurrent.TimeUnit
-import com.simplifydvpn.android.ui.auth.LoginActivity
-import android.net.Uri
-import androidx.core.os.bundleOf
-import com.simplifydvpn.android.ui.main.webview.WebViewFragment
+
 
 @ExperimentalStdlibApi
 class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
@@ -67,26 +63,39 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         help_text.text = Html.fromHtml(getString(R.string.how_does_simplifyd_work_we))
-        help_text.setCompoundDrawablesRelative(
-            null,
-            ContextCompat.getDrawable(requireContext(), R.drawable.ic_question_fill),
-            null,
-            null
-        )
+
+        val image: Drawable = requireContext().resources.getDrawable(R.drawable.ic_question_fill)
+        val h: Int = image.intrinsicHeight
+        val w: Int = image.intrinsicWidth
+        image.setBounds(0, 0, w, h)
+        help_text.setCompoundDrawables(null, image, null, null)
+//        help_text.setCompoundDrawablesRelative(
+//            null,
+//            ContextCompat.getDrawable(requireContext(), R.drawable.ic_question_fill),
+//            null,
+//            null
+//        )
 
         btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
 
-        requireActivity().findViewById<View>(R.id.logout_link).setOnClickListener {
+        requireActivity().findViewById<View>(R.id.settings_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
-                if (it.isVPNConnected()) {
-                    it.disconnectVPN()
-                } else {
-                    viewModel.logOut()
-                    startActivity(Intent(context, LoginActivity::class.java))
-                    activity?.finish()
-                }
+
+                findNavController().navigate(R.id.action_navigation_overview_to_navigation_settings)
+
+
             }
         }
+
+        requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
+            (requireActivity() as? MainActivity)?.let {
+
+                findNavController().navigate(R.id.action_navigation_overview_to_navigation_notification)
+
+
+            }
+        }
+
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
 
@@ -118,7 +127,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
 
     private fun observeGetDashboardData() {
-        viewModel.getDashboardDataStatus.observe(viewLifecycleOwner, {
+        viewModel.getDashboardDataStatus.observe(viewLifecycleOwner) {
             when (it) {
                 is Status.Loading -> {
 
@@ -130,27 +139,38 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Success -> {
                     help_text.text = Html.fromHtml(
                         getString(
-                            R.string.protection_count_text,
+                            R.string.data_count_text,
                             it.data.topDomains?.values?.sum() ?: 0
                         )
                     )
 
+                    val image: Drawable =
+                        requireContext().resources.getDrawable(R.drawable.ic_shield_protected)
+                    val h: Int = image.intrinsicHeight
+                    val w: Int = image.intrinsicWidth
+                    image.setBounds(0, 0, w, h)
                     help_text.setCompoundDrawablesRelative(
                         null,
-                        ContextCompat.getDrawable(requireContext(), R.drawable.ic_shield_protected),
+                        image,
                         null,
                         null
                     )
                 }
             }
-        })
+        }
 
-        viewModel.connectProfileStatus.observe(viewLifecycleOwner, {
+        viewModel.connectProfileStatus.observe(viewLifecycleOwner) {
             when (it) {
                 is Status.Loading -> {
 
                 }
                 is Status.Error -> {
+                    connect_switch.setOnCheckedChangeListener(null)
+                    connect_switch.isChecked = false
+                    connect_switch.isEnabled = true
+                    toggle_to_protect.isVisible = true
+                    progressBar.isVisible = false
+                    connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
                 is Status.Success -> {
@@ -164,7 +184,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     }
                 }
             }
-        })
+        }
 
     }
 
@@ -178,37 +198,54 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     ) {
         requireActivity().runOnUiThread {
             if (level == ConnectionStatus.LEVEL_CONNECTED) {
-                protection_status.text = "Your are conected to Edge."
+                zerodata_off.visibility = View.GONE
+                zerodata_on.visibility = View.VISIBLE
+                protection_status.text = getString(R.string.internet_free)
                 connect_switch.isEnabled = PreferenceManager.getProfileName() != null
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = true
                 progressBar.isVisible = false
+                toggle_to_protect.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                viewModel.connectUrl?.let{
-                    openWebUrl(it)
+                viewModel.connectUrl?.let {
+                    if (!PreferenceManager.getIsSeen()) {
+                        openWebUrl(it)
+                        PreferenceManager.setIsSeen(true)
+                    }
                 }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 progressBar.isVisible = true
-                protection_status.text = "Connecting"
+                zerodata_off.visibility = View.GONE
+                zerodata_on.visibility = View.GONE
+                protection_status.text = getString(R.string.connecting)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = false
+                toggle_to_protect.isVisible = false
+                PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_VPNPAUSED) {
+                zerodata_off.visibility = View.GONE
+                zerodata_on.visibility = View.GONE
                 progressBar.isVisible = false
-                protection_status.text = "Paused"
+                protection_status.text = getString(R.string.paused)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
+                toggle_to_protect.isVisible = false
+                PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_NOTCONNECTED) {
-                protection_status.text = "Your are not connected to Edge."
+                zerodata_off.visibility = View.VISIBLE
+                zerodata_on.visibility = View.GONE
+                protection_status.text = getString(R.string.internet_not_free)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
                 toggle_to_protect.isVisible = true
                 progressBar.isVisible = false
+                PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             }
         }

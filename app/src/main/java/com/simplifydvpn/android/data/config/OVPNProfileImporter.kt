@@ -22,7 +22,7 @@ class OVPNProfileImporter @Inject constructor() {
         return result!!
     }
 
-    fun parseServerConfig(serverConfig:String): VpnProfile {
+    fun parseServerConfig(serverConfig: String): VpnProfile {
         val result = doImport(serverConfig.byteInputStream())
         Log.d("OVPN:", "${result!!.uuid}")
         return result!!

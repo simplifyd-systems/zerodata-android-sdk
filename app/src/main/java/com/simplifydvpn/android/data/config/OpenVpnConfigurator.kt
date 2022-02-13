@@ -15,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import java.io.File
@@ -40,7 +39,7 @@ object OpenVpnConfigurator {
     }
 
     private fun configureOVPNServer(profileData: String): Flow<VpnProfile> {
-        return flow{
+        return flow {
             emit(saveOVPNProfile(ovpnProfileImporter.parseServerConfig(profileData)))
         }
     }

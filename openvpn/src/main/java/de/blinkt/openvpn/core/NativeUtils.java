@@ -6,9 +6,10 @@
 package de.blinkt.openvpn.core;
 
 import android.os.Build;
-import de.blinkt.openvpn.BuildConfig;
 
 import java.security.InvalidKeyException;
+
+import de.blinkt.openvpn.BuildConfig;
 
 public class NativeUtils {
     public static native byte[] rsasign(byte[] input, int pkey, boolean pkcs1padding) throws InvalidKeyException;

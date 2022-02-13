@@ -1,6 +1,5 @@
 package com.simplifydvpn.android.data.remote.http
 
-import android.util.Log
 import com.simplifydvpn.android.data.local.PreferenceManager
 import okhttp3.Interceptor
 import okhttp3.Response

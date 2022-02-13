@@ -6,4 +6,4 @@
 package com.simplifydvpn.android.data.config.downloader
 
 
-class FileDownloaderException(val error:String) : Exception()
+class FileDownloaderException(val error: String) : Exception()

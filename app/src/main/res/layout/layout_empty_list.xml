@@ -23,11 +23,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        tools:text="Block inappropriate content and websites by age for all your devices."
         android:gravity="center"
         android:lineSpacingExtra="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmptyStateImage" />
+        app:layout_constraintTop_toBottomOf="@+id/ivEmptyStateImage"
+        tools:text="Block inappropriate content and websites by age for all your devices." />
 </androidx.constraintlayout.widget.ConstraintLayout>
