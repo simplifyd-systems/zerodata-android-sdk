@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.simplifydvpn.android.data.model.DashboardData
 import com.simplifydvpn.android.data.repo.CredentialsRepository
+import com.simplifydvpn.android.utils.SingleLiveData
 import com.simplifydvpn.android.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ class OverviewViewModel : ViewModel() {
 
     private val credentialsRepository = CredentialsRepository()
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
-    val connectProfileStatus = MutableLiveData<Status<String>>()
+    val connectProfileStatus = SingleLiveData<Status<String>>()
+    val checkPartnerNetwork = SingleLiveData<Status<Unit>>()
 
     val connectUrl: String?
         get() {
@@ -30,5 +32,16 @@ class OverviewViewModel : ViewModel() {
                 connectProfileStatus.postValue(result)
             }
         }
+    }
+
+    fun checkIsPartnerNewtwork(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val result = credentialsRepository.getServiceAvailablity()
+                print(result)
+                checkPartnerNetwork.postValue(result)
+            }
+        }
+
     }
 }

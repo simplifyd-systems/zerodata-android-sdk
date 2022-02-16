@@ -49,9 +49,15 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     .newInstance()
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
-                viewModel.connect()
+                progressBar.isVisible = true
+                zerodata_off.visibility = View.GONE
+                zerodata_on.visibility = View.GONE
+                toggle_to_protect.isVisible = false
+                protection_status.text = getString(R.string.checking_network_availability)
+                viewModel.checkIsPartnerNewtwork()
             }
         }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,12 +75,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         val w: Int = image.intrinsicWidth
         image.setBounds(0, 0, w, h)
         help_text.setCompoundDrawables(null, image, null, null)
-//        help_text.setCompoundDrawablesRelative(
-//            null,
-//            ContextCompat.getDrawable(requireContext(), R.drawable.ic_question_fill),
-//            null,
-//            null
-//        )
 
         btnProtectMe = requireActivity().findViewById<MaterialButton>(R.id.btnProtectMe)
 
@@ -133,7 +133,16 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                 }
                 is Status.Error -> {
+                    zerodata_off.visibility = View.VISIBLE
+                    zerodata_on.visibility = View.GONE
+                    protection_status.text = getString(R.string.internet_not_free)
+                    connect_switch.setOnCheckedChangeListener(null)
                     connect_switch.isChecked = false
+                    connect_switch.isEnabled = true
+                    toggle_to_protect.isVisible = true
+                    progressBar.isVisible = false
+//                    PreferenceManager.setIsSeen(false)
+                    connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
                 is Status.Success -> {
@@ -165,11 +174,15 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                 }
                 is Status.Error -> {
+                    zerodata_off.visibility = View.VISIBLE
+                    zerodata_on.visibility = View.GONE
+                    protection_status.text = getString(R.string.internet_not_free)
                     connect_switch.setOnCheckedChangeListener(null)
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
                     progressBar.isVisible = false
+//                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
@@ -183,6 +196,35 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                         )
                     }
                 }
+            }
+        }
+
+        viewModel.checkPartnerNetwork.observe(viewLifecycleOwner){
+            when (it){
+
+                is Status.Loading -> {
+
+                }
+                is Status.Error -> {
+                    zerodata_off.visibility = View.VISIBLE
+                    zerodata_on.visibility = View.GONE
+                    protection_status.text = getString(R.string.internet_not_free)
+                    connect_switch.setOnCheckedChangeListener(null)
+                    connect_switch.isChecked = false
+                    connect_switch.isEnabled = true
+                    toggle_to_protect.isVisible = true
+                    progressBar.isVisible = false
+//                    PreferenceManager.setIsSeen(false)
+                    connect_switch.setOnCheckedChangeListener(checkChangedListener)
+                    showRetrySnackBar(it.error.localizedMessage) { }
+                }
+                is Status.Success -> {
+
+                    viewModel.connect()
+
+
+                }
+
             }
         }
 

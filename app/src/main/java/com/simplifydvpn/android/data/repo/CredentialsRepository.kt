@@ -59,6 +59,27 @@ class CredentialsRepository constructor(
         }
     }
 
+    suspend fun getServiceAvailablity(): Status<Unit>{
+        return try {
+            val isOnPartnerNetworkRq = ApiRpc.EmptyReq.newBuilder().build()
+            val token = preferenceManager.getToken()
+            val creds = AuthenticationCallCredentials(token)
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+                .withCallCredentials(creds)
+            val response = blockingStub.isOnPartnerNetwork(isOnPartnerNetworkRq)
+
+            if (response.success) {
+                Status.Success(Unit)
+            } else {
+                Status.Error(Throwable(response.getErrors(0)))
+            }
+
+        }catch (error: Throwable) {
+            error.printStackTrace()
+            Status.Error(handleError(error))
+        }
+    }
+
 
     /*fun loadKeysDecryptionKeys() {
         //load KEY2 from server public key

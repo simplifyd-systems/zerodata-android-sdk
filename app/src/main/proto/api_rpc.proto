@@ -8,7 +8,15 @@ service Edge {
     rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
     rpc LoginValidate(OTP) returns (LoginResponse) {};
     rpc Login(LoginReq) returns (LoginResponse) {};
+    rpc IsOnPartnerNetwork(EmptyReq) returns (IsOnPartnerNetworkResponse) {};
     rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+}
+
+message IsOnPartnerNetworkResponse {
+    bool success = 1;
+    string msg = 2;
+    repeated string errors = 3;
+    bool is_on_partner_etwork = 4;
 }
 
 message Username {

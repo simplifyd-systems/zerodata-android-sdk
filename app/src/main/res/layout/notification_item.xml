@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/two_space"
-            android:text="@string/account_verification"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_16"
             android:textStyle="bold"
@@ -55,8 +55,18 @@
             android:lineSpacingMultiplier="1.5"
             android:maxLines="2"
             android:paddingEnd="@dimen/two_space"
-            android:text="akjhdfhjafdjhadjjhaajjhdafshjghjafghdgafsghdafghghdhgaakhgjdhfgghdfhgjadsfhgjdsfdsghfgadfsghdgshfhgdfhadshgfsdjhhjsdfhjsfjkajhkdsfjhkdsfahjdfhjadshahd"
+            android:text=""
             android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/two_space"
+            android:lineSpacingMultiplier="1.5"
+            android:maxLines="2"
+            android:text=""
+            android:textSize="@dimen/text_12" />
     </LinearLayout>
 
 

@@ -62,7 +62,7 @@ fun String.isValidEmail(): Boolean {
 
 fun String.isValidCode(): Boolean {
     var status = false
-    if (this.length < 4) {
+    if (this.length < 6) {
     } else {
         status = true
     }
