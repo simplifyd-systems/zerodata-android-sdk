@@ -9,16 +9,18 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     kotlin("android")
     kotlin("android.extensions")
+    id ("com.google.gms.google-services")
+    id ("com.google.firebase.crashlytics")
 }
 
 android {
     compileSdkVersion(31)
 
     defaultConfig {
-        applicationId = "com.simplifydvpn.android"
+        applicationId = "com.simplifyd.zerodata.android"
         minSdkVersion(23)
-        targetSdkVersion(29)
-        versionCode = 11
+        targetSdkVersion(31)
+        versionCode = 12
         versionName = "1.0.7"
         resConfigs(listOf("en"))
 //        manifestPlaceholders = mapOf(
@@ -49,10 +51,10 @@ android {
             keyPassword = "Password01"
         }
         create("release") {
-            storeFile = file("simplyfyd.jks")
-            storePassword = "Password01"
-            keyAlias = "ekoVPN"
-            keyPassword = "Password01"
+            storeFile = file("zerodata.jks")
+            storePassword = "Zerodata01"
+            keyAlias = "ZerodataVPN"
+            keyPassword = "Zerodata01"
         }
     }
 
@@ -176,6 +178,11 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.work:work-runtime-ktx:$work_version")
     implementation("org.apache.commons:commons-lang3:3.4")
+
+    implementation (platform("com.google.firebase:firebase-bom:29.1.0"))
+    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-crashlytics-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
 
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")

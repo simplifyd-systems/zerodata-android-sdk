@@ -7,7 +7,10 @@
 
     <style name="blinkt.baseTheme" parent="android:Theme.DeviceDefault.Light" />
 
-    <style name="blinkt.dialog" parent="android:Theme.DeviceDefault.Light.Dialog" />
+    <style name="blinkt.dialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
 
 
     <style name="Theme.CreateShortCut" parent="android:Theme.DeviceDefault.DialogWhenLarge" />

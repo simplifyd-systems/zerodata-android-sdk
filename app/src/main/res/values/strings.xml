@@ -1,6 +1,7 @@
 <resources>
     <!--    <string name="app_name">Simplifyd VPN</string>-->
     <string name="app_name">Zerodata</string>
+    <string name="platform">android</string>
     <string name="email">Email</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -74,9 +75,9 @@
     <string name="intro_three_desc">We work with partners to make more sites available. Watch this space.</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
-    <string name="welcome_text">Welcome to Edge by Simplifyd</string>
-    <string name="welcome_text_">Welcome to Simplifyd</string>
-    <string name="welcome_back">Welcome back to Simplifyd</string>
+    <string name="welcome_text">Welcome to Zerodata by Simplifyd</string>
+    <string name="welcome_text_">Welcome to Zerodata</string>
+    <string name="welcome_back">Welcome back to Zerodata</string>
     <string name="filter_by">Filter by</string>
     <string name="blocked_categories">Blocked Categories</string>
     <string name="search">Search</string>
@@ -95,18 +96,20 @@
     <string name="account_verification">Account verification code</string>
     <string name="account_verification_details">Enter the verification code we just sent to your phone number</string>
     <string name="verification_success">Verification Successful</string>
+    <string name="update_message">Update your app to have access to more benefits of Zerodata</string>
     <string name="cnt_zerodata">Continue to start using Zerodata</string>
+    <string name="update">Update App</string>
     <string name="phonenumber">0800 000 0000</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="protection_count_text"><![CDATA[In the last 30 days, Simplifyd has protected you from <b>%1$d</b> Threats <br/><br/><font color=\'#C60505\'>How does Simplifyd work?</font>]]></string>
-    <string name="data_count_text"><![CDATA[In the last 30 days, Zerodata has saved you <b>%1$d</b>  <br/><br/>]]></string>
+    <string name="data_count_text"><![CDATA[In the last 30 days, Zerodata has saved you <b>%1$d</b>   <br/><br/>]]></string>
     <string name="how_does_simplifyd_work_we"><![CDATA[<font color=\'#C60505\'>How does Zerodata work?</font><br/><br/> We route your internet through datafree network configurations.]]></string>
     <string name="how_long_disable">How long do you want to disbale Zerodata for?</string>
     <string name="pause_for_fifteen_minutes">Pause for 15 minutes</string>
     <string name="pause_for_hour">Pause for 1 hour</string>
-    <string name="disable_simplifyd">Disable Simplifyd</string>
+    <string name="disable_zerodata">Disable Zerodata</string>
     <string name="data_not_free">Your internet usage is not data free.</string>
     <string name="internet_not_free">Your internet usage is not data free.</string>
     <string name="internet_free">Your internet usage is data free.</string>

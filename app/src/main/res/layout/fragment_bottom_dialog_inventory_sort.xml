@@ -74,7 +74,7 @@
             android:layout_marginStart="@dimen/one_space"
             android:layout_marginEnd="@dimen/one_space"
             android:letterSpacing="0"
-            android:text="@string/disable_simplifyd"
+            android:text="@string/disable_zerodata"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/colorRed"

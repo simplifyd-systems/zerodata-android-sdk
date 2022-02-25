@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_intro_screens"
-        android:name="com.simplifydvpn.android.ui.intro.IntroductionFragment"
+        android:name="com.simplifyd.zerodata.android.ui.intro.IntroductionFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_introduction">
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_sign_in"
-        android:name="com.simplifydvpn.android.ui.auth.getStarted.GetStartedFragment"
+        android:name="com.simplifyd.zerodata.android.ui.auth.getStarted.GetStartedFragment"
         android:label="fragment_sign_in">
 
         <action
@@ -40,12 +40,29 @@
 
     <fragment
         android:id="@+id/navigation_sign_up"
-        android:name="com.simplifydvpn.android.ui.auth.verify.VerificationFragment"
+        android:name="com.simplifyd.zerodata.android.ui.auth.verify.VerificationFragment"
         android:label="fragment_sign_up">
 
         <argument
             android:name="phoneNumber"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_navigation_sign_up_to_update"
+            app:destination="@id/navigation_updateApp"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_updateApp"
+        android:name="com.simplifyd.zerodata.android.ui.update.UpdateFragment"
+        android:label="fragment_update">
+
+
 
     </fragment>
 

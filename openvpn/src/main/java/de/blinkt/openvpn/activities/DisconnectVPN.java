@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+import android.view.Window;
 
 import androidx.annotation.Nullable;
 
@@ -53,7 +54,7 @@ public class DisconnectVPN extends Activity implements DialogInterface.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     @Override

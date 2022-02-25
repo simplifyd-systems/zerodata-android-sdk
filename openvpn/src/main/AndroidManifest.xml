@@ -45,6 +45,7 @@
         <service
             android:name="de.blinkt.openvpn.core.OpenVPNService"
             android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="true"
             android:process=":openvpn">
             <intent-filter>
                 <action android:name="android.net.VpnService" />
@@ -53,6 +54,7 @@
         <service
             android:name="de.blinkt.openvpn.api.ExternalOpenVPNService"
             android:process=":openvpn"
+            android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="de.blinkt.openvpn.api.IOpenVPNAPIService" />
@@ -66,6 +68,7 @@
             android:name="de.blinkt.openvpn.OpenVPNTileService"
             android:icon="@drawable/ic_quick"
             android:label="@string/qs_title"
+            android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:value="true">
             <intent-filter>
@@ -84,7 +87,8 @@
 
         </activity>
 
-        <receiver android:name="de.blinkt.openvpn.OnBootReceiver">
+        <receiver android:name="de.blinkt.openvpn.OnBootReceiver"
+            android:exported="true">
             <intent-filter android:priority="999">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
@@ -97,6 +101,7 @@
             android:label="Convert Config File"
             android:taskAffinity=".ConfigConverter"
             android:uiOptions="splitActionBarWhenNarrow"
+            android:exported="true"
             tools:ignore="ExportedActivity">
             <intent-filter
                 android:label="@string/import_config"
@@ -139,6 +144,7 @@
         <activity-alias
             android:name="de.blinkt.openvpn.activities.ConfigConverterFile"
             android:enabled="@bool/supportFileScheme"
+            android:exported="true"
             android:targetActivity=".activities.ConfigConverter">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -182,6 +188,7 @@
             android:excludeFromRecents="true"
             android:label="@string/vpn_shortcut"
             android:taskAffinity=".CreateShortcuts"
+            android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault.Light.DialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -192,7 +199,7 @@
 
         <provider
             android:name="de.blinkt.openvpn.FileProvider"
-            android:authorities="de.blinkt.openvpn.FileProvider"
+            android:authorities="${applicationId}.de.blinkt.openvpn.FileProvider"
             android:exported="true"
             android:grantUriPermissions="true"
             tools:ignore="ExportedContentProvider" />

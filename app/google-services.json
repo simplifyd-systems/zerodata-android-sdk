@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197019382652",
+    "project_id": "zerodata-17933",
+    "storage_bucket": "zerodata-17933.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197019382652:android:f9d864829b98357815aaf9",
+        "android_client_info": {
+          "package_name": "com.simplifyd.zerodata.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197019382652-djmgafbamfri7482h9j49lnoikenlnp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBma9WBCkyw0k_w-sFOwVXWt8Yrdx6ByDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197019382652-djmgafbamfri7482h9j49lnoikenlnp4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,10 +6,23 @@ option go_package  = "edge-api-rpc/pb";
 service Edge {
     rpc Register(RegisterReq) returns (StandardResponse) {};
     rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
-    rpc LoginValidate(OTP) returns (LoginResponse) {};
+    rpc LoginValidate(LoginValidateRequest) returns (LoginResponse) {};
     rpc Login(LoginReq) returns (LoginResponse) {};
     rpc IsOnPartnerNetwork(EmptyReq) returns (IsOnPartnerNetworkResponse) {};
     rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+    rpc GetNotifications(EmptyReq) returns (Notifications) {};
+}
+
+message Notification {
+    string title = 1;
+    string body = 2;
+}
+
+message Notifications {
+    bool success = 1;
+    string msg = 2;
+    repeated string errors = 3;
+    repeated Notification notifications = 4;
 }
 
 message IsOnPartnerNetworkResponse {
@@ -29,8 +42,10 @@ message InitiateLoginResponse {
     string initiate_login_jwt = 4;
 }
 
-message OTP {
+message LoginValidateRequest {
     string otp = 1;
+    string app_version = 2;
+    string platform = 3; // android, ios, macOS, windows
     string initiate_login_jwt = 4;
 }
 
@@ -60,6 +75,9 @@ message ConnectProfileResponse {
     bytes nonce = 3; // used for AES decryption
     string open_browser_to_url = 4; // url to open browser to
     string unencrypted_connect_profile = 5; // unencrypted connect profile
+    bool success = 6;
+    repeated string errors = 7;
+    string msg = 8;
 }
 
 message User {
