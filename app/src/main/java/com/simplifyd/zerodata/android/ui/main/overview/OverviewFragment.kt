@@ -174,6 +174,18 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Loading -> {
 
                 }
+
+                is Status.Success -> {
+                    PreferenceManager.getProfileName()?.let {
+                        (requireActivity() as MainActivity).startOrStopOpenVPN(
+                            ProfileManager.get(
+                                requireContext(),
+                                it
+                            )
+                        )
+                    }
+                }
+
                 is Status.Error -> {
                     zerodata_off.visibility = View.VISIBLE
                     zerodata_on.visibility = View.GONE
@@ -186,27 +198,17 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 //                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
 //                    showRetrySnackBar(it.error.localizedMessage) { }
-                    (requireActivity() as? MainActivity)?.let { it ->
+                    if(it.error.localizedMessage.contains("1001", ignoreCase = true)){
+                        gotoUpdateScreen()
 
-                        if (it.isVPNConnected()) {
-                            it.disconnectVPN()
-                        } else {
-                            viewModel.logOut()
-                            startActivity(Intent(context, LoginActivity::class.java))
-                            activity?.finish()
-                        }
+                    }else{
+                        logOutUser()
+//                        showRetrySnackBar(it.error.localizedMessage) { }
+
                     }
+
                 }
-                is Status.Success -> {
-                    PreferenceManager.getProfileName()?.let {
-                        (requireActivity() as MainActivity).startOrStopOpenVPN(
-                            ProfileManager.get(
-                                requireContext(),
-                                it
-                            )
-                        )
-                    }
-                }
+
             }
         }
 
@@ -241,6 +243,23 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
     }
 
+    fun gotoUpdateScreen() {
+        findNavController().navigate(R.id.action_navigation_overview_to_update)
+    }
+
+    fun logOutUser()
+    {
+        (requireActivity() as? MainActivity)?.let { it ->
+
+            if (it.isVPNConnected()) {
+                it.disconnectVPN()
+            } else {
+                viewModel.logOut()
+                startActivity(Intent(context, LoginActivity::class.java))
+                activity?.finish()
+            }
+        }
+    }
 
     override fun updateState(
         state: String?,

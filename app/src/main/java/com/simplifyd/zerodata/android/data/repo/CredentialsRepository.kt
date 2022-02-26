@@ -46,13 +46,20 @@ class CredentialsRepository constructor(
                 .withCallCredentials(creds)
             val response = blockingStub.getConnectProfile(connectProfileRequest)
 
-            openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
-                .first().let {
-                preferenceManager.saveProfileName(it.uuidString)
-            }
 
-            print(response)
-            Status.Success(response.openBrowserToUrl)
+            print("RESPONSE NOW" +response.success.toString())
+            if(response.success){
+
+                openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
+                    .first().let {
+                        preferenceManager.saveProfileName(it.uuidString)
+                    }
+                Status.Success(response.openBrowserToUrl)
+
+            }else{
+
+                Status.Error(Throwable(response.errorCode))
+            }
         } catch (error: Throwable) {
             error.printStackTrace()
             Status.Error(handleError(error))

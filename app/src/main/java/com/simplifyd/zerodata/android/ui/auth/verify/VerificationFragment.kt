@@ -60,9 +60,7 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
         VerifyDialogSuccess(requireActivity(), 1).showDialog()
     }
 
-    fun gotoUpdateScreen() {
-        findNavController().navigate(R.id.action_navigation_sign_up_to_update)
-    }
+
 
     private fun validateLogin() {
         var code = etCode.text.toString().trim()
@@ -93,12 +91,9 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
                 is Status.Loading -> showLoading(true)
                 is Status.Error -> {
                     showLoading(false)
-                    if(it.error.localizedMessage.contains("update", ignoreCase = true)){
-                        gotoUpdateScreen()
 
-                    }else{
                     showToast(it.error.localizedMessage)
-                    }
+
                 }
             }
         })

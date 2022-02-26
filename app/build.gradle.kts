@@ -14,12 +14,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdkVersion(32)
 
     defaultConfig {
         applicationId = "com.simplifyd.zerodata.android"
         minSdkVersion(23)
-        targetSdkVersion(31)
+        targetSdkVersion(32)
         versionCode = 12
         versionName = "1.0.7"
         resConfigs(listOf("en"))
@@ -51,7 +51,7 @@ android {
             keyPassword = "Password01"
         }
         create("release") {
-            storeFile = file("zerodata.jks")
+            storeFile = file("zerodata")
             storePassword = "Zerodata01"
             keyAlias = "ZerodataVPN"
             keyPassword = "Zerodata01"
@@ -170,7 +170,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("io.cabriole:decorator:1.0.0")
-    implementation("com.wireguard.android:tunnel:1.0.20200407")
     implementation("com.amulyakhare:com.amulyakhare.textdrawable:1.0.1")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.palette:palette-ktx:1.0.0")
@@ -178,6 +177,7 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.work:work-runtime-ktx:$work_version")
     implementation("org.apache.commons:commons-lang3:3.4")
+    implementation("androidx.work:work-runtime-ktx:2.8.0-alpha01")
 
     implementation (platform("com.google.firebase:firebase-bom:29.1.0"))
     implementation ("com.google.firebase:firebase-analytics-ktx")

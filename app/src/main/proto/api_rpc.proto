@@ -76,8 +76,9 @@ message ConnectProfileResponse {
     string open_browser_to_url = 4; // url to open browser to
     string unencrypted_connect_profile = 5; // unencrypted connect profile
     bool success = 6;
-    repeated string errors = 7;
-    string msg = 8;
+    string errorCode = 7;
+    repeated string errors = 8;
+    string msg = 9;
 }
 
 message User {

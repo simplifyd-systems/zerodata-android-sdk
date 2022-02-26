@@ -61,6 +61,7 @@ class UserRepository : BaseRepository() {
 
                 Status.Success(Unit)
             } else {
+
                 Status.Error(Throwable(response.getErrors(0)))
             }
         } catch (error: Throwable) {
