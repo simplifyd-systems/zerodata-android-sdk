@@ -22,7 +22,7 @@ To successfully build and run this project on an Android device or emulator kind
           * Download Zip file [here](https://dl.google.com/android/repository/cmake-3.6.4111459-darwin-x86_64.zip  )
           * Unzip it and rename it to *3.6.4111459*
           * Copy and paste the package to Macintosh HD/Users/<your username>/library/android/sdk/cmake
-3. Install [Swig](http://www.swig.org/]) using [homebrew](https://brew.sh/)
+3. Install [Swig](http://www.swig.org/]) using [Homebrew](https://brew.sh/)
     * Open terminal run `ruby-e"$(curl-fsSLhttps://raw.githubusercontent.com/Homebrew/install/master/install)"2>/dev/null` & press enter, wait for the command to finish
     * Run `brew install swig@3`
 
