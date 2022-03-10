@@ -9,8 +9,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     kotlin("android")
     kotlin("android.extensions")
-    id ("com.google.gms.google-services")
-    id ("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -20,13 +20,9 @@ android {
         applicationId = "com.simplifyd.zerodata.android"
         minSdkVersion(23)
         targetSdkVersion(32)
-        versionCode = 12
-        versionName = "1.0.7"
+        versionCode = 15
+        versionName = "1.0.0"
         resConfigs(listOf("en"))
-//        manifestPlaceholders = mapOf(
-//            "onesignal_app_id" to "ccf04af8-42e5-40cf-ac4c-e8be7e2b89a9",
-//            "onesignal_google_project_number" to "REMOTE"
-//        )
     }
 
     compileOptions {
@@ -101,7 +97,8 @@ android {
         }
     }
 
-    //dataBinding.isEnabled = true
+    bundle { abi { enableSplit = false } }
+
 
 }
 
@@ -125,8 +122,8 @@ dependencies {
     val work_version = "2.4.0"
 
 
-    implementation ("org.bouncycastle:bcprov-jdk15to18:1.68")
-    implementation ("org.bouncycastle:bcpkix-jdk15to18:1.68")
+    implementation("org.bouncycastle:bcprov-jdk15to18:1.68")
+    implementation("org.bouncycastle:bcpkix-jdk15to18:1.68")
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:$coreVersion")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
@@ -179,21 +176,20 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.4")
     implementation("androidx.work:work-runtime-ktx:2.8.0-alpha01")
 
-    implementation (platform("com.google.firebase:firebase-bom:29.1.0"))
-    implementation ("com.google.firebase:firebase-analytics-ktx")
-    implementation ("com.google.firebase:firebase-crashlytics-ktx")
-    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation(platform("com.google.firebase:firebase-bom:29.1.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")
     api("com.google.protobuf:protobuf-javalite:3.19.1")
-    api( "io.grpc:grpc-core:1.27.1")
+    api("io.grpc:grpc-core:1.27.1")
     api("io.grpc:grpc-protobuf-lite:1.43.1") {
         exclude(module = "protobuf-lite")
     }
     api("javax.annotation:javax.annotation-api:1.3.2")
     api("io.grpc:grpc-stub:1.43.1")
-    api( "commons-codec:commons-codec:1.3")
+    api("commons-codec:commons-codec:1.3")
 
     dependencies.add("uiImplementation", project(":openvpn"))
     dependencies.add("skeletonImplementation", project(":openvpn"))

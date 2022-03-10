@@ -127,4 +127,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="view_portal">View Portal</string>
     <string name="sign_out">Sign out</string>
+    <string name="zerodata_url">https://zerodata.app/</string>
+    <string name="not_on_partner_network">You are currently not on a partner network</string>
 </resources>

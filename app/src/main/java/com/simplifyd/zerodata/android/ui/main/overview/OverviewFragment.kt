@@ -101,7 +101,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
 
         help_text.setOnClickListener {
-            val url = "https://edge.simplifyd.com/howtos"
+            val url = getString(R.string.zerodata_url)
             openWebUrl(url)
         }
     }
@@ -229,7 +229,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     progressBar.isVisible = false
 //                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                    showRetrySnackBar(it.error.localizedMessage) { }
+                    showRetrySnackBar(getString(R.string.not_on_partner_network)) { }
                 }
                 is Status.Success -> {
 

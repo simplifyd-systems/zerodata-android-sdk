@@ -37,17 +37,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnProtectMe"
         app:navGraph="@navigation/overview" />
 
-    <ImageView
-        android:id="@+id/imageViNew2"
-        android:layout_width="@dimen/app_logo_width"
-        android:layout_height="@dimen/app_logo_height"
-        android:layout_margin="13dp"
-        android:contentDescription="@string/brand_logo"
-        android:src="@drawable/ic_app_zerodata_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
 
     <!--    <TextView-->
     <!--        android:id="@+id/logout_link"-->
@@ -66,34 +55,82 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="@+id/imageView3" />-->
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:gravity="center|end"
-        android:paddingVertical="@dimen/activity_vertical_margin">
+        android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/notifications_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/two_space"
-            android:background="?selectableItemBackground"
-            android:drawablePadding="8dp"
-            android:src="@drawable/ic_bell_"
-            android:textColor="@color/colorRed" />
+            android:id="@+id/imageViNew2"
+            android:layout_width="@dimen/app_logo_width"
+            android:layout_height="38dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="start"
+            android:contentDescription="@string/brand_logo"
+            android:src="@drawable/ic_app_zerodata_black"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/settings_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/two_space"
-            android:background="?selectableItemBackground"
-            android:drawablePadding="8dp"
-            android:src="@drawable/ic_navigation_menu" />
 
-    </LinearLayout>
+
+            <ImageView
+                android:id="@+id/notifications_link"
+                android:layout_width="@dimen/two_half_space"
+                android:layout_height="@dimen/two_half_space"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_bell_"
+                android:textColor="@color/colorRed"
+                android:layout_marginEnd="@dimen/two_space"
+                app:layout_constraintEnd_toStartOf="@id/settings_link"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/settings_link"
+                android:layout_width="@dimen/two_half_space"
+                android:layout_height="@dimen/two_half_space"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_navigation_menu"
+                android:layout_marginEnd="@dimen/two_space"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/notificationLayout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:gravity="center|end"-->
+<!--        android:paddingVertical="@dimen/activity_vertical_margin">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/notifications_link"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="@dimen/two_space"-->
+<!--            android:background="?selectableItemBackground"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:src="@drawable/ic_bell_"-->
+<!--            android:textColor="@color/colorRed" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/settings_link"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="@dimen/two_space"-->
+<!--            android:background="?selectableItemBackground"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:src="@drawable/ic_navigation_menu" />-->
+
+<!--    </LinearLayout>-->
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
