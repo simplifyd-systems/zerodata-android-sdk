@@ -21,6 +21,7 @@ class NotificationFragment : Fragment(R.layout.fragment_notification), (Notifica
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         notificationRecyclerView.adapter = notificationAdapter
+
         observeGetNotifications()
     }
 
