@@ -33,6 +33,7 @@
     <string name="error_enter_code">Enter code.</string>
     <string name="error_enter_valid_code">Enter a valid code.</string>
     <string name="error_enter_valid_phone_number">Enter a valid phone number.</string>
+    <string name="error_network_connectivity">Ensure your mobile data is turned on or you are connected to wifi</string>
 
     <string name="error_enter_password">Enter a password.</string>
     <string name="error_short_password">Password can\'t be less than 5 characters</string>
@@ -70,7 +71,7 @@
     <string name="intro_one_title"><![CDATA[Data-free browsing]]></string>
     <string name="intro_two_title">Easy Toggle.</string>
     <string name="intro_three_title">More sites added weekly.</string>
-    <string name="intro_one_desc">Browse sites and apps without using your data plan.</string>
+    <string name="intro_one_desc">Turn on to browse sites/apps like Whatsapp without expending from your data bundle.</string>
     <string name="intro_two_desc">Turn on/off easily. It\'s a vibe.</string>
     <string name="intro_three_desc">We work with partners to make more sites available. Watch this space.</string>
     <string name="sign_in">Sign In</string>

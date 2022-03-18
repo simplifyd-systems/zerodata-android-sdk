@@ -1,16 +1,17 @@
 package com.simplifyd.zerodata.android.ui.auth.getStarted
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
-import com.simplifyd.zerodata.android.utils.Status
-import com.simplifyd.zerodata.android.utils.getColorInt
-import com.simplifyd.zerodata.android.utils.isValidPhoneNumber
-import com.simplifyd.zerodata.android.utils.showToast
+import com.simplifyd.zerodata.android.utils.*
 import kotlinx.android.synthetic.main.fragment_get_started.*
 import org.apache.commons.lang3.StringUtils
 
@@ -28,7 +29,7 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
         observeInitiateLogin()
         showLoading(false)
         btnSubmit.setOnClickListener {
-            initiateLogin()
+           initiateLogin()
         }
     }
 
@@ -53,6 +54,8 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
     private fun initiateLogin() {
         phoneNumber = etPhoneNumber.text.toString().trim()
 
+
+
         if (phoneNumber.isEmpty()) {
             showToast(getString(R.string.error_enter_phone_number))
             return
@@ -73,13 +76,23 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
             }
         }
 
+
+
         if (!phoneNumber.isValidPhoneNumber()) {
             showToast(getString(R.string.error_enter_valid_phone_number))
             return
         }
 
 
-        viewModel.initiateLogin(phoneNumber)
+        if(NetworkUtils.isOnline(requireContext())){
+            viewModel.initiateLogin(phoneNumber)
+        }else{
+            hideKeyboard(requireActivity())
+            Handler().postDelayed({
+                showToast(getString(R.string.error_network_connectivity))
+            }, 200)
+
+        }
 
     }
 
@@ -106,6 +119,8 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
             }
         })
     }
+
+
 
 
 }

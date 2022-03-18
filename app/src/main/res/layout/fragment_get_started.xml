@@ -57,6 +57,8 @@
             app:boxCornerRadiusTopStart="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/nigerian_flag"
+                android:drawablePadding="@dimen/half_space"
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

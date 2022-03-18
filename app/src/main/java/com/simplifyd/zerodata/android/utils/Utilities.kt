@@ -1,6 +1,10 @@
 package com.simplifyd.zerodata.android.utils
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -101,3 +105,19 @@ fun handleError(exception: Throwable): Throwable {
         Throwable("There was an error handling your request, please retry.")
     }
 }
+
+fun hideKeyboard(activity: Activity) {
+    try {
+        val inputManager: InputMethodManager = activity
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusedView: View = activity.getCurrentFocus()!!
+        inputManager.hideSoftInputFromWindow(
+            currentFocusedView.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+

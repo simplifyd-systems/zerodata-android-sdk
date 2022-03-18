@@ -1,6 +1,7 @@
 package com.simplifyd.zerodata.android.ui.auth.verify
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -8,10 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.BuildConfig
 import com.simplifyd.zerodata.android.R
-import com.simplifyd.zerodata.android.utils.Status
-import com.simplifyd.zerodata.android.utils.getColorInt
-import com.simplifyd.zerodata.android.utils.isValidCode
-import com.simplifyd.zerodata.android.utils.showToast
+import com.simplifyd.zerodata.android.utils.*
 import kotlinx.android.synthetic.main.fragment_verification.*
 
 
@@ -33,7 +31,11 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
         showLoading(false)
         observeValidateLogin()
         btnSubmit.setOnClickListener {
-            validateLogin()
+
+                validateLogin()
+
+
+
 
         }
     }
@@ -75,7 +77,11 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
             return
         }
 
-        viewModel.validateLogin(code, BuildConfig.VERSION_CODE.toString(), getString(R.string.platform))
+        if(NetworkUtils.isOnline(requireContext())){
+            viewModel.validateLogin(code, BuildConfig.VERSION_CODE.toString(), getString(R.string.platform))
+        }else{
+            showToast(getString(R.string.error_network_connectivity))
+        }
 //        showValidatedDialog()
 
 

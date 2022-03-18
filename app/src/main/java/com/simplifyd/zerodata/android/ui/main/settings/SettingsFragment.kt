@@ -1,6 +1,7 @@
 package com.simplifyd.zerodata.android.ui.main.settings
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -17,6 +18,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        allowedSitesView.setOnClickListener {
+            val url = getString(R.string.zerodata_url)
+            openWebUrl(url)
+        }
+
         logoutView.setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
 
@@ -31,6 +37,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
 
 
+    }
+
+    fun openWebUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
 

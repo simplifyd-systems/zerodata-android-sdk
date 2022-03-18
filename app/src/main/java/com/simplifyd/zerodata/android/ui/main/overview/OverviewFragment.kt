@@ -1,5 +1,6 @@
 package com.simplifyd.zerodata.android.ui.main.overview
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -7,7 +8,9 @@ import android.os.Bundle
 import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,7 +30,9 @@ import com.simplifyd.zerodata.android.ui.main.bottomsheets.InventorySortBottomDi
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.PauseMode
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.showRetrySnackBar
+import com.simplifyd.zerodata.android.utils.showToast
 import de.blinkt.openvpn.core.ConnectionStatus
+import de.blinkt.openvpn.core.NetworkUtils
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -55,7 +60,11 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 zerodata_on.visibility = View.GONE
                 toggle_to_protect.isVisible = false
                 protection_status.text = getString(R.string.checking_network_availability)
-                viewModel.checkIsPartnerNewtwork()
+                if(com.simplifyd.zerodata.android.utils.NetworkUtils.isOnline(requireContext())){
+                    viewModel.checkIsPartnerNewtwork()
+                }else {
+                    noNetworkActive()
+                }
             }
         }
 
@@ -360,6 +369,22 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             }
         }
     }
+
+    fun noNetworkActive(){
+        zerodata_off.visibility = View.VISIBLE
+        zerodata_on.visibility = View.GONE
+        protection_status.text = getString(R.string.internet_not_free)
+        connect_switch.setOnCheckedChangeListener(null)
+        connect_switch.isChecked = false
+        connect_switch.isEnabled = true
+        toggle_to_protect.isVisible = true
+        progressBar.isVisible = false
+//                    PreferenceManager.setIsSeen(false)
+        connect_switch.setOnCheckedChangeListener(checkChangedListener)
+        showRetrySnackBar(getString(R.string.error_network_connectivity)) { }
+    }
+
+
 
 
     companion object {
