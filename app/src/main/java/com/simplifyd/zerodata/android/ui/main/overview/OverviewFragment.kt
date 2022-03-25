@@ -50,7 +50,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     .newInstance()
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
-                progressBar.isVisible = true
+                if(progressBar != null)
+                    progressBar.isVisible = true
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
                 toggle_to_protect.isVisible = false
@@ -145,7 +146,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
-                    progressBar.isVisible = false
+                    if(progressBar != null)
+                        progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
@@ -197,15 +199,14 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
-                    progressBar.isVisible = false
+                    if(progressBar != null)
+                        progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
-//                    showRetrySnackBar(it.error.localizedMessage) { }
                     if(it.error.localizedMessage.contains("1001", ignoreCase = true)){
                         gotoUpdateScreen()
 
                     }else{
                         logOutUser()
-//                        showRetrySnackBar(it.error.localizedMessage) { }
 
                     }
 
@@ -228,7 +229,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
-                    progressBar.isVisible = false
+                    if(progressBar != null)
+                        progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(getString(R.string.not_on_partner_network)) { }
                 }
@@ -278,7 +280,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = true
-                progressBar.isVisible = false
+                if(progressBar != null)
+                    progressBar.isVisible = false
                 toggle_to_protect.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
                 viewModel.connectUrl?.let {
@@ -288,7 +291,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     }
                 }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
-                progressBar.isVisible = true
+                if(progressBar != null)
+                    progressBar.isVisible = true
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
                 protection_status.text = getString(R.string.connecting)
@@ -301,7 +305,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             } else if (level == ConnectionStatus.LEVEL_VPNPAUSED) {
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
-                progressBar.isVisible = false
+                if(progressBar != null)
+                    progressBar.isVisible = false
                 protection_status.text = getString(R.string.paused)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
@@ -317,7 +322,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
                 toggle_to_protect.isVisible = true
-                progressBar.isVisible = false
+                if(progressBar != null)
+                    progressBar.isVisible = false
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             }
@@ -370,7 +376,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         connect_switch.isChecked = false
         connect_switch.isEnabled = true
         toggle_to_protect.isVisible = true
-        progressBar.isVisible = false
+        if(progressBar != null)
+            progressBar.isVisible = false
         connect_switch.setOnCheckedChangeListener(checkChangedListener)
         showRetrySnackBar(getString(R.string.error_network_connectivity)) { }
     }
