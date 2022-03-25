@@ -1,12 +1,10 @@
 package com.simplifyd.zerodata.android.ui.auth.verify
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.BuildConfig
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.utils.*

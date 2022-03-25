@@ -1,7 +1,6 @@
 package com.simplifyd.zerodata.android.data.repo
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.data.model.User
 import com.simplifyd.zerodata.android.data.remote.grpc.GRPCChannelFactory

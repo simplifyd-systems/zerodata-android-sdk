@@ -1,12 +1,9 @@
 package com.simplifyd.zerodata.android.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.simplifyd.zerodata.android.data.repo.MainRepository
 import com.simplifyd.zerodata.android.utils.SingleLiveData
 import com.simplifyd.zerodata.android.utils.Status
-import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 

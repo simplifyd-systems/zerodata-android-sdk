@@ -13,7 +13,6 @@ import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        startAuthActivity()
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

@@ -151,7 +151,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
                     progressBar.isVisible = false
-//                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
                 }
@@ -204,7 +203,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
                     progressBar.isVisible = false
-//                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
 //                    showRetrySnackBar(it.error.localizedMessage) { }
                     if(it.error.localizedMessage.contains("1001", ignoreCase = true)){
@@ -236,7 +234,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     connect_switch.isEnabled = true
                     toggle_to_protect.isVisible = true
                     progressBar.isVisible = false
-//                    PreferenceManager.setIsSeen(false)
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(getString(R.string.not_on_partner_network)) { }
                 }
@@ -379,7 +376,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         connect_switch.isEnabled = true
         toggle_to_protect.isVisible = true
         progressBar.isVisible = false
-//                    PreferenceManager.setIsSeen(false)
         connect_switch.setOnCheckedChangeListener(checkChangedListener)
         showRetrySnackBar(getString(R.string.error_network_connectivity)) { }
     }

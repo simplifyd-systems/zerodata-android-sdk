@@ -1,6 +1,5 @@
 package com.simplifyd.zerodata.android.ui.main.profile
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.simplifyd.zerodata.android.data.model.User

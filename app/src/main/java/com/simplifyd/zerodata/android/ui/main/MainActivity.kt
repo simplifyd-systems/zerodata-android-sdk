@@ -2,8 +2,6 @@ package com.simplifyd.zerodata.android.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
