@@ -1,6 +1,5 @@
 package com.simplifyd.zerodata.android.ui.main.overview
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -8,9 +7,7 @@ import android.os.Bundle
 import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,9 +27,7 @@ import com.simplifyd.zerodata.android.ui.main.bottomsheets.InventorySortBottomDi
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.PauseMode
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.showRetrySnackBar
-import com.simplifyd.zerodata.android.utils.showToast
 import de.blinkt.openvpn.core.ConnectionStatus
-import de.blinkt.openvpn.core.NetworkUtils
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
