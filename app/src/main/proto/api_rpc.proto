@@ -29,7 +29,7 @@ message IsOnPartnerNetworkResponse {
     bool success = 1;
     string msg = 2;
     repeated string errors = 3;
-    bool is_on_partner_etwork = 4;
+    bool is_on_partner_network = 4;
 }
 
 message Username {
