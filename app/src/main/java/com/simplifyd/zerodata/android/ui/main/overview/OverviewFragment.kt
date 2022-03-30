@@ -25,6 +25,7 @@ import com.simplifyd.zerodata.android.ui.main.MainActivity
 import com.simplifyd.zerodata.android.ui.main.MainViewModel
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.InventorySortBottomDialogFragment
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.PauseMode
+import com.simplifyd.zerodata.android.utils.NetworkUtils
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.showRetrySnackBar
 import de.blinkt.openvpn.core.ConnectionStatus
@@ -56,7 +57,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 zerodata_on.visibility = View.GONE
                 toggle_to_protect.isVisible = false
                 protection_status.text = getString(R.string.checking_network_availability)
-                if(com.simplifyd.zerodata.android.utils.NetworkUtils.isOnline(requireContext())){
+                if(NetworkUtils.isOnline(requireContext())){
                     viewModel.checkIsPartnerNewtwork()
                 }else {
                     noNetworkActive()

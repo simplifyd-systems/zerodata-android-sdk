@@ -24,7 +24,6 @@ class GetStartedViewModel : ViewModel() {
                 initiateStatus.postValue(result)
             }
         }
+
     }
-
-
 }

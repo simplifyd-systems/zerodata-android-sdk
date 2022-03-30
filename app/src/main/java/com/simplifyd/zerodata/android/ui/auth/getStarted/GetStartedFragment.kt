@@ -84,6 +84,7 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
         if(NetworkUtils.isOnline(requireContext())){
             viewModel.initiateLogin(phoneNumber)
         }else{
+
             hideKeyboard(requireActivity())
             Handler().postDelayed({
                 showToast(getString(R.string.error_network_connectivity))

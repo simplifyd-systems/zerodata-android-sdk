@@ -75,7 +75,7 @@ class CredentialsRepository constructor(
                 .withCallCredentials(creds)
             val response = blockingStub.isOnPartnerNetwork(isOnPartnerNetworkRq)
 
-            if (response.success) {
+            if (response.isOnPartnerEtwork) {
                 Status.Success(Unit)
             } else {
                 Status.Error(Throwable(response.getErrors(0)))
