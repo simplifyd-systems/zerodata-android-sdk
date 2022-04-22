@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/itemBankContainer"
     android:layout_width="match_parent"
+    android:id="@+id/itemBankContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/intro_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_intro_1"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.4"
-        android:visibility="gone"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -37,43 +14,74 @@
         app:layout_constraintGuide_percent=".50" />
 
 
-    <TextView
-        android:id="@+id/intro_title"
-        style="@style/Theme.Simplifyd.BoldIntroText"
+
+
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="@dimen/two_space"
-        android:gravity="center"
-        android:lineSpacingExtra="@dimen/one_space"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_24"
-        app:layout_constraintEnd_toEndOf="@id/intro_desc"
-        app:layout_constraintStart_toStartOf="@+id/intro_desc"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
-        tools:text="See where your \n money is going." />
-
-    <TextView
-        android:id="@+id/intro_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/two_space"
-        android:gravity="center"
-        android:layout_marginHorizontal="@dimen/four_space"
-        android:textSize="@dimen/text_16"
-        android:lineSpacingMultiplier="1.5"
-        app:layout_constraintTop_toBottomOf="@+id/intro_title"
-        app:layout_constraintEnd_toEndOf="@+id/intro_bg"
-        app:layout_constraintStart_toStartOf="@+id/intro_bg"
-        tools:text="Effortlessly track your money and stay on top on your spendings." />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="@dimen/app_logo_width"
-        android:layout_height="@dimen/app_logo_height"
-        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_app_zerodata_black" />
+        app:layout_constraintBottom_toTopOf="@id/guideline">
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            android:layout_gravity="bottom"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="20dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/two_space"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="@dimen/two_space">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/intro_title"
+                    style="@style/Theme.Simplifyd.Extra.Bold.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Browse Data Free" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Theme.Simplifyd.Normal.SubBlack"
+                    android:id="@+id/intro_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_14"
+                    android:padding="10dp"
+                    android:lineHeight="25dp"
+                    android:text="Browse sites and apps without using your data plan. " />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/intro_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/four_space"
+        android:src="@drawable/ic_intro_one"
+        app:srcCompat="@drawable/ic_intro_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

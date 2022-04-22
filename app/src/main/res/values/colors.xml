@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    <color name="colorPrimary">#EC3944</color>-->
-    <color name="colorPrimary">#495FFA</color>
+    <color name="colorPrimary">#4A64FF</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#4CAF50</color>
     <color name="colorBlack">#000000</color>
@@ -26,5 +26,8 @@
     <color name="colorSecondaryText">#59617B</color>
     <color name="colorDivider">#DFE2E6</color>
     <color name="color_toolbar">#FFFFFF</color>
-    <color name="color_primary_text">#000000</color>
+    <color name="color_primary_text">#00140E</color>
+    <color name="color_gray_text">#737A91</color>
+    <color name="color_black_sub_text">#41423C</color>
+    <color name="color_light_gray_text">#A6AFCE</color>
 </resources>

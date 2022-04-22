@@ -27,6 +27,7 @@
 
     <dimen name="half_space">4dp</dimen>
     <dimen name="two_half_space">20dp</dimen>
+    <dimen name="three_half_space">36dp</dimen>
     <dimen name="one_and_half_space">12dp</dimen>
     <dimen name="nine_space">72dp</dimen>
 

@@ -180,6 +180,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
+    implementation("com.google.android.play:core:1.10.3")
+
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")
     api("com.google.protobuf:protobuf-javalite:3.19.1")

@@ -20,6 +20,32 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".80" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".38" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".05" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/three_space"
+        style="@style/Theme.Simplifyd.Extra.Bold.Blue"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/three_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        android:text="Skip"/>
+
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
@@ -29,15 +55,14 @@
         app:dotsSize="6dp"
         app:dotsSpacing="4dp"
         app:dotsWidthFactor="1"
-        app:layout_constraintBottom_toTopOf="@+id/btnNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/intro_list"
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/guideline1"
         app:layout_constraintVertical_bias=".0"
         app:progressMode="false"
         app:selectedDotColor="@color/colorPrimary" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         style="@style/Theme.Simplifyd.ActionButton"
         android:layout_width="0dp"
@@ -51,4 +76,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_bottom_bg"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
