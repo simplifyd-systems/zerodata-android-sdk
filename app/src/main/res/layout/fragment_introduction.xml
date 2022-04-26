@@ -34,6 +34,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".05" />
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -62,22 +63,10 @@
         app:progressMode="false"
         app:selectedDotColor="@color/colorPrimary" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnNext"
-        style="@style/Theme.Simplifyd.ActionButton"
-        android:layout_width="0dp"
-        android:layout_marginStart="@dimen/three_space"
-        android:layout_marginTop="@dimen/two_space"
-        android:layout_marginEnd="@dimen/three_space"
-        android:layout_marginBottom="@dimen/six_space"
-        android:singleLine="true"
-        android:text="@string/get_started"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1" />
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -87,7 +76,57 @@
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintBottom_toBottomOf="parent">
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".20" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPrev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_left_button_bg"
+            android:drawableStart="@drawable/ic_arrow_left"
+            android:paddingLeft="20dp"
+            android:drawablePadding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNext"
+            style="@style/Theme.Simplifyd.ActionButton"
+            android:layout_width="0dp"
+            android:text="Next"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline3"
+          />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNext1"
+            style="@style/Theme.Simplifyd.ActionButton"
+            android:layout_width="0dp"
+            android:text="Next"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

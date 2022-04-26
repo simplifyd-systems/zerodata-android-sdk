@@ -2,8 +2,12 @@ package com.simplifyd.zerodata.android.ui.intro
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.simplifyd.zerodata.android.R
 import kotlinx.android.synthetic.main.fragment_introduction.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,6 +25,59 @@ class IntroductionFragment : Fragment(R.layout.fragment_introduction) {
         intro_list.adapter = introAdapter
         dots_indicator.setViewPager2(intro_list)
         introAdapter.submitList(intros)
+
+
+
+        intro_list.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                when(position){
+
+                    0 ->{
+
+                        skip.visibility = View.GONE
+                        btnPrev.visibility = View.GONE
+                        btnNext.visibility = View.GONE
+                        btnNext1.visibility = View.VISIBLE
+
+
+                    }
+                    1 ->{
+                        btnNext1.visibility = View.GONE
+                        skip.visibility = View.VISIBLE
+                        btnPrev.visibility = View.VISIBLE
+                        btnNext.visibility = View.VISIBLE
+                        btnNext.text = "Next"
+
+
+
+                    }
+                    2 ->{
+
+                        btnNext1.visibility = View.GONE
+                        skip.visibility = View.VISIBLE
+                        btnPrev.visibility = View.VISIBLE
+                        btnNext.visibility = View.VISIBLE
+                        btnNext.text = "Next"
+                    }
+                    3 ->{
+
+                        btnNext.text = "Get started"
+                    }
+                }
+
+            }
+        })
+
+        skip.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
+        }
+
+
+
+
         btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
         }
