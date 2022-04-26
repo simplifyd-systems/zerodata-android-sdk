@@ -2,9 +2,6 @@ package com.simplifyd.zerodata.android.ui.intro
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -75,11 +72,29 @@ class IntroductionFragment : Fragment(R.layout.fragment_introduction) {
             findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
         }
 
+        btnNext1.setOnClickListener {
+            intro_list.setCurrentItem(1, true)
+
+        }
+
+        btnPrev.setOnClickListener {
+            val currentPosition = intro_list.currentItem
+            if (currentPosition in 1..3){
+                intro_list.setCurrentItem(currentPosition-1, true)
+            }
+        }
+
 
 
 
         btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
+            val currentPosition = intro_list.currentItem
+            if (currentPosition in 1..2){
+                intro_list.setCurrentItem(currentPosition+1, true)
+            }else{
+                findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
+
+            }
         }
     }
 
