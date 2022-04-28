@@ -181,6 +181,8 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("com.google.android.play:core:1.10.3")
+    implementation("fr.tvbarthel.blurdialogfragment:lib:2.2.0")
+
 
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")
