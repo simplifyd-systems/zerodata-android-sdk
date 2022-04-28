@@ -7,78 +7,141 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.LoginActivity">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollableParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".12" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:gravity="center_horizontal"
+        android:gravity="start"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/dashboard_title_toolbar_height"
-            android:layout_height="@dimen/six_space"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/brand_logo"
-            android:src="@drawable/ic_app_zerodata_black" />
-
-        <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_space"
-            android:text="@string/get_started"
-            android:textSize="@dimen/text_24"
-            android:textStyle="bold"
-            android:theme="@style/Theme.Simplifyd.BoldIntroText"
-            app:layout_constraintVertical_chainStyle="packed" />
+            android:contentDescription="@string/brand_logo"
+            android:src="@drawable/ic_logo_symbol" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/six_space"
+            android:text="Let’s sign you in"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            style="@style/Theme.Simplifyd.Extra.Bold.Black"
+             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/two_half_space"
+            android:text="Enter your phone number below to sign into a data free internet"
+            android:textSize="@dimen/text_14"
+            style="@style/Theme.Simplifyd.Normal.SubBlack"
+            android:layout_marginEnd="24dp"
+            android:lineHeight="25dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/two_half_space"
-            android:text="@string/welcome_back"
+            android:text="Number"
             android:textSize="@dimen/text_14"
-            app:layout_constraintEnd_toEndOf="@+id/ivBankLogo"
-            app:layout_constraintStart_toStartOf="@id/ivBankLogo"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_chainStyle="packed" />
+            style="@style/Theme.Simplifyd.Bold.Light.Gray"
+            android:layout_marginEnd="24dp"
+         />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/four_space"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp">
+            android:layout_marginTop="@dimen/one_and_half_space"
+            android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@drawable/nigerian_flag"
-                android:drawablePadding="@dimen/half_space"
-                android:id="@+id/etPhoneNumber"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_number"
-                android:inputType="phone" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".35" />
+
+            <TextView
+                android:id="@+id/country_code_tv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_rectangle_input"
+                android:padding="@dimen/one_and_half_space"
+                android:drawableStart="@drawable/nigerian_flag"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/one_space"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Theme.Simplifyd.Normal.Gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="+234"/>
 
 
-        <com.google.android.material.button.MaterialButton
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhoneNumber"
+                style="@style/Theme.Simplifyd.Normal.Gray"
+                android:padding="@dimen/two_space"
+                android:background="@drawable/ic_rectangle_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintStart_toEndOf="@id/guideline1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSubmit"
+            style="@style/Theme.Simplifyd.ActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/six_space"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/cnt"
+            android:text="Send OTP"
             android:textAllCaps="false"
             android:textStyle="bold"
             app:cornerRadius="12dp" />
 
 
     </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

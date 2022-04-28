@@ -20,8 +20,8 @@ class ReferralViewModel:ViewModel(){
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-//                val result = userRepository.loginValidate(code, app_version, platform)
-//                logReferralCode.postValue(result)
+                val result = userRepository.postRerralCode(code)
+                logReferralCode.postValue(result)
             }
         }
     }

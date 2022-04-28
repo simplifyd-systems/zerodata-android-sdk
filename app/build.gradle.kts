@@ -184,6 +184,10 @@ dependencies {
     implementation("fr.tvbarthel.blurdialogfragment:lib:2.2.0")
 
 
+    implementation("com.github.WShaobin:VerificationCodeInputView:1.0.2")
+
+    implementation("fr.tvbarthel.blurdialogfragment:lib:2.2.0")
+
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")
     api("com.google.protobuf:protobuf-javalite:3.19.1")
@@ -207,6 +211,8 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     kapt("com.google.dagger:dagger-compiler:$dagger")
     kapt("org.xerial:sqlite-jdbc:3.34.0")
+
+
 
 }
 

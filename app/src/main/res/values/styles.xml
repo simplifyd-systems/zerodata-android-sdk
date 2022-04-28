@@ -181,8 +181,19 @@
         <item name="android:fontFamily">@font/publicsans_regular</item>
         <item name="fontFamily">@font/publicsans_regular</item>
         <item name="android:textColor">@color/color_gray_text</item>
+        <item name="android:textColorHint">@color/color_hint_text</item>
+        <item name="hintTextColor">@color/color_hint_text</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="Theme.Simplifyd.Bold.Light.Gray" parent="AppTheme">
+        <item name="android:fontFamily">@font/publicsans_bold</item>
+        <item name="fontFamily">@font/publicsans_bold</item>
+        <item name="android:textColor">@color/color_light_gray_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
 
 
 

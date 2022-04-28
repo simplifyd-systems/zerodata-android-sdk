@@ -15,6 +15,7 @@ class VerificationViewModel : ViewModel() {
 
     val validateStatus = MutableLiveData<Status<Unit>>()
 
+
     fun validateLogin(code: String, app_version: String, platform:String) {
         validateStatus.postValue(Status.Loading)
 

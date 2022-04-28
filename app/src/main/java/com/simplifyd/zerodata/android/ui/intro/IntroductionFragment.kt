@@ -69,6 +69,7 @@ class IntroductionFragment : Fragment(R.layout.fragment_introduction) {
         })
 
         skip.setOnClickListener {
+
             findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
         }
 
