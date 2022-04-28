@@ -28,8 +28,12 @@ class EnterReferralCodeFragment : Fragment(R.layout.fragment_enter_referral_code
         observeLogReferralCode()
 
         btnSubmit.setOnClickListener {
+
+            validateReferralCode()
+        }
+
+        noReferralCode.setOnClickListener {
             goToMainScreen()
-//            validateReferralCode()
         }
 
 

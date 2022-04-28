@@ -116,6 +116,19 @@
                     android:textStyle="bold"
                     app:cornerRadius="12dp" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/noReferralCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/two_half_space"
+                    android:text="I don't have a referral code"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/text_14"
+                    style="@style/Theme.Simplifyd.Normal.Blue"
+                    android:lineHeight="25dp" />
+
+
+
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

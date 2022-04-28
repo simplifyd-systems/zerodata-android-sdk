@@ -132,4 +132,14 @@
     <string name="sign_out">Sign out</string>
     <string name="zerodata_url">https://zerodata.app/</string>
     <string name="not_on_partner_network">You are currently not on a partner network</string>
+    <string name="allow_notifications">Allow Notifications</string>
+    <string name="verification_desc">We texted your code to %s</string>
+    <string name="resend_code_in"> <![CDATA[
+        <font color=#4A64FF>Resend in</font> <font color=#4A64FF>%1$s</font>
+    ]]>
+    </string>
+
+
+
+    <string name="tap_here">Tap Here</string>
 </resources>

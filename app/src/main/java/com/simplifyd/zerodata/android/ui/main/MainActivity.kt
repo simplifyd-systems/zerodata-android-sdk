@@ -20,6 +20,8 @@ import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.simplifyd.zerodata.android.R
+import com.simplifyd.zerodata.android.data.local.PreferenceManager
+import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 import de.blinkt.openvpn.LaunchVPN
 import de.blinkt.openvpn.VpnProfile
 import de.blinkt.openvpn.activities.DisconnectVPN
@@ -36,6 +38,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (PreferenceManager.getToken().isNullOrEmpty()) {
+            goToAuthScreen()
+        }
 
         appUpdateManager.registerListener(this)
         checkUpdates()
@@ -56,6 +62,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
         toolbar.setNavigationOnClickListener {
             navController.navigateUp() || super.onSupportNavigateUp()
         }
+    }
+
+    private fun goToAuthScreen() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
 

@@ -21,6 +21,8 @@ class IntroductionFragment : Fragment(R.layout.fragment_introduction) {
         intro_list.adapter = introAdapter
         dots_indicator.setViewPager2(intro_list)
         introAdapter.submitList(intros)
+
+
         btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_intro_screens_to_navigation_sign_in)
         }

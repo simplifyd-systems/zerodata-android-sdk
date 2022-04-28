@@ -22,6 +22,7 @@
 
 
     <color name="intro_indicator_unselected">#DBDBDB</color>
+    <color name="indicator_unselected">#9EA8FC</color>
     <color name="white">#FFFFFF</color>
     <color name="colorSecondaryText">#59617B</color>
     <color name="colorDivider">#DFE2E6</color>
@@ -30,4 +31,5 @@
     <color name="color_gray_text">#737A91</color>
     <color name="color_black_sub_text">#41423C</color>
     <color name="color_light_gray_text">#A6AFCE</color>
+    <color name="color_hint_text">#E6E8EC</color>
 </resources>

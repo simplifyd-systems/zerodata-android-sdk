@@ -47,8 +47,8 @@ class CredentialsRepository constructor(
             val response = blockingStub.getConnectProfile(connectProfileRequest)
 
 
-            print("RESPONSE NOW" +response.success.toString())
-            if(response.success){
+//            print("RESPONSE NOW" +response.success.toString())
+//            if(response.success){
 
                 openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
                     .first().let {
@@ -56,10 +56,10 @@ class CredentialsRepository constructor(
                     }
                 Status.Success(response.openBrowserToUrl)
 
-            }else{
-
-                Status.Error(Throwable(response.errorCode))
-            }
+//            }else{
+//
+//                Status.Error(Throwable(response.errorCode))
+//            }
         } catch (error: Throwable) {
             error.printStackTrace()
             Status.Error(handleError(error))
@@ -68,18 +68,18 @@ class CredentialsRepository constructor(
 
     suspend fun getServiceAvailablity(): Status<Unit>{
         return try {
-            val isOnPartnerNetworkRq = ApiRpc.EmptyReq.newBuilder().build()
+            val isOnPartnerNetworkRq = ApiRpc.Empty.newBuilder().build()
             val token = preferenceManager.getToken()
             val creds = AuthenticationCallCredentials(token)
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)
             val response = blockingStub.isOnPartnerNetwork(isOnPartnerNetworkRq)
 
-            if (response.isOnPartnerNetwork) {
+//            if (response.isOnPartnerNetwork) {
                 Status.Success(Unit)
-            } else {
-                Status.Error(Throwable(response.getErrors(0)))
-            }
+//            } else {
+//                Status.Error(Throwable(response.getErrors(0)))
+//            }
 
         }catch (error: Throwable) {
             error.printStackTrace()

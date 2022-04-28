@@ -4,42 +4,75 @@ package pb;
 option go_package  = "edge-api-rpc/pb";
 
 service Edge {
-    rpc Register(RegisterReq) returns (StandardResponse) {};
     rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
     rpc LoginValidate(LoginValidateRequest) returns (LoginResponse) {};
-    rpc Login(LoginReq) returns (LoginResponse) {};
-    rpc IsOnPartnerNetwork(EmptyReq) returns (IsOnPartnerNetworkResponse) {};
+    rpc IsOnPartnerNetwork(Empty) returns (IsOnPartnerNetworkResponse) {};
     rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
-    rpc GetNotifications(EmptyReq) returns (Notifications) {};
+    rpc GetNotifications(Empty) returns (Notifications) {};
+    rpc GetListedApps(Empty) returns (ListedApps) {};
+    rpc PostReferralCode(ReferralCode) returns (Empty) {};
+
+    /*
+        Data Gathering Feature
+    */
+    rpc PostDeviceInfo(DeviceInfo) returns (Empty) {};
+    rpc PostInstalledApps(InstalledApps) returns (Empty) {};
+    rpc PostInstalledAppUsingZerodata(InstalledApp) returns (Empty) {};
 }
+
+message ReferralCode {
+    string referral_code = 1;
+}
+
+message Empty {}
+
+message DeviceInfo {
+    string manufacturer = 1;
+    string brand = 2;
+    string model = 3;
+}
+
+message InstalledApp {
+    string name = 1;
+    string package_name = 2;
+    uint64 install_time = 3; // unix time in seconds
+}
+
+message InstalledApps {
+    repeated InstalledApp installed_apps = 1;
+}
+
 
 message Notification {
     string title = 1;
     string body = 2;
 }
 
+message ListedApps {
+    message ListedApp {
+        string name = 1;
+        string image = 2;
+        string category = 3;
+        string url = 4;
+        string info = 5;
+    }
+
+    repeated ListedApp listed_apps = 1;
+}
+
 message Notifications {
-    bool success = 1;
-    string msg = 2;
-    repeated string errors = 3;
-    repeated Notification notifications = 4;
+    repeated Notification notifications = 1;
 }
 
 message IsOnPartnerNetworkResponse {
-    bool success = 1;
-    string msg = 2;
-    repeated string errors = 3;
-    bool is_on_partner_network = 4;
+    bool is_on_partner_network = 1;
 }
 
 message Username {
     string mobile = 1;
 }
 message InitiateLoginResponse {
-    bool success = 1;
-    string msg = 2;
-    repeated string errors = 3;
-    string initiate_login_jwt = 4;
+    string initiate_login_jwt = 1;
 }
 
 message LoginValidateRequest {
@@ -49,17 +82,6 @@ message LoginValidateRequest {
     string initiate_login_jwt = 4;
 }
 
-message RegisterReq {
-    string fname = 1;
-    string lname = 2;
-    string email = 3;
-    string mobile = 4;
-    string password = 5;
-}
-message LoginReq {
-    string username = 1;
-    string password = 2;
-}
 message PubKey {
     bytes x = 1;
     bytes y = 2;
@@ -67,7 +89,6 @@ message PubKey {
 message ConnectProfileReq {
     PubKey client_pub_key = 1;
 }
-message EmptyReq {}
 
 message ConnectProfileResponse {
     PubKey server_pub_key = 1; // used to generate ECDH pre key
@@ -75,10 +96,6 @@ message ConnectProfileResponse {
     bytes nonce = 3; // used for AES decryption
     string open_browser_to_url = 4; // url to open browser to
     string unencrypted_connect_profile = 5; // unencrypted connect profile
-    bool success = 6;
-    string errorCode = 7;
-    repeated string errors = 8;
-    string msg = 9;
 }
 
 message User {
@@ -89,14 +106,7 @@ message User {
     string id = 5;
 }
 message LoginResponse {
-    bool success = 1;
-    string msg = 2;
-    repeated string errors = 3;
-    User user = 4;
-    string jwt = 5;
-}
-message StandardResponse {
-    bool success = 1;
-    string msg = 2;
-    repeated string errors = 3;
+    User user = 1;
+    string jwt = 2;
+    bool is_referral_eligible = 3; // controls if we show the user the referral screen
 }

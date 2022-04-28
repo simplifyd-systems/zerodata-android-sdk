@@ -14,8 +14,8 @@ import org.apache.commons.lang3.StringUtils
 
 
 class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
-    private val viewModel by viewModels<GetStartedViewModel>()
 
+    private val viewModel by viewModels<SharedAuthViewModel>()
     lateinit var phoneNumber: String
 
 
@@ -25,9 +25,16 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
         setUpSwipeRefresh()
         observeInitiateLogin()
         showLoading(false)
+
+        country_code_tv.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_sign_in_to_countryCodeDialog)
+        }
+
         btnSubmit.setOnClickListener {
            initiateLogin()
         }
+
+
     }
 
 
@@ -50,8 +57,6 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
 
     private fun initiateLogin() {
         phoneNumber = etPhoneNumber.text.toString().trim()
-
-
 
         if (phoneNumber.isEmpty()) {
             showToast(getString(R.string.error_enter_phone_number))
@@ -94,16 +99,16 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
 
     }
 
-    fun gotoVerifyScreen() {
-
+    private fun gotoVerifyScreen() {
         val bundle = Bundle()
+
         bundle.putString("phoneNumber", phoneNumber)
 
-        findNavController().navigate(R.id.action_navigation_sign_in_to_navigation_sign_up, bundle)
+        findNavController().navigate(R.id.action_navigation_sign_in_to_navigation_verification, bundle)
     }
 
     private fun observeInitiateLogin() {
-        viewModel.initiateStatus.observe(viewLifecycleOwner, Observer {
+        viewModel.initiateStatus.observe(viewLifecycleOwner) {
             when (it) {
                 is Status.Success -> {
                     showLoading(false)
@@ -115,7 +120,7 @@ class GetStartedFragment : Fragment(R.layout.fragment_get_started) {
                     showToast(it.error.localizedMessage)
                 }
             }
-        })
+        }
     }
 
 
