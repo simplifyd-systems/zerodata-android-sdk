@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:src="@drawable/ic_handle"
+        android:layout_width="@dimen/three_half_space"
+        android:layout_height="@dimen/half_space"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/one_space"/>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.Simplifyd.Normal.SubBlack"
+        android:drawablePadding="@dimen/one_space"
+        android:drawableStart="@drawable/ic_search_"
+        android:hint="Search for country here"
+        android:background="@android:color/transparent"
+        android:textSize="@dimen/text_16"
+        android:padding="@dimen/three_space"/>
+
+    <View
+        android:id="@+id/view_separtor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/demacation"/>
+
+    <include android:id="@+id/country_code_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_country_code"/>
+
+
+
+
+
+</LinearLayout>

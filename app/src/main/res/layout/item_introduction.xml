@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/itemBankContainer"
+    android:background="@drawable/ic_layout_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_height="match_parent">
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
+        android:background="@android:color/transparent"
         android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="15dp"
+            android:background="@android:color/transparent"
             android:layout_gravity="bottom"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="20dp"
@@ -41,6 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:layout_margin="@dimen/two_space"
                 android:orientation="vertical"
                 android:layout_gravity="center"
@@ -72,16 +76,28 @@
         </androidx.cardview.widget.CardView>
     </FrameLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/intro_bg"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/four_space"
-        android:src="@drawable/ic_intro_one"
-        app:srcCompat="@drawable/ic_intro_one"
+        android:layout_marginTop="@dimen/three_half_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/guideline">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/intro_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_intro_one"
+        app:srcCompat="@drawable/ic_intro_one"
+        />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_circular_img"/>
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
