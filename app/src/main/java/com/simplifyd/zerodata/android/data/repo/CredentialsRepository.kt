@@ -38,7 +38,7 @@ class CredentialsRepository constructor(
 
             val connectProfileRequest =
                 ApiRpc.ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
-                    .build();
+                    .build()
 
             val token = preferenceManager.getToken()
             val creds = AuthenticationCallCredentials(token)
@@ -47,19 +47,12 @@ class CredentialsRepository constructor(
             val response = blockingStub.getConnectProfile(connectProfileRequest)
 
 
-//            print("RESPONSE NOW" +response.success.toString())
-//            if(response.success){
-
                 openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
                     .first().let {
                         preferenceManager.saveProfileName(it.uuidString)
                     }
                 Status.Success(response.openBrowserToUrl)
 
-//            }else{
-//
-//                Status.Error(Throwable(response.errorCode))
-//            }
         } catch (error: Throwable) {
             error.printStackTrace()
             Status.Error(handleError(error))
@@ -74,12 +67,7 @@ class CredentialsRepository constructor(
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)
             val response = blockingStub.isOnPartnerNetwork(isOnPartnerNetworkRq)
-
-//            if (response.isOnPartnerNetwork) {
-                Status.Success(Unit)
-//            } else {
-//                Status.Error(Throwable(response.getErrors(0)))
-//            }
+             Status.Success(Unit)
 
         }catch (error: Throwable) {
             error.printStackTrace()
@@ -87,47 +75,4 @@ class CredentialsRepository constructor(
         }
     }
 
-
-    /*fun loadKeysDecryptionKeys() {
-        //load KEY2 from server public key
-        val ecParameters = publicKey.params
-        val lengthX = response.serverPubKey.x.toByteArray().size
-        val lengthY = response.serverPubKey.y.toByteArray().size
-        val x = BigInteger(response.serverPubKey.x.toByteArray());
-        val y = BigInteger(response.serverPubKey.y.toByteArray());
-        val ecPoint = ECPoint(x, y);
-        val keySpec = ECPublicKeySpec(ecPoint, ecParameters);
-        val keyFactory = KeyFactory.getInstance("EC")
-        val serverPublicKey: PublicKey
-        try {
-            serverPublicKey = keyFactory.generatePublic(keySpec)
-
-
-            // Perform key agreement
-            // Perform key agreement
-            *//*
-            val ka: KeyAgreement = KeyAgreement.getInstance("ECDH")
-            ka.init(keypair.private)
-            ka.doPhase(serverPublicKey, true)
-
-            // Read shared secret
-            val sharedSecret: ByteArray = ka.generateSecret()
-            val sharedSecretStr = String(sharedSecret)
-             *//*
-
-            // Create a shared secret based on our private key and the other party's public key.
-            // Create a shared secret based on our private key and the other party's public key.
-            val keyAgreement = KeyAgreement.getInstance("ECDH", "AndroidKeyStore")
-            keyAgreement.init(keypair.private)
-            keyAgreement.doPhase(serverPublicKey, true)
-            val sharedSecret = keyAgreement.generateSecret()
-            val sharedSecretStr = String(sharedSecret)
-            // val result = userRepository.connectProfile()
-            // connectProfileStatus.postValue(result)
-        } catch (e: InvalidKeySpecException) {
-            println(e)
-        }
-
-        Log.d("***************************", "HEREEEEEEEEEEE")
-    }*/
 }
