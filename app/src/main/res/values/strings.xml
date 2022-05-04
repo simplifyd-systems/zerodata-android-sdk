@@ -13,8 +13,11 @@
     <string name="forgot_password">Forgot your Password</string>
     <string name="brand_logo">Brand Logo</string>
     <string name="overview">Overview</string>
+    <string name="connect">Connect</string>
     <string name="rules">Rules</string>
+    <string name="catalogue">Catalogue</string>
     <string name="profile">Profile</string>
+    <string name="more">More</string>
     <string name="you_re_protected">You\'re Protected</string>
     <string name="not_protected">Not Protected</string>
     <string name="text_protected">Protected</string>
@@ -140,6 +143,8 @@
     </string>
 
 
+    <string name="connected_text">Zerodata mode is on. Browse apps for free</string>
+    <string name="unconnected_text">Zerodata mode is off. Connect to browse for free</string>
 
     <string name="tap_here">Tap Here</string>
 </resources>

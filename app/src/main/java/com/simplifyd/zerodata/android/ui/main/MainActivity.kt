@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColor
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -22,6 +27,7 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
+import com.simplifyd.zerodata.android.utils.setupWithNavController
 import de.blinkt.openvpn.LaunchVPN
 import de.blinkt.openvpn.VpnProfile
 import de.blinkt.openvpn.activities.DisconnectVPN
@@ -32,12 +38,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpdatedListener {
 
-
+    private var currentNavController: LiveData<NavController>? = null
     private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val MY_REQUEST_CODE = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
+        }
 
         if (PreferenceManager.getToken().isNullOrEmpty()) {
             goToAuthScreen()
@@ -45,23 +54,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
 
         appUpdateManager.registerListener(this)
         checkUpdates()
+    }
 
-        val navController = Navigation.findNavController(this@MainActivity, R.id.navHostFragment)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            toolbar?.setNavigationIcon(R.drawable.ic_back)
-            val isOverviewScreenActive = destination.id == R.id.navigation_overview
-            settings_link.isGone = isOverviewScreenActive.not()
-            notifications_link.isGone = isOverviewScreenActive.not()
-            imageViNew2.isGone = isOverviewScreenActive.not()
-            toolbar.isInvisible = isOverviewScreenActive
-        }
-
-        toolbar.setNavigationOnClickListener {
-            navController.navigateUp() || super.onSupportNavigateUp()
-        }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setupBottomNavigationBar()
     }
 
     private fun goToAuthScreen() {
@@ -178,5 +175,51 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
                 }
             }
         }
+    }
+
+    private fun setupBottomNavigationBar() {
+        val bottomNavigationView = bottom_nav
+        val navGraphIds =
+            listOf(R.navigation.nav_connect, R.navigation.nav_catalogue, R.navigation.nav_more)
+
+        // Setup the bottom navigation view with a list of navigation graphs
+        val controller = bottom_nav.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.navHostFragment,
+            intent = intent
+        )
+        bottomNavigationView.itemIconTintList = null
+
+
+        // Whenever the selected controller changes, setup the action bar.
+        controller.observe(this, Observer { navController ->
+            val appBarConfiguration = AppBarConfiguration(navController.graph)
+            toolbar.setupWithNavController(navController, appBarConfiguration)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                toolbar?.setNavigationIcon(R.drawable.ic_back_blue)
+                bottomNavigationView.isInvisible = true
+                toolbar?.labelFor?.toColor()
+                val isConnectActive = destination.id == R.id.navigation_overview
+                val isCatalogueActive = destination.id == R.id.fragment_catalogue
+                val isMoreActive = destination.id == R.id.fragment_more
+
+                notifications_link.isGone = isConnectActive.not()
+
+
+
+                (isConnectActive || isCatalogueActive || isMoreActive).let {
+                    app_bar.isInvisible = it
+                    bottomNavigationView.isVisible = it
+                }
+            }
+        })
+
+        currentNavController = controller
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 }

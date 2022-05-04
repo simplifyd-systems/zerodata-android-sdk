@@ -3,24 +3,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/nine_space"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/nine_space"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/two_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,68 +40,65 @@
 
 
 
-    <androidx.appcompat.widget.AppCompatToggleButton
-        android:id="@+id/connect_switch"
-        android:layout_width="140dp"
-        android:layout_height="85dp"
-        android:background="@drawable/switch_selector"
-        android:textOff=""
-        android:textOn=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/connect_switch"
+            android:layout_width="140dp"
+            android:layout_height="85dp"
+            android:background="@drawable/switch_selector"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
-    <TextView
-        android:id="@+id/zerodata_on"
-        android:visibility="gone"
-        android:drawablePadding="@dimen/one_space"
-        android:padding="@dimen/one_space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/two_space"
-        android:layout_marginEnd="@dimen/two_space"
-        android:layout_marginBottom="@dimen/one_half_space"
-        android:gravity="center|start"
-        android:background="@drawable/ic_rectangle_connected"
-        android:textColor="@color/colorPrimary"
-        android:drawableStart="@drawable/ic_shield_connected"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/connected_text"
-        app:layout_constraintBottom_toTopOf="@id/connectionDetailsCardView"/>
+        <TextView
+            android:id="@+id/zerodata_on"
+            android:visibility="gone"
+            android:drawablePadding="@dimen/one_space"
+            android:padding="@dimen/one_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/two_space"
+            android:gravity="center|start"
+            android:background="@drawable/ic_rectangle_connected"
+            android:textColor="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_shield_connected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/connected_text"
+            app:layout_constraintBottom_toTopOf="@id/cardView"/>
 
     <TextView
-        android:id="@+id/zerodata_off"
-        android:drawablePadding="@dimen/half_space"
-        android:padding="@dimen/one_space"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/half_space"
-        android:layout_marginEnd="@dimen/half_space"
-        android:background="@drawable/ic_rectangle_unconnected"
-        android:gravity="center|start"
-        android:textColor="@color/color_red_text"
-        android:drawableStart="@drawable/ic_shield_unconnected"
-        android:text="@string/unconnected_text"
-        android:layout_marginBottom="@dimen/two_space"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            android:id="@+id/zerodata_off"
+            android:drawablePadding="@dimen/one_space"
+            android:padding="@dimen/one_space"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/two_space"
+            android:background="@drawable/ic_rectangle_unconnected"
+            android:gravity="center|start"
+            android:textColor="@color/color_red_text"
+            android:drawableStart="@drawable/ic_shield_unconnected"
+            android:text="@string/unconnected_text"
+            android:layout_marginBottom="@dimen/three_half_space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/connectionDetailsCardView"
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginStart="@dimen/three_space"
         android:layout_marginEnd="@dimen/three_space"
-        android:layout_marginBottom="@dimen/three_half_space"
+        android:layout_marginBottom="@dimen/eight_space"
         app:cardBackgroundColor="#F8F7F8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

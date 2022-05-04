@@ -32,4 +32,7 @@
     <color name="color_black_sub_text">#41423C</color>
     <color name="color_light_gray_text">#A6AFCE</color>
     <color name="color_hint_text">#E6E8EC</color>
+    <color name="colorFadedBlue">#EAEDFD</color>
+    <color name="colorFadedRed">#FEEDEF</color>
+    <color name="color_red_text">#FF4A75</color>
 </resources>

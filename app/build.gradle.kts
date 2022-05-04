@@ -14,12 +14,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(32)
+    compileSdkVersion(31)
 
     defaultConfig {
         applicationId = "com.simplifyd.zerodata.android"
         minSdkVersion(23)
-        targetSdkVersion(32)
+        targetSdkVersion(31)
         versionCode = 17
         versionName = "1.0.2"
         resConfigs(listOf("en"))
@@ -157,6 +157,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.0")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.3.0")
     implementation("androidx.core:core-ktx:1.3.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
