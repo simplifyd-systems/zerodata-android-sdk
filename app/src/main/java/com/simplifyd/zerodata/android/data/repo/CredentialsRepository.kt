@@ -46,6 +46,8 @@ class CredentialsRepository constructor(
                 .withCallCredentials(creds)
             val response = blockingStub.getConnectProfile(connectProfileRequest)
 
+            Log.d("getConnectProfile: ", "Response $response")
+
 
                 openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
                     .first().let {
@@ -63,6 +65,7 @@ class CredentialsRepository constructor(
         return try {
             val isOnPartnerNetworkRq = ApiRpc.Empty.newBuilder().build()
             val token = preferenceManager.getToken()
+            Log.d("TokenNOW", token.toString())
             val creds = AuthenticationCallCredentials(token)
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)

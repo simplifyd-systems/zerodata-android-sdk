@@ -17,6 +17,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/rippleGif"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#fff"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_blue_ripple"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,10 +43,13 @@
         android:background="@drawable/ic_pulse"
         app:layout_constraintBottom_toBottomOf="parent">
 
+
+
         <ImageView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:src="@drawable/ic_circle_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +58,16 @@
 
     </FrameLayout>
 
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:src="@drawable/ic_circle_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     <androidx.appcompat.widget.AppCompatToggleButton
@@ -95,6 +123,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/connectionDetailsCardView"
         android:layout_width="match_parent"
@@ -103,7 +132,7 @@
         android:visibility="gone"
         android:layout_marginStart="@dimen/three_space"
         android:layout_marginEnd="@dimen/three_space"
-        android:layout_marginBottom="@dimen/three_half_space"
+        android:layout_marginBottom="@dimen/two_half_space"
         app:cardBackgroundColor="#F8F7F8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,12 +140,15 @@
         app:cardCornerRadius="@dimen/two_space"
         app:cardElevation="@dimen/half_space">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/two_space"
             >
+
 
             <FrameLayout
                 android:layout_width="match_parent"

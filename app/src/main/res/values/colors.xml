@@ -35,4 +35,5 @@
     <color name="colorFadedBlue">#EAEDFD</color>
     <color name="colorFadedRed">#FEEDEF</color>
     <color name="color_red_text">#FF4A75</color>
+    <color name="color_underline">#979797</color>
 </resources>

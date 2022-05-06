@@ -1,10 +1,8 @@
 package com.simplifyd.zerodata.android.ui.main.overview
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
@@ -16,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.google.android.material.button.MaterialButton
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.scheduling.RestartWorkWM
@@ -50,16 +47,15 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     .newInstance()
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
-                if(progressBar != null)
+                if (progressBar != null)
                     progressBar.isVisible = true
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
+                rippleGif.visibility = View.VISIBLE
                 connectionDetailsCardView.visibility = View.GONE
-//                toggle_to_protect.isVisible = false
-//                protection_status.text = getString(R.string.checking_network_availability)
-                if(NetworkUtils.isOnline(requireContext())){
+                if (NetworkUtils.isOnline(requireContext())) {
                     viewModel.checkIsPartnerNewtwork()
-                }else {
+                } else {
                     noNetworkActive()
                 }
             }
@@ -75,23 +71,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
-//        help_text.text = Html.fromHtml(getString(R.string.how_does_simplifyd_work_we))
-
-//        val image: Drawable = requireContext().resources.getDrawable(R.drawable.ic_question_fill)
-//        val h: Int = image.intrinsicHeight
-//        val w: Int = image.intrinsicWidth
-//        image.setBounds(0, 0, w, h)
-//        help_text.setCompoundDrawables(null, image, null, null)
-
-
-//        requireActivity().findViewById<View>(R.id.settings_link).setOnClickListener {
-//            (requireActivity() as? MainActivity)?.let {
-//
-//                findNavController().navigate(R.id.action_navigation_overview_to_navigation_settings)
-//
-//
-//            }
-//        }
 
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
@@ -141,14 +120,12 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Error -> {
                     zerodata_off.visibility = View.VISIBLE
                     zerodata_on.visibility = View.GONE
+                    rippleGif.visibility = View.GONE
                     connectionDetailsCardView.visibility = View.GONE
-
-//                    protection_status.text = getString(R.string.internet_not_free)
                     connect_switch.setOnCheckedChangeListener(null)
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
-//                    toggle_to_protect.isVisible = true
-                    if(progressBar != null)
+                    if (progressBar != null)
                         progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(it.error.localizedMessage) { }
@@ -196,20 +173,18 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Error -> {
                     zerodata_off.visibility = View.VISIBLE
                     zerodata_on.visibility = View.GONE
+                    rippleGif.visibility = View.GONE
                     connectionDetailsCardView.visibility = View.GONE
-
-//                    protection_status.text = getString(R.string.internet_not_free)
                     connect_switch.setOnCheckedChangeListener(null)
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
-//                    toggle_to_protect.isVisible = true
-                    if(progressBar != null)
+                    if (progressBar != null)
                         progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                    if(it.error.localizedMessage.contains("1001", ignoreCase = true)){
+                    if (it.error.localizedMessage.contains("1001", ignoreCase = true)) {
                         gotoUpdateScreen()
 
-                    }else{
+                    } else {
                         logOutUser()
 
                     }
@@ -219,8 +194,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             }
         }
 
-        viewModel.checkPartnerNetwork.observe(viewLifecycleOwner){
-            when (it){
+        viewModel.checkPartnerNetwork.observe(viewLifecycleOwner) {
+            when (it) {
 
                 is Status.Loading -> {
 
@@ -228,13 +203,12 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Error -> {
                     zerodata_off.visibility = View.VISIBLE
                     zerodata_on.visibility = View.GONE
+                    rippleGif.visibility = View.GONE
                     connectionDetailsCardView.visibility = View.GONE
-//                    protection_status.text = getString(R.string.internet_not_free)
                     connect_switch.setOnCheckedChangeListener(null)
                     connect_switch.isChecked = false
                     connect_switch.isEnabled = true
-//                    toggle_to_protect.isVisible = true
-                    if(progressBar != null)
+                    if (progressBar != null)
                         progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
                     showRetrySnackBar(getString(R.string.not_on_partner_network)) { }
@@ -255,8 +229,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         findNavController().navigate(R.id.action_navigation_overview_to_update)
     }
 
-    fun logOutUser()
-    {
+    fun logOutUser() {
         (requireActivity() as? MainActivity)?.let { it ->
 
             if (it.isVPNConnected()) {
@@ -280,15 +253,14 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             if (level == ConnectionStatus.LEVEL_CONNECTED) {
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.VISIBLE
+                rippleGif.visibility = View.VISIBLE
                 connectionDetailsCardView.visibility = View.VISIBLE
-//                protection_status.text = getString(R.string.internet_free)
                 connect_switch.isEnabled = PreferenceManager.getProfileName() != null
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = true
-                if(progressBar != null)
+                if (progressBar != null)
                     progressBar.isVisible = false
-//                toggle_to_protect.isVisible = false
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
                 viewModel.connectUrl?.let {
                     if (!PreferenceManager.getIsSeen()) {
@@ -297,41 +269,38 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     }
                 }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
-                if(progressBar != null)
+                if (progressBar != null)
                     progressBar.isVisible = true
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
+                rippleGif.visibility = View.VISIBLE
                 connectionDetailsCardView.visibility = View.GONE
-//                protection_status.text = getString(R.string.connecting)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = true
                 connect_switch.isEnabled = false
-//                toggle_to_protect.isVisible = false
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_VPNPAUSED) {
                 zerodata_off.visibility = View.GONE
                 zerodata_on.visibility = View.GONE
+                rippleGif.visibility = View.VISIBLE
                 connectionDetailsCardView.visibility = View.GONE
-                if(progressBar != null)
+                if (progressBar != null)
                     progressBar.isVisible = false
-//                protection_status.text = getString(R.string.paused)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
-//                toggle_to_protect.isVisible = false
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             } else if (level == ConnectionStatus.LEVEL_NOTCONNECTED) {
                 zerodata_off.visibility = View.VISIBLE
                 zerodata_on.visibility = View.GONE
+                rippleGif.visibility = View.GONE
                 connectionDetailsCardView.visibility = View.GONE
-//                protection_status.text = getString(R.string.internet_not_free)
                 connect_switch.setOnCheckedChangeListener(null)
                 connect_switch.isChecked = false
                 connect_switch.isEnabled = true
-//                toggle_to_protect.isVisible = true
-                if(progressBar != null)
+                if (progressBar != null)
                     progressBar.isVisible = false
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
@@ -377,16 +346,14 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         }
     }
 
-    fun noNetworkActive(){
+    fun noNetworkActive() {
         zerodata_off.visibility = View.VISIBLE
         zerodata_on.visibility = View.GONE
         connectionDetailsCardView.visibility = View.GONE
-//        protection_status.text = getString(R.string.internet_not_free)
         connect_switch.setOnCheckedChangeListener(null)
         connect_switch.isChecked = false
         connect_switch.isEnabled = true
-//        toggle_to_protect.isVisible = true
-        if(progressBar != null)
+        if (progressBar != null)
             progressBar.isVisible = false
         connect_switch.setOnCheckedChangeListener(checkChangedListener)
         showRetrySnackBar(getString(R.string.error_network_connectivity)) { }

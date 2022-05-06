@@ -184,6 +184,9 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
     implementation("fr.tvbarthel.blurdialogfragment:lib:2.2.0")
 
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.22")
+
+
 
     implementation("com.github.WShaobin:VerificationCodeInputView:1.0.2")
 

@@ -11,6 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.withContext
 import pb.ApiRpc
 import pb.EdgeGrpc
+import kotlin.math.log
 
 
 @ExperimentalCoroutinesApi
@@ -23,7 +24,7 @@ class UserRepository : BaseRepository() {
             val loginInitiateRq = ApiRpc.Username.newBuilder().setMobile(mobile).build()
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.initiateLogin(loginInitiateRq)
-            print("Response Now $response")
+            Log.d("loginInitiate:","Response Now Initiate $response")
                 saveToken(response.initiateLoginJwt)
                 Status.Success(Unit)
 
@@ -40,6 +41,8 @@ class UserRepository : BaseRepository() {
                 .setInitiateLoginJwt(PreferenceManager.getTokenInitation()).build()
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.loginValidate(loginValidateRq)
+            Log.d("loginValidate:","Response Now Validate $response")
+            Log.d("Token!!!", response.jwt)
 
                 saveAuthToken(response.jwt)
                 Status.Success(Unit)
@@ -50,7 +53,7 @@ class UserRepository : BaseRepository() {
 
     }
 
-    suspend fun postRerralCode(referralCode:String): Status<Unit>{
+    fun postRerralCode(referralCode:String): Status<Unit>{
 
         return try {
 
