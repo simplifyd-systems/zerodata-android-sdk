@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/three_space"
-    android:layout_marginEnd="@dimen/three_space"
-    android:layout_marginBottom="@dimen/three_half_space"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/one_space"
-    app:cardCornerRadius="@dimen/two_space"
-    app:cardElevation="@dimen/half_space"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/three_space"
+        android:layout_marginEnd="@dimen/three_space"
+        android:layout_marginBottom="@dimen/three_half_space"
+        android:padding="@dimen/one_space"
+        app:cardCornerRadius="@dimen/two_space"
+        app:cardElevation="@dimen/half_space"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +22,13 @@
         android:orientation="vertical"
         android:padding="@dimen/three_space"
         >
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/ic_back"
+            />
 
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="150dp"
@@ -34,7 +45,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/two_space"
             android:layout_gravity="center_horizontal"
-            android:text="You’re not on a supported network" />
+            android:text="@string/not_supported_network" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Theme.Simplifyd.Normal.SubBlack"
@@ -46,7 +57,7 @@
             android:textSize="@dimen/text_14"
             android:padding="10dp"
             android:lineHeight="25dp"
-            android:text="We only support the following networks for now" />
+            android:text="@string/notsupported_network_desc" />
 
 
        <LinearLayout
@@ -54,19 +65,34 @@
            android:layout_height="wrap_content"
            android:layout_gravity="center_horizontal"
            android:layout_marginTop="@dimen/two_space">
-           <ImageView
+           <androidx.appcompat.widget.AppCompatImageView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_marginEnd="@dimen/one_space"
                android:src="@drawable/ic_mtn_logo"/>
 
-           <ImageView
+           <androidx.appcompat.widget.AppCompatImageView
                android:layout_width="30dp"
                android:layout_height="30dp"
                android:src="@drawable/ic_glo_logo"/>
 
 
        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:visibility="gone"
+            style="@style/Theme.Simplifyd.ActionButton"
+            android:layout_width="match_parent"
+            android:text="@string/get_started"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="@dimen/two_space"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
     </LinearLayout>
 
@@ -75,3 +101,4 @@
 
 
 </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

@@ -1,19 +1,22 @@
-package com.simplifyd.zerodata.android.ui.auth.verify
+package com.simplifyd.zerodata.android.ui.main.overview.dialogs
 
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.button.MaterialButton
 import com.simplifyd.zerodata.android.R
+import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.ui.main.MainActivity
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class VerifyDialogSuccess(private val activity: Activity, val type: Int = 0) {
+class DataDialog (private val activity: Activity, val type: Int = 0) {
 
 
     private var dialog: Dialog? = null
@@ -37,20 +40,53 @@ class VerifyDialogSuccess(private val activity: Activity, val type: Int = 0) {
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog!!.setCancelable(false)
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog!!.setContentView(
-            R.layout.dialog_verification_successful
-        )
+        when (type)
+        {
+            1 ->{
+                dialog!!.setContentView(
+                    R.layout.dialog_get_started
+                )
+                PreferenceManager.setIsFirstLogin(true)
+            }
+
+            2 ->{
+                dialog!!.setContentView(
+                    R.layout.dialog_offline
+                )
+            }
+
+            3 ->{
+                dialog!!.setContentView(
+                    R.layout.dialog_nonsupported_network
+                )
+            }
+
+            else -> {
+                dialog!!.setContentView(
+                    R.layout.dialog_verification_successful
+                )
+            }
+        }
+
     }
 
     private fun bindViews() {
-        val closeButton = dialog!!.findViewById<MaterialButton>(R.id.btnSubmit)
+        val closeButton = dialog!!.findViewById<AppCompatButton>(R.id.btnSubmit)
         val backButton = dialog!!.findViewById<ImageView>(R.id.ic_back)
+
         closeButton.setOnClickListener { v ->
-            dialog!!.dismiss()
-            if (type != 0) {
-                startMainActivity()
+
+            when (type)
+            {
+                1 ->{
+                    dialog!!.dismiss()
+                }
+
+                else -> {
+                    dialog!!.dismiss()
+                }
             }
-            activity.finish()
+
 
         }
 

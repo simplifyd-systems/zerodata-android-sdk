@@ -17,7 +17,13 @@
         android:orientation="vertical"
         android:padding="@dimen/three_space"
         >
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/ic_back"
+            />
 
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="150dp"
@@ -34,7 +40,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/two_space"
             android:layout_gravity="center_horizontal"
-            android:text="Are you sure you want to disconnect Zerodata?" />
+            android:text="@string/disconnect_zerodata" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Theme.Simplifyd.Normal.SubBlack"
@@ -46,11 +52,10 @@
             android:textSize="@dimen/text_14"
             android:padding="10dp"
             android:lineHeight="25dp"
-            android:text="Disconnecting Zerodata will result to browsing with your mobile data." />
+            android:text="@string/disconnect_zerodata_desc" />
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnNext1"
             style="@style/Theme.Simplifyd.ActionButton"
             android:background="@drawable/ic_red_button"
             android:layout_width="match_parent"
@@ -62,6 +67,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Theme.Simplifyd.Normal.SubBlack"
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/two_space"
+            android:padding="5dp"
+            android:text="@string/no_cancel" />
 
     </LinearLayout>
 

@@ -18,7 +18,7 @@
         style="@style/Theme.Simplifyd.Normal.SubBlack"
         android:drawablePadding="@dimen/one_space"
         android:drawableStart="@drawable/ic_search_"
-        android:hint="Search for country here"
+        android:hint="@string/search_for_country"
         android:background="@android:color/transparent"
         android:textSize="@dimen/text_16"
         android:padding="@dimen/three_space"/>

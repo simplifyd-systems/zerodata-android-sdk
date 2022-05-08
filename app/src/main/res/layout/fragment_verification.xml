@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/eight_space"
-                android:text="Enter the code sent to your phone number"
+                android:text="@string/code_sent"
                 android:lineHeight="40dp"
                 android:textSize="27sp"
                 android:textStyle="bold"
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/two_half_space"
-                    android:text="Edit"
+                    android:text="@string/edit"
                     android:textSize="@dimen/text_14"
                     style="@style/Theme.Simplifyd.Normal.Blue"
                      />
@@ -109,7 +109,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Didn't get the code?"
+                    android:text="@string/didnt_get_code"
                     android:textSize="@dimen/text_14"
                     style="@style/Theme.Simplifyd.Normal.SubBlack"
                     android:layout_marginEnd="@dimen/one_space"
@@ -151,7 +151,7 @@
                 android:layout_marginTop="@dimen/eight_space"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="Verify Number"
+                android:text="@string/verify_number"
                 android:textAllCaps="false"
                 app:cornerRadius="12dp" />
         </LinearLayout>

@@ -17,6 +17,13 @@
         android:orientation="vertical"
         android:padding="@dimen/three_space"
         >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/ic_back"
+            />
 
 
         <pl.droidsonroids.gif.GifImageView
@@ -34,7 +41,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/two_space"
             android:layout_gravity="center_horizontal"
-            android:text="You are using an older version of Zerodata" />
+            android:text="@string/older_version" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/Theme.Simplifyd.Normal.SubBlack"
@@ -46,14 +53,14 @@
             android:textSize="@dimen/text_14"
             android:padding="10dp"
             android:lineHeight="25dp"
-            android:text="Click on the button below to download the latest version." />
+            android:text="@string/download_latest_version" />
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnNext1"
+            android:id="@+id/btnSubmit"
             style="@style/Theme.Simplifyd.ActionButton"
             android:layout_width="match_parent"
-            android:text="Download latest version"
+            android:text="@string/click_download_new_version"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="@dimen/two_space"

@@ -160,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Connection time"
+                    android:text="@string/connection_time"
                     style="@style/Theme.Simplifyd.Normal.Gray"
                     android:textSize="@dimen/text_12"
                     />
@@ -196,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Data saved"
+                    android:text="@string/data_saved"
                     style="@style/Theme.Simplifyd.Normal.Gray"
                     android:textSize="@dimen/text_12"
                     />
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="%s MB"
+                    android:text="@string/data_saved_val"
                     android:drawableEnd="@drawable/ic_arrow_right"
                     android:layout_gravity="end"
                     style="@style/Theme.Simplifyd.Normal.Gray"

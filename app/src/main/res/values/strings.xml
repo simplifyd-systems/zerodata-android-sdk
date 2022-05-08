@@ -146,4 +146,36 @@
 
 
     <string name="tap_here">Tap Here</string>
+    <string name="continue_using_zerodata">Continue using Zerodata</string>
+    <string name="search_for_country">Search for country here</string>
+    <string name="older_version">You are using an older version of Zerodata</string>
+    <string name="download_latest_version">Click on the button below to download the latest version.</string>
+    <string name="click_download_new_version">Download latest version</string>
+    <string name="disconnect_zerodata">Are you sure you want to disconnect Zerodata?</string>
+    <string name="disconnect_zerodata_desc">Disconnecting Zerodata will result to browsing with your mobile data.</string>
+    <string name="welcome_zerodata">Welcome to Zerodata</string>
+    <string name="welcome_zerodata_desc">Browse sites and apps without using your data plan.</string>
+    <string name="not_supported_network">You’re not on a supported network</string>
+    <string name="notsupported_network_desc">We only support the following networks for now</string>
+    <string name="offline">You are offline</string>
+    <string name="offline_desc">Turn on your mobile data to use the Zerodata app</string>
+    <string name="zerodata_free">Zerodata will not use your data. Browsing is 100% free</string>
+    <string name="data_saved">Data saved</string>
+    <string name="connection_time">Connection time</string>
+    <string name="data_saved_val">%s MB</string>
+    <string name="no_referral_code">I don\'t have a referral code</string>
+    <string name="continue_">Continue</string>
+    <string name="enter_code_here">Enter code here</string>
+    <string name="referal_code_optional">Referal code (Optional)</string>
+    <string name="referral_code_desc">Enter the code below to get a 100MB. You can also invite more people to get more data.</string>
+    <string name="have_referral_code">Have a referal code?</string>
+    <string name="sign_you_in">Let’s sign you in</string>
+    <string name="sign_you_in_desc">Enter your phone number below to sign into a data free internet</string>
+    <string name="number">Number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="edit">Edit</string>
+    <string name="code_sent">Enter the code sent to your phone number</string>
+    <string name="didnt_get_code">Didn\'t get the code?</string>
+    <string name="verify_number">Verify Number</string>
+    <string name="no_cancel">No, Cancel</string>
 </resources>

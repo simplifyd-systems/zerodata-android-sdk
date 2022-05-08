@@ -10,6 +10,7 @@ object PreferenceManager {
     private const val IS_SEEN = "IS_SEEN"
     private const val APP_NAME = "APP_NAME"
     private const val VPN_PROFILE_NAME = "VPN_PROFILE_NAME"
+    private const val IS_FIRST_LOGIN = "IS_FIRST_LOGIN"
 
     private const val VPN_USERNAME_NAME = "VPN_PROFILE_NAME"
     private const val VPN_PASSWORD = "VPN_PROFILE_PASSWORD"
@@ -75,6 +76,15 @@ object PreferenceManager {
     }
 
     fun getIsSeen(): Boolean = preferences.getBoolean(IS_SEEN, false)
+
+    fun setIsFirstLogin(isFirstLogin: Boolean) {
+        preferences.edit().apply {
+            putBoolean(IS_FIRST_LOGIN, isFirstLogin)
+        }.apply()
+    }
+
+    fun getIsFirstLogin(): Boolean = preferences.getBoolean(IS_FIRST_LOGIN, false)
+
 
     fun clearAll() {
         preferences.edit().clear().apply()

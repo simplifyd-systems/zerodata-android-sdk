@@ -22,6 +22,7 @@ import com.simplifyd.zerodata.android.ui.main.MainActivity
 import com.simplifyd.zerodata.android.ui.main.MainViewModel
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.InventorySortBottomDialogFragment
 import com.simplifyd.zerodata.android.ui.main.bottomsheets.PauseMode
+import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DataDialog
 import com.simplifyd.zerodata.android.utils.NetworkUtils
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.showRetrySnackBar
@@ -81,13 +82,15 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             }
         }
 
+        if (PreferenceManager.getIsFirstLogin().not()){
+
+            DataDialog(requireActivity(), 1).showDialog()
+
+        }
+
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
 
-//        help_text.setOnClickListener {
-//            val url = getString(R.string.zerodata_url)
-//            openWebUrl(url)
-//        }
     }
 
     private fun openWebUrl(url: String) {
@@ -211,7 +214,9 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                     if (progressBar != null)
                         progressBar.isVisible = false
                     connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                    showRetrySnackBar(getString(R.string.not_on_partner_network)) { }
+                    DataDialog(requireActivity() as MainActivity, 3).showDialog()
+
+
                 }
                 is Status.Success -> {
 
@@ -356,7 +361,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         if (progressBar != null)
             progressBar.isVisible = false
         connect_switch.setOnCheckedChangeListener(checkChangedListener)
-        showRetrySnackBar(getString(R.string.error_network_connectivity)) { }
+        DataDialog(requireActivity() as MainActivity, 2).showDialog()
     }
 
     companion object {
