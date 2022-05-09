@@ -5,12 +5,24 @@
     android:id="@+id/nav_more"
     app:startDestination="@id/fragment_more">
 
-    <fragment
+    <dialog
         android:id="@+id/fragment_more"
         android:name="com.simplifyd.zerodata.android.ui.main.more.MoreFragment"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more">
-    </fragment>
+
+
+        <action
+            android:id="@+id/action_dialogmore_to_referalFrragment"
+            app:destination="@id/fragment_referal" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/fragment_referal"
+        android:name="com.simplifyd.zerodata.android.ui.main.more.ReferalFragment"
+        android:label="Refer a friend"
+        tools:layout="@layout/fragment_referal"></fragment>
+
 
 
 </navigation>

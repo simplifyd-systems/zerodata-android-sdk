@@ -24,6 +24,7 @@
     <color name="intro_indicator_unselected">#DBDBDB</color>
     <color name="indicator_unselected">#9EA8FC</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorOffWhite">#FCFCFD</color>
     <color name="colorSecondaryText">#59617B</color>
     <color name="colorDivider">#DFE2E6</color>
     <color name="color_toolbar">#FFFFFF</color>

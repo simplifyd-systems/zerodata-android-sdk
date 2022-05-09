@@ -48,9 +48,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
             setupBottomNavigationBar()
         }
 
-        if (PreferenceManager.getToken().isNullOrEmpty()) {
-            goToAuthScreen()
-        }
 
         if (PreferenceManager.getToken().isNullOrEmpty()) {
             goToAuthScreen()
@@ -65,12 +62,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
         setupBottomNavigationBar()
     }
 
-    private fun goToAuthScreen() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
-    }
 
     private fun goToAuthScreen() {
         val intent = Intent(this, LoginActivity::class.java)

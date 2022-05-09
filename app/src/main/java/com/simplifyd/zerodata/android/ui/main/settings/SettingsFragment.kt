@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 import com.simplifyd.zerodata.android.ui.main.MainActivity
+import com.simplifyd.zerodata.android.ui.main.more.MoreSharedViewModel
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
-    private val viewModel by viewModels<SettingsViewModel>()
+    private val viewModel by viewModels<MoreSharedViewModel>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
