@@ -335,15 +335,13 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 if (progressBar != null)
                     progressBar.isVisible = false
                 isRunning = true
-
-//                startTimer()
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-//                viewModel.connectUrl?.let {
-//                    if (!PreferenceManager.getIsSeen()) {
-//                        openWebUrl(it)
-//                        PreferenceManager.setIsSeen(true)
-//                    }
-//                }
+                viewModel.connectUrl?.let {
+                    if (!PreferenceManager.getIsSeen()) {
+                        openWebUrl(it)
+                        PreferenceManager.setIsSeen(true)
+                    }
+                }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 if (progressBar != null)
                     progressBar.isVisible = true
