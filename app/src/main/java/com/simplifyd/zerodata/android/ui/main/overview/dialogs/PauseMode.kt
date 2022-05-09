@@ -1,4 +1,4 @@
-package com.simplifyd.zerodata.android.ui.main.bottomsheets
+package com.simplifyd.zerodata.android.ui.main.overview.dialogs
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

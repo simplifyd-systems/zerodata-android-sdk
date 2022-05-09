@@ -3,6 +3,8 @@ package com.simplifyd.zerodata.android.ui.main.overview
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.SystemClock
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
@@ -20,9 +22,10 @@ import com.simplifyd.zerodata.android.scheduling.RestartWorkWM
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 import com.simplifyd.zerodata.android.ui.main.MainActivity
 import com.simplifyd.zerodata.android.ui.main.MainViewModel
-import com.simplifyd.zerodata.android.ui.main.bottomsheets.InventorySortBottomDialogFragment
-import com.simplifyd.zerodata.android.ui.main.bottomsheets.PauseMode
+import com.simplifyd.zerodata.android.ui.main.overview.dialogs.AppUpdateDialogFragment
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DataDialog
+import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DisconnectDialogFragment
+import com.simplifyd.zerodata.android.ui.main.overview.dialogs.PauseMode
 import com.simplifyd.zerodata.android.utils.NetworkUtils
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.showRetrySnackBar
@@ -30,21 +33,77 @@ import de.blinkt.openvpn.core.ConnectionStatus
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
 @ExperimentalStdlibApi
 class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateListener,
-    InventorySortBottomDialogFragment.Companion.Callback {
+    DisconnectDialogFragment.Companion.Callback {
 
     private val viewModel by viewModels<OverviewViewModel>()
     private val mainViewModel by activityViewModels<MainViewModel>()
+
+    private var sec = 0
+    private var isRunning = false
+    private var wasRunning = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            sec = savedInstanceState.getInt("seconds")
+            isRunning = savedInstanceState.getBoolean("running")
+            wasRunning = savedInstanceState.getBoolean("wasRunning")
+        }
+
+        startTimer()
+    }
+
+
+    fun startTimer(){
+            val customHandler = Handler()
+
+        customHandler.post(object : Runnable {
+            override fun run() {
+                val hoursVar = sec / 3600
+                val minuteVar = sec % 3600 / 60
+                val secVar = sec % 60
+                val timeValue = String.format(
+                    Locale.getDefault(),
+                    "%02d:%02d",
+                    minuteVar,
+                    secVar
+                )
+                if(connection_time_val !=null)
+                    connection_time_val.text = timeValue
+                if (isRunning) {
+                    sec++
+                }
+                customHandler.postDelayed(this, 1000)
+            }
+        })
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        savedInstanceState.putInt("seconds", sec)
+        savedInstanceState.putBoolean("running", isRunning)
+        savedInstanceState.putBoolean("wasRunning", wasRunning)
+    }
+
+     override fun onPause() {
+        super.onPause()
+        wasRunning = isRunning
+        isRunning = false
+    }
+
+
 
     private val checkChangedListener =
         CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked.not()) {
                 connect_switch.isChecked = true
-                InventorySortBottomDialogFragment
+                DisconnectDialogFragment
                     .newInstance()
                     .show(childFragmentManager, DISCONNECT_FRAGMENT)
             } else {
@@ -72,6 +131,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
+
+
 
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
@@ -102,7 +163,12 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     override fun onResume() {
         super.onResume()
         VpnStatus.addStateListener(this)
+        if (wasRunning) {
+            isRunning = true
+        }
     }
+
+
 
     override fun onStop() {
         super.onStop()
@@ -231,7 +297,9 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     }
 
     fun gotoUpdateScreen() {
-        findNavController().navigate(R.id.action_navigation_overview_to_update)
+        AppUpdateDialogFragment
+            .newInstance()
+            .show(childFragmentManager, APP_UPDATE_FRAGMENT)
     }
 
     fun logOutUser() {
@@ -266,13 +334,16 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 if (progressBar != null)
                     progressBar.isVisible = false
+                isRunning = true
+
+//                startTimer()
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
-                viewModel.connectUrl?.let {
-                    if (!PreferenceManager.getIsSeen()) {
-                        openWebUrl(it)
-                        PreferenceManager.setIsSeen(true)
-                    }
-                }
+//                viewModel.connectUrl?.let {
+//                    if (!PreferenceManager.getIsSeen()) {
+//                        openWebUrl(it)
+//                        PreferenceManager.setIsSeen(true)
+//                    }
+//                }
             } else if (level == ConnectionStatus.LEVEL_CONNECTING_SERVER_REPLIED || level == ConnectionStatus.LEVEL_CONNECTING_NO_SERVER_REPLY_YET || level == ConnectionStatus.LEVEL_START) {
                 if (progressBar != null)
                     progressBar.isVisible = true
@@ -307,6 +378,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 if (progressBar != null)
                     progressBar.isVisible = false
+                isRunning = false
+                sec = 0
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             }
@@ -364,8 +437,11 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         DataDialog(requireActivity() as MainActivity, 2).showDialog()
     }
 
+
+
     companion object {
         private const val DISCONNECT_FRAGMENT = "DISCONNECT_FRAGMENT"
+        private const val APP_UPDATE_FRAGMENT = "APP_UPDATE_FRAGMENT"
     }
 
 }

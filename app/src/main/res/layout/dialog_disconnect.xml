@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/three_space"
-    android:layout_marginEnd="@dimen/three_space"
-    android:layout_marginBottom="@dimen/three_half_space"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/one_space"
-    app:cardCornerRadius="@dimen/two_space"
-    app:cardElevation="@dimen/half_space"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/three_space"
+        android:layout_marginEnd="@dimen/three_space"
+        android:layout_marginBottom="@dimen/three_half_space"
+        android:padding="@dimen/one_space"
+        app:cardCornerRadius="@dimen/two_space"
+        android:layout_gravity="bottom"
+        app:cardElevation="@dimen/half_space"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +22,7 @@
         android:orientation="vertical"
         android:padding="@dimen/three_space"
         >
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            app:srcCompat="@drawable/ic_back"
-            />
+
 
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="150dp"
@@ -56,6 +55,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
             style="@style/Theme.Simplifyd.ActionButton"
             android:background="@drawable/ic_red_button"
             android:layout_width="match_parent"
@@ -69,8 +69,8 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cancel_action"
             style="@style/Theme.Simplifyd.Normal.SubBlack"
-            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -81,9 +81,5 @@
             android:text="@string/no_cancel" />
 
     </LinearLayout>
-
-
-
-
-
 </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
