@@ -48,7 +48,6 @@ class CredentialsRepository constructor(
 
             Log.d("getConnectProfile: ", "Response $response")
 
-
                 openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
                     .first().let {
                         preferenceManager.saveProfileName(it.uuidString)

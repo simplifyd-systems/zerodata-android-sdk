@@ -24,8 +24,8 @@ class UserRepository : BaseRepository() {
             val loginInitiateRq = ApiRpc.Username.newBuilder().setMobile(mobile).build()
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
             val response = blockingStub.initiateLogin(loginInitiateRq)
-            Log.d("loginInitiate:","Response Now Initiate $response")
-                saveToken(response.initiateLoginJwt)
+
+          saveToken(response.initiateLoginJwt)
                 Status.Success(Unit)
 
         } catch (error: Throwable) {

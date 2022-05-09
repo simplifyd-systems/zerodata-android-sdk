@@ -52,6 +52,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
             goToAuthScreen()
         }
 
+        if (PreferenceManager.getToken().isNullOrEmpty()) {
+            goToAuthScreen()
+        }
+
         appUpdateManager.registerListener(this)
         checkUpdates()
     }
@@ -59,6 +63,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setupBottomNavigationBar()
+    }
+
+    private fun goToAuthScreen() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun goToAuthScreen() {

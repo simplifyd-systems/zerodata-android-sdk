@@ -141,10 +141,9 @@
         <font color=#4A64FF>Resend in</font> <font color=#4A64FF>%1$s</font>
     ]]>
     </string>
-
-
     <string name="connected_text">Zerodata mode is on. Browse apps for free</string>
     <string name="unconnected_text">Zerodata mode is off. Connect to browse for free</string>
+
 
     <string name="tap_here">Tap Here</string>
 </resources>
