@@ -6,9 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
-import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 import com.simplifyd.zerodata.android.ui.main.MainActivity
 import com.simplifyd.zerodata.android.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_referral_code.*

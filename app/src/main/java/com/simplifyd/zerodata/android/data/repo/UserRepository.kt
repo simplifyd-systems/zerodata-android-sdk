@@ -2,7 +2,6 @@ package com.simplifyd.zerodata.android.data.repo
 
 import android.util.Log
 import com.simplifyd.zerodata.android.data.local.PreferenceManager
-import com.simplifyd.zerodata.android.data.model.User
 import com.simplifyd.zerodata.android.data.remote.grpc.GRPCChannelFactory
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.handleError
@@ -11,7 +10,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.withContext
 import pb.ApiRpc
 import pb.EdgeGrpc
-import kotlin.math.log
 
 
 @ExperimentalCoroutinesApi
@@ -58,7 +56,9 @@ class UserRepository : BaseRepository() {
         return try {
 
             val referralRq = ApiRpc.ReferralCode.newBuilder().setReferralCode(referralCode).build()
-            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
+            val token = PreferenceManager.getToken()
+            val creds = AuthenticationCallCredentials(token)
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel).withCallCredentials(creds)
             val response = blockingStub.postReferralCode(referralRq)
 
             Status.Success(Unit)

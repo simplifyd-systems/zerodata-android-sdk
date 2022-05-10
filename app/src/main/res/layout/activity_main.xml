@@ -50,14 +50,38 @@
         android:padding="@dimen/two_space"
         android:orientation="horizontal">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="@dimen/three_space"
+            android:layout_height="@dimen/three_space"
+            android:background="?selectableItemBackground"
+            app:srcCompat="@drawable/ic_back_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/toolbar_title_"
+            style="@style/Theme.Simplifyd.Semi.Bold.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/three_space"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            android:text="" />
 
 
-        <ImageView
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notifications_link"
             android:layout_width="@dimen/two_half_space"
             android:layout_height="@dimen/two_half_space"
             android:background="?selectableItemBackground"
-            android:src="@drawable/ic_notification_icon"
+            app:srcCompat="@drawable/ic_notification_icon"
             android:textColor="@color/colorRed"
             android:layout_marginEnd="@dimen/two_space"
             app:layout_constraintEnd_toEndOf="parent"

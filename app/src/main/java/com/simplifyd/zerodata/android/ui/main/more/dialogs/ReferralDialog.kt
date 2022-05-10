@@ -1,4 +1,4 @@
-package com.simplifyd.zerodata.android.ui.main.overview.dialogs
+package com.simplifyd.zerodata.android.ui.main.more.dialogs
 
 import android.app.Activity
 import android.app.Dialog
@@ -7,14 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
 import android.view.WindowManager
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import com.simplifyd.zerodata.android.R
-import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.ui.main.MainActivity
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class DataDialog (private val activity: Activity, val type: Int = 0) {
+class ReferralDialog (private val activity: Activity, val type: Int = 0) {
 
     private var dialog: Dialog? = null
 
@@ -40,54 +39,31 @@ class DataDialog (private val activity: Activity, val type: Int = 0) {
         when (type)
         {
             1 ->{
-                dialog!!.setContentView(
-                    R.layout.dialog_get_started
-                )
-                PreferenceManager.setIsFirstLogin(true)
+                dialog!!.setContentView(R.layout.dialog_referee)
             }
 
             2 ->{
-                dialog!!.setContentView(
-                    R.layout.dialog_offline
-                )
+                dialog!!.setContentView(R.layout.dialog_referrer)
             }
 
-            3 ->{
-                dialog!!.setContentView(
-                    R.layout.dialog_nonsupported_network
-                )
-            }
-
-            else -> {
-                dialog!!.setContentView(
-                    R.layout.dialog_verification_successful
-                )
-            }
         }
 
     }
 
     private fun bindViews() {
-        val closeButton = dialog!!.findViewById<AppCompatButton>(R.id.btnSubmit)
-        val backButton = dialog!!.findViewById<ImageView>(R.id.ic_back)
+        val shareButton = dialog!!.findViewById<AppCompatImageView>(R.id.share)
+        val copyButton = dialog!!.findViewById<AppCompatImageView>(R.id.copy)
+        val cancelButton = dialog!!.findViewById<AppCompatTextView>(R.id.cancel)
 
-        closeButton.setOnClickListener { v ->
-
-            when (type)
-            {
-                1 ->{
-                    dialog!!.dismiss()
-                }
-
-                else -> {
-                    dialog!!.dismiss()
-                }
-            }
-
+        shareButton.setOnClickListener { v ->
 
         }
 
-        backButton.setOnClickListener {
+        copyButton.setOnClickListener {
+
+        }
+
+        cancelButton.setOnClickListener {
             dialog!!.dismiss()
         }
     }

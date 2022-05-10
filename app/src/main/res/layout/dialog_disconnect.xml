@@ -42,7 +42,7 @@
             android:text="@string/disconnect_zerodata" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/Theme.Simplifyd.Normal.SubBlack"
+            style="@style/Theme.Simplifyd.Normal.Gray"
             android:id="@+id/intro_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cancel_action"
-            style="@style/Theme.Simplifyd.Normal.SubBlack"
+            style="@style/Theme.Simplifyd.Normal.Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

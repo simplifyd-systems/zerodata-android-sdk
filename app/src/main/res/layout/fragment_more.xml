@@ -8,11 +8,24 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/handle_bar"
         android:src="@drawable/ic_handle"
         android:layout_width="@dimen/three_half_space"
         android:layout_height="@dimen/half_space"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/one_space"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/Theme.Simplifyd.Normal.Blue"
+        android:id="@+id/cancel"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:textSize="@dimen/text_12"
+        app:srcCompat="@drawable/ic_back_blue"
+        android:padding="10dp"
+       />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

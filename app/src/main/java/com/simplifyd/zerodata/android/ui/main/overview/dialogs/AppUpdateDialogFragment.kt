@@ -8,17 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.simplifyd.zerodata.android.R
 import kotlinx.android.synthetic.main.dialog_app_update.*
-import kotlinx.android.synthetic.main.dialog_app_update.btnSubmit
+
 class AppUpdateDialogFragment: DialogFragment(R.layout.dialog_app_update) {
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         btnSubmit.setOnClickListener {
-
             val appPackageName = "com.simplifyd.zerodata.android"
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(
@@ -26,10 +22,9 @@ class AppUpdateDialogFragment: DialogFragment(R.layout.dialog_app_update) {
                 setPackage("com.android.vending")
             }
             startActivity(intent)
-
             dismiss()
-
         }
+
 
         ic_back.setOnClickListener {
             dismiss()

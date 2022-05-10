@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.simplifyd.zerodata.android.data.repo.UserRepository
 import com.simplifyd.zerodata.android.utils.Status
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -15,6 +16,7 @@ class ReferralViewModel:ViewModel(){
 
     val logReferralCode = MutableLiveData<Status<Unit>>()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun validateReferral(code: String) {
         logReferralCode.postValue(Status.Loading)
 

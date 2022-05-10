@@ -13,7 +13,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -38,6 +37,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpdatedListener {
 
+    private val viewModel by viewModels<MainViewModel>()
+
     private var currentNavController: LiveData<NavController>? = null
     private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val MY_REQUEST_CODE = 3
@@ -53,8 +54,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
             goToAuthScreen()
         }
 
+      observeData()
+
+
         appUpdateManager.registerListener(this)
         checkUpdates()
+    }
+
+    private fun observeData() {
+        viewModel.switchState.observe(this, Observer {
+
+            if (it){
+                bottom_nav.selectedItemId = R.id.nav_connect
+            }
+        })
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -177,6 +190,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
                 }
             }
         }
+
+
     }
 
     private fun setupBottomNavigationBar() {
@@ -206,12 +221,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
                 val isConnectActive = destination.id == R.id.navigation_overview
                 val isCatalogueActive = destination.id == R.id.fragment_catalogue
                 val isMoreActive = destination.id == R.id.fragment_more
+                val isReferralActive = destination.id == R.id.fragment_referral
 
                 notifications_link.isGone = isConnectActive.not()
 
+                isReferralActive.not().let {
+                    ic_back.isGone = it
+                    toolbar_title_.isGone =it
+
+                }
 
 
-                (isConnectActive || isCatalogueActive || isMoreActive).let {
+
+
+                (isConnectActive || isCatalogueActive || isMoreActive ||isReferralActive).let {
                     app_bar.isInvisible = it
                     bottomNavigationView.isVisible = it
                 }

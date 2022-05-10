@@ -166,9 +166,9 @@
     <string name="no_referral_code">I don\'t have a referral code</string>
     <string name="continue_">Continue</string>
     <string name="enter_code_here">Enter code here</string>
-    <string name="referal_code_optional">Referal code (Optional)</string>
+    <string name="referral_code_optional">Referral code (Optional)</string>
     <string name="referral_code_desc">Enter the code below to get a 100MB. You can also invite more people to get more data.</string>
-    <string name="have_referral_code">Have a referal code?</string>
+    <string name="have_referral_code">Have a referral code?</string>
     <string name="sign_you_in">Let’s sign you in</string>
     <string name="sign_you_in_desc">Enter your phone number below to sign into a data free internet</string>
     <string name="number">Number</string>
@@ -178,4 +178,5 @@
     <string name="didnt_get_code">Didn\'t get the code?</string>
     <string name="verify_number">Verify Number</string>
     <string name="no_cancel">No, Cancel</string>
+    <string name="refer_friend">Refer a friend</string>
 </resources>

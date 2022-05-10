@@ -2,8 +2,8 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefresh"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefresh"
     android:background="@drawable/ic_layout_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +22,7 @@
     android:background="@color/colorOffWhite"
     android:orientation="vertical"
     android:padding="@dimen/one_half_space"
-    tools:context=".ui.main.more.ReferalFragment">
+    tools:context=".ui.main.more.ReferralFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/giftBox"
@@ -199,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/one_space"
-                android:text="Your referal code"
+                android:text="Your referral code"
                 android:textSize="12sp"
                 style="@style/Theme.Simplifyd.Bold.Light.Gray"
                 />

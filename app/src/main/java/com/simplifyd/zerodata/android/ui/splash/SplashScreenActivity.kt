@@ -7,7 +7,6 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.simplifyd.zerodata.android.R
-import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 
 

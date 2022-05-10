@@ -1,10 +1,6 @@
 package com.simplifyd.zerodata.android.utils
 
 import android.content.Intent
-import android.os.Build
-import android.util.SparseArray
-import androidx.annotation.RequiresApi
-import androidx.core.util.forEach
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.simplifyd.zerodata.android.R
+
 /**
  * Manages the various graphs needed for a [BottomNavigationView].
  * This sample is a workaround until the Navigation Component supports multiple back stacks.

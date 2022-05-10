@@ -51,7 +51,7 @@
             android:text="@string/welcome_zerodata" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/Theme.Simplifyd.Normal.SubBlack"
+            style="@style/Theme.Simplifyd.Normal.Gray"
             android:id="@+id/intro_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

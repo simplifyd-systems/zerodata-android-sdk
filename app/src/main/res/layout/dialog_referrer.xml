@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/three_space"
+        android:layout_marginEnd="@dimen/three_space"
+        android:layout_marginBottom="@dimen/three_half_space"
+        android:padding="@dimen/one_space"
+        app:cardCornerRadius="@dimen/two_space"
+        app:cardElevation="@dimen/half_space"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/three_space"
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/ic_back"
+                />
+
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="#fff"
+                android:src="@drawable/ic_cheers_gif"
+                android:layout_gravity="center_horizontal" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/intro_title"
+                style="@style/Theme.Simplifyd.Extra.Bold.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/two_space"
+                android:layout_gravity="center_horizontal"
+                android:text="Hurray!!! You received %dMB for referring %s persons" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Theme.Simplifyd.Normal.Gray"
+                android:id="@+id/intro_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="@dimen/text_14"
+                android:padding="10dp"
+                android:lineHeight="25dp"
+                android:text="Keep referring friends and family to earn more" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/referalcodeView"
+                android:layout_marginTop="@dimen/two_space"
+                android:layout_marginStart="@dimen/one_space"
+                android:layout_marginEnd="@dimen/one_space"
+                android:layout_marginBottom="@dimen/two_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="20dp"
+                card_view:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/one_half_space"
+                    android:layout_marginEnd="@dimen/one_half_space"
+                    android:layout_marginTop="@dimen/two_space"
+                    android:layout_marginBottom="@dimen/two_space"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/one_space"
+                        android:text="Your referral code"
+                        android:textSize="12sp"
+                        style="@style/Theme.Simplifyd.Bold.Light.Gray"
+                        />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Theme.Simplifyd.Extra.Bold.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginStart="@dimen/one_space"
+                        android:layout_marginBottom="@dimen/one_space"
+                        android:textSize="@dimen/text_14"
+                        android:layout_gravity="start"
+                        android:text="%s" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/one_space"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/share"
+                            android:clickable="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/one_space"
+                            android:src="@drawable/ic_share"
+                            android:focusable="true" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/copy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/one_space"
+                            android:src="@drawable/ic_copy"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Theme.Simplifyd.Normal.Gray"
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="@dimen/text_14"
+                android:padding="10dp"
+                android:lineHeight="25dp"
+                android:text="Cancel" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
