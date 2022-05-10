@@ -215,6 +215,10 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.3.3")
     testImplementation("org.robolectric:robolectric:4.3.1")
     testImplementation("androidx.test:core:1.2.0")
+    testImplementation("androidx.test.ext:junit:1.1.3")
+    testImplementation("androidx.test.ext:truth:1.4.0")
+    testImplementation("androidx.test:rules:1.4.0")
+    testImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     kapt("androidx.room:room-compiler:$roomVersion")
     kapt("com.google.dagger:dagger-compiler:$dagger")
