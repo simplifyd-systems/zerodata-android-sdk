@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.data.model.NotificationData
 import com.simplifyd.zerodata.android.utils.AutoUpdateRecyclerView
-import kotlinx.android.synthetic.main.notification_item.view.*
+import kotlinx.android.synthetic.main.item_notification.view.*
 import kotlin.properties.Delegates
 
 class NotificationAdapter(
@@ -20,7 +20,7 @@ class NotificationAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         return NotificationViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.notification_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false)
         )
     }
 
@@ -36,6 +36,7 @@ class NotificationAdapter(
 
             itemView.textViewTitle.text = notification.notification_name
             itemView.textViewContent.text = notification.notification_content
+            itemView.textViewTime.text = notification.notification_date
 
             itemView.setOnClickListener { onNotificationClicked(notification) }
 

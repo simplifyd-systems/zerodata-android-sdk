@@ -1,5 +1,6 @@
 package com.simplifyd.zerodata.android.ui.auth.getStarted
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,30 +15,31 @@ class SharedAuthViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
 
-    val initiateStatus = SingleLiveData<Status<Unit>>()
-
-    val validateStatus = MutableLiveData<Status<Unit>>()
+    val _initiateStatus = SingleLiveData<Status<Unit>>()
+    val initiateStatus: LiveData<Status<Unit>> = _initiateStatus
+    val _validateStatus = MutableLiveData<Status<Unit>>()
+    val validateStatus:LiveData<Status<Unit>> = _validateStatus
 
 
     fun initiateLogin(phoneNumber: String) {
-        initiateStatus.postValue(Status.Loading)
+        _initiateStatus.postValue(Status.Loading)
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val result = userRepository.loginInitiate(phoneNumber)
-                initiateStatus.postValue(result)
+                _initiateStatus.postValue(result)
             }
         }
 
     }
 
     fun validateLogin(code: String, app_version: String, platform:String) {
-        validateStatus.postValue(Status.Loading)
+        _validateStatus.postValue(Status.Loading)
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val result = userRepository.loginValidate(code, app_version, platform)
-                validateStatus.postValue(result)
+                _validateStatus.postValue(result)
             }
         }
     }

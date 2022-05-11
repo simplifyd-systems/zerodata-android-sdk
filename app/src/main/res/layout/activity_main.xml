@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorOffWhite"
     android:animateLayoutChanges="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -43,8 +43,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,8 +78,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notifications_link"
-            android:layout_width="@dimen/two_half_space"
-            android:layout_height="@dimen/two_half_space"
+            android:layout_width="@dimen/three_space"
+            android:layout_height="@dimen/three_space"
             android:background="?selectableItemBackground"
             app:srcCompat="@drawable/ic_notification_icon"
             android:textColor="@color/colorRed"

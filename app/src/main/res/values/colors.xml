@@ -37,5 +37,6 @@
     <color name="colorFadedRed">#FEEDEF</color>
     <color name="color_red_text">#FF4A75</color>
     <color name="color_underline">#979797</color>
+    <color name="color_blue_tertiary">#32587D</color>
 
 </resources>

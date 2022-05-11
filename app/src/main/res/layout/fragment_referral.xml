@@ -22,6 +22,7 @@
     android:background="@color/colorOffWhite"
     android:orientation="vertical"
     android:padding="@dimen/one_half_space"
+    android:id="@+id/refer_ui"
     tools:context=".ui.main.more.ReferralFragment">
 
     <androidx.appcompat.widget.AppCompatImageView

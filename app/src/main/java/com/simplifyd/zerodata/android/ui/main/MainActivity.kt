@@ -211,7 +211,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
 
 
         // Whenever the selected controller changes, setup the action bar.
-        controller.observe(this, Observer { navController ->
+        controller.observe(this) { navController ->
             val appBarConfiguration = AppBarConfiguration(navController.graph)
             toolbar.setupWithNavController(navController, appBarConfiguration)
 
@@ -226,25 +226,21 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
 
                 notifications_link.isGone = isConnectActive.not()
 
-                    isReferralActive.not().let {
-                        ic_back.isGone = it
-                        toolbar_title_.isGone =it
-                    }
-
-
-
-
-
-
+                isReferralActive.not().let {
+                    ic_back.isGone = it
+                    toolbar_title_.isGone = it
+                }
 
                 (isConnectActive || isCatalogueActive || isMoreActive).let {
                     app_bar.isInvisible = it
                     bottomNavigationView.isVisible = it
-                    
                 }
 
+                if (isReferralActive) {
+                    app_bar.visibility = View.INVISIBLE
+                }
             }
-        })
+        }
 
         currentNavController = controller
     }
