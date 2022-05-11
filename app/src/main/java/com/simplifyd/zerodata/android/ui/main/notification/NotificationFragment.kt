@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.data.model.NotificationData
-import com.simplifyd.zerodata.android.utils.hideLoadingDialog
-import com.simplifyd.zerodata.android.utils.showLoadingDialog
 import com.simplifyd.zerodata.android.utils.showToast
 import kotlinx.android.synthetic.main.fragment_notification.*
-import kotlinx.android.synthetic.main.fragment_notification.swipeRefresh
 
 
 class NotificationFragment : Fragment(R.layout.fragment_notification), (NotificationData) -> Unit {
@@ -34,6 +32,11 @@ class NotificationFragment : Fragment(R.layout.fragment_notification), (Notifica
     }
 
     override fun invoke(notification: NotificationData) {
+
+        findNavController().navigate(NotificationFragmentDirections.actionNavigationNotificationToNotificationDetails(
+            notification
+        ))
+
 
     }
 

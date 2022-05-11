@@ -1,7 +1,6 @@
 package com.simplifyd.zerodata.android.data.repo
 
 import com.simplifyd.zerodata.android.data.local.PreferenceManager
-import com.simplifyd.zerodata.android.data.model.NotificationData
 import com.simplifyd.zerodata.android.data.remote.grpc.GRPCChannelFactory
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.handleError

@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/two_space"
-            android:text="Welcome to Zerodata"
+            android:text="@string/welcome_zerodata"
             android:textSize="@dimen/text_14"
             android:textStyle="bold"
             android:theme="@style/Theme.Simplifyd.Semi.Bold.Black" />

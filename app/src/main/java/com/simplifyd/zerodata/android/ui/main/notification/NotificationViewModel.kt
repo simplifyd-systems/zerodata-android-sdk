@@ -9,8 +9,6 @@ import com.simplifyd.zerodata.android.data.repo.NotificationRepository
 import com.simplifyd.zerodata.android.ui.main.notification.mapper.NotificationMapper
 import com.simplifyd.zerodata.android.utils.Status
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pb.ApiRpc

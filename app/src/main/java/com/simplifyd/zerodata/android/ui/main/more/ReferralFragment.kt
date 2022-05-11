@@ -9,8 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.dialog_update.view.*
-import kotlinx.android.synthetic.main.fragment_referral.*
 
 
 class ReferralFragment : Fragment(R.layout.fragment_referral) {

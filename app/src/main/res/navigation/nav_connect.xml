@@ -15,12 +15,10 @@
             android:id="@+id/action_navigation_overview_to_navigation_webview"
             app:destination="@id/navigation_webview" />
 
-        <action
-            android:id="@+id/action_navigation_overview_to_navigation_settings"
-            app:destination="@id/navigation_settings" />
+
         <action
             android:id="@+id/action_navigation_overview_to_navigation_notification"
-            app:destination="@id/navigation_notifications" />
+            app:destination="@id/fragment_notifications" />
 
 
     </fragment>
@@ -41,16 +39,32 @@
 
 
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.simplifyd.zerodata.android.ui.main.settings.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings"></fragment>
-
-    <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/fragment_notifications"
         android:name="com.simplifyd.zerodata.android.ui.main.notification.NotificationFragment"
         android:label="Notifications"
-        tools:layout="@layout/fragment_notification"></fragment>
+        tools:layout="@layout/fragment_notification">
+
+        <action
+            android:id="@+id/action_navigation_notification_to_notification_details"
+            app:destination="@id/fragment_navigation_detail" />
+
+
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_navigation_detail"
+        android:name="com.simplifyd.zerodata.android.ui.main.notification.NotificationDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_notification_detail">
+
+        <argument
+            android:name="notification"
+            app:argType="com.simplifyd.zerodata.android.data.model.NotificationData"/>
+
+    </fragment>
+
+
 
 
 </navigation>

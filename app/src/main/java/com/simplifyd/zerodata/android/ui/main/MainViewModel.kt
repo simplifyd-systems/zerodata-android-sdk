@@ -4,13 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.simplifyd.zerodata.android.data.repo.MainRepository
-import com.simplifyd.zerodata.android.ui.MoreUIState
 import com.simplifyd.zerodata.android.utils.SingleLiveData
 import com.simplifyd.zerodata.android.utils.Status
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 
 class MainViewModel : ViewModel() {
 
