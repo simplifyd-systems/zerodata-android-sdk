@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.toColor
@@ -225,19 +226,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
 
                 notifications_link.isGone = isConnectActive.not()
 
-                isReferralActive.not().let {
-                    ic_back.isGone = it
-                    toolbar_title_.isGone =it
-
-                }
-
+                    isReferralActive.not().let {
+                        ic_back.isGone = it
+                        toolbar_title_.isGone =it
+                    }
 
 
 
-                (isConnectActive || isCatalogueActive || isMoreActive ||isReferralActive).let {
+
+
+
+
+                (isConnectActive || isCatalogueActive || isMoreActive).let {
                     app_bar.isInvisible = it
                     bottomNavigationView.isVisible = it
+                    
                 }
+
             }
         })
 
