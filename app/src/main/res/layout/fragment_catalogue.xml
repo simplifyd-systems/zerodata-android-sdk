@@ -3,12 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".ui.main.catalogue.CatalogueFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        style="@style/Theme.Simplifyd.Normal.SubBlack"
+        android:drawablePadding="@dimen/one_space"
+        android:drawableStart="@drawable/ic_curved_search"
+        android:hint="@string/search_app"
+        android:background="@drawable/ic_rectangle_gray"
+        android:textSize="@dimen/text_12"
+        android:layout_marginStart="@dimen/two_space"
+        android:layout_marginEnd="@dimen/two_space"
+        android:padding="@dimen/one_half_space"/>
+
 
 </FrameLayout>

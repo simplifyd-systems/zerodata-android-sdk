@@ -224,11 +224,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
                 val isMoreActive = destination.id == R.id.fragment_more
                 val isReferralActive = destination.id == R.id.fragment_referral
 
-                notifications_link.isGone = isConnectActive.not()
+
+                notifications_link.isGone = isConnectActive.not() && isCatalogueActive.not()
+                toolbar_title_.isGone = isReferralActive.not() && isCatalogueActive.not()
+
 
                 isReferralActive.not().let {
                     ic_back.isGone = it
-                    toolbar_title_.isGone = it
                 }
 
                 (isConnectActive || isCatalogueActive || isMoreActive).let {
@@ -239,6 +241,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
                 if (isReferralActive) {
                     app_bar.visibility = View.INVISIBLE
                 }
+
+
             }
         }
 

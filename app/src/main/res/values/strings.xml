@@ -148,6 +148,7 @@
     <string name="tap_here">Tap Here</string>
     <string name="continue_using_zerodata">Continue using Zerodata</string>
     <string name="search_for_country">Search for country here</string>
+    <string name="search_app">Search app here</string>
     <string name="older_version">You are using an older version of Zerodata</string>
     <string name="download_latest_version">Click on the button below to download the latest version.</string>
     <string name="click_download_new_version">Download latest version</string>
@@ -179,4 +180,5 @@
     <string name="verify_number">Verify Number</string>
     <string name="no_cancel">No, Cancel</string>
     <string name="refer_friend">Refer a friend</string>
+    <string name="supported_apps">Supported Apps &amp; Websites</string>
 </resources>
