@@ -11,7 +11,7 @@ import com.simplifyd.zerodata.android.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pb.ApiRpc
+import zerodata_api.ApiRpc
 
 class NotificationViewModel : ViewModel() {
 

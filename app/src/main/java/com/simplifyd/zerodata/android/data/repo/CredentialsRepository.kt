@@ -8,8 +8,8 @@ import com.simplifyd.zerodata.android.data.remote.grpc.GRPCChannelFactory
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.handleError
 import kotlinx.coroutines.flow.first
-import pb.ApiRpc
-import pb.EdgeGrpc
+import zerodata_api.ApiRpc
+import zerodata_api.EdgeGrpc
 import java.math.BigInteger
 import java.security.interfaces.ECPublicKey
 import java.util.*

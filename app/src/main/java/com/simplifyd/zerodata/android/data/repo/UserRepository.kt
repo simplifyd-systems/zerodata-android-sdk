@@ -8,8 +8,8 @@ import com.simplifyd.zerodata.android.utils.handleError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.withContext
-import pb.ApiRpc
-import pb.EdgeGrpc
+import zerodata_api.ApiRpc
+import zerodata_api.EdgeGrpc
 
 
 @ExperimentalCoroutinesApi

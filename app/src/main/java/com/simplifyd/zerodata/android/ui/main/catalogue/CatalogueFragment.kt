@@ -38,8 +38,7 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
             ListedApp(3, "Livescore",R.string.sports, R.drawable.ic_livescore_logo),
             ListedApp(4, "Nairaland", R.string.social, R.drawable.ic_nairaland_logo),
             ListedApp(5, "Talksay",R.string.social, R.drawable.ic_talksay_logo),
-
-        )
+            )
 
         val categoryList = listOf(
             R.string.all,
@@ -47,8 +46,7 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
             R.string.entertainment,
             R.string.sports,
             R.string.news,
-            R.string.books_ref
-        )
+            R.string.books_ref)
     }
 
     override fun invoke(p1: ListedApp) {

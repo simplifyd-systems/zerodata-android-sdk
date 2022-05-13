@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-package pb;
-option go_package  = "edge-api-rpc/pb";
+package zerodata_api;
+option go_package  = "pb/zerodata_api";
 
 service Edge {
     rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
     rpc LoginValidate(LoginValidateRequest) returns (LoginResponse) {};
     rpc IsOnPartnerNetwork(Empty) returns (IsOnPartnerNetworkResponse) {};
     rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+    rpc GetAppleDNSMobileConfig(Empty) returns (AppleDNSMobileConfig) {};
     rpc GetNotifications(Empty) returns (Notifications) {};
     rpc GetListedApps(Empty) returns (ListedApps) {};
     rpc PostReferralCode(ReferralCode) returns (Empty) {};
@@ -30,6 +31,10 @@ message DeviceInfo {
     string manufacturer = 1;
     string brand = 2;
     string model = 3;
+}
+
+message AppleDNSMobileConfig {
+    bytes config = 1;
 }
 
 message InstalledApp {

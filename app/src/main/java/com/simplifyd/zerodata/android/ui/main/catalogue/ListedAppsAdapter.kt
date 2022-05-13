@@ -3,6 +3,8 @@ package com.simplifyd.zerodata.android.ui.main.catalogue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.utils.AutoUpdateRecyclerView
@@ -11,7 +13,7 @@ import kotlin.properties.Delegates
 
 class ListedAppsAdapter(
     private val onListedAppClicked: (ListedApp) -> Unit
-) : RecyclerView.Adapter<ListedAppsAdapter.ListedAppsViewHolder>(), AutoUpdateRecyclerView {
+) : RecyclerView.Adapter<ListedAppsAdapter.ListedAppsViewHolder>(), AutoUpdateRecyclerView, Filterable {
 
     var listedApps: List<ListedApp> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
@@ -40,4 +42,9 @@ class ListedAppsAdapter(
         }
 
     }
+
+    override fun getFilter(): Filter {
+        TODO("Not yet implemented")
+    }
+
 }

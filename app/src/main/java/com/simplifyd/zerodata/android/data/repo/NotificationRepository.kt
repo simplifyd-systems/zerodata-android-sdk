@@ -4,8 +4,8 @@ import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.data.remote.grpc.GRPCChannelFactory
 import com.simplifyd.zerodata.android.utils.Status
 import com.simplifyd.zerodata.android.utils.handleError
-import pb.ApiRpc
-import pb.EdgeGrpc
+import zerodata_api.ApiRpc
+import zerodata_api.EdgeGrpc
 
 class NotificationRepository: BaseRepository() {
 
