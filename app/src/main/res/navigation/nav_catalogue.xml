@@ -10,7 +10,41 @@
         android:name="com.simplifyd.zerodata.android.ui.main.catalogue.CatalogueFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_catalogue">
+
+        <action
+            android:id="@+id/action_navigation_catalogue_to_navigation_notification"
+            app:destination="@id/fragment_notifications" />
     </fragment>
+
+
+
+    <fragment
+        android:id="@+id/fragment_notifications"
+        android:name="com.simplifyd.zerodata.android.ui.main.notification.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notification">
+
+        <action
+            android:id="@+id/action_navigation_notification_to_notification_details"
+            app:destination="@id/fragment_navigation_detail" />
+
+
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_navigation_detail"
+        android:name="com.simplifyd.zerodata.android.ui.main.notification.NotificationDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_notification_detail">
+
+        <argument
+            android:name="notification"
+            app:argType="com.simplifyd.zerodata.android.data.model.NotificationData"/>
+
+    </fragment>
+
+
 
 
 </navigation>

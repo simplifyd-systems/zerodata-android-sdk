@@ -181,4 +181,15 @@
     <string name="no_cancel">No, Cancel</string>
     <string name="refer_friend">Refer a friend</string>
     <string name="supported_apps">Supported Apps &amp; Websites</string>
+    <string name="all">All</string>
+    <string name="social">Social</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="books_ref">Books &amp; Reference</string>
+    <string name="sports">Sports</string>
+    <string name="news">News</string>
+    <string name="open_app">Open %s</string>
+    <string name="earn_refer">Earn 50MB for every friend you refer</string>
+    <string name="push_notification">Push notification</string>
+    <string name="push_notification_desc">Get notified about updates, alerts and new features</string>
+    <string name="get_referral_code">Get referral code</string>
 </resources>
