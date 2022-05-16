@@ -3,8 +3,6 @@ package com.simplifyd.zerodata.android.ui.main.catalogue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.utils.AutoUpdateRecyclerView
@@ -13,7 +11,7 @@ import kotlin.properties.Delegates
 
 class ListedAppsAdapter(
     private val onListedAppClicked: (ListedApp) -> Unit
-) : RecyclerView.Adapter<ListedAppsAdapter.ListedAppsViewHolder>(), AutoUpdateRecyclerView, Filterable {
+) : RecyclerView.Adapter<ListedAppsAdapter.ListedAppsViewHolder>(), AutoUpdateRecyclerView {
 
     var listedApps: List<ListedApp> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
@@ -37,14 +35,18 @@ class ListedAppsAdapter(
             itemView.listedAppLogo.setImageResource(listedApp.imageResourceId)
             itemView.listedAppName.text = listedApp.title
             "Open ${listedApp.title}".also { itemView.btnSubmit.text = it }
-            itemView.setOnClickListener { onListedAppClicked(listedApp) }
+            itemView.btnSubmit.setOnClickListener {
+                it.isSelected = !it.isSelected
+                onListedAppClicked(listedApp)
+            }
 
         }
 
     }
 
-    override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+    fun filterList(filteredList: List<ListedApp>) {
+        listedApps = filteredList
+        notifyDataSetChanged()
     }
 
 }

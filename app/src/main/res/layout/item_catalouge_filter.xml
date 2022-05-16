@@ -8,9 +8,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmit"
         style="@style/Theme.Simplifyd.ActionWhiteButton"
-        android:layout_width="@dimen/seven_space"
-        android:layout_height="@dimen/four_space"
-        android:layout_marginTop="@dimen/six_space"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/three_half_space"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:textAllCaps="false"
