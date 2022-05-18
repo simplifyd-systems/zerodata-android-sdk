@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -29,10 +32,16 @@
         android:layout_height="1dp"
         android:background="@color/demacation"/>
 
-    <include android:id="@+id/country_code_layout"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/countryCodeRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/item_country_code"/>
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:padding="@dimen/one_space"
+        tools:listitem="@layout/item_country_code"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
 
 
