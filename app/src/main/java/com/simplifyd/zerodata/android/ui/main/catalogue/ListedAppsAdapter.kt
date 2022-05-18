@@ -36,7 +36,6 @@ class ListedAppsAdapter(
             itemView.listedAppName.text = listedApp.title
             "Open ${listedApp.title}".also { itemView.btnSubmit.text = it }
             itemView.btnSubmit.setOnClickListener {
-                it.isSelected = !it.isSelected
                 onListedAppClicked(listedApp)
             }
 

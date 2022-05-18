@@ -1,5 +1,7 @@
 package com.simplifyd.zerodata.android.ui.main.catalogue
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -65,8 +67,9 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
             }
         })
 
-
     }
+
+
 
 
     private fun filter(text: String) {
@@ -82,11 +85,11 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
 
     companion object {
         val listedApps = listOf(
-            ListedApp(1, "Whatsapp", R.string.social, R.drawable.ic_whatsapp_logo),
-            ListedApp(2, "Wikipedia", R.string.books_ref, R.drawable.ic_wikipedia_logo),
-            ListedApp(3, "Livescore", R.string.sports, R.drawable.ic_livescore_logo),
-            ListedApp(4, "Nairaland", R.string.social, R.drawable.ic_nairaland_logo),
-            ListedApp(5, "Talksay", R.string.social, R.drawable.ic_talksay_logo),
+            ListedApp(1, "Whatsapp","https://www.whatsapp.com", R.string.social, R.drawable.ic_whatsapp_logo),
+            ListedApp(2, "Wikipedia","https://www.wikipedia.org", R.string.books_ref, R.drawable.ic_wikipedia_logo),
+            ListedApp(3, "Livescore","https://www.livescore.com/en/", R.string.sports, R.drawable.ic_livescore_logo),
+            ListedApp(4, "Nairaland","https://www.nairaland.com", R.string.social, R.drawable.ic_nairaland_logo),
+            ListedApp(5, "Talksay","https://www.talksay.io", R.string.social, R.drawable.ic_talksay_logo),
         )
 
         val categoryList = listOf(
@@ -100,9 +103,14 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     }
 
     override fun invoke(p1: ListedApp) {
-        showToast(p1.title)
+        openWebUrl(p1.url)
     }
 
+    private fun openWebUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
 
 
 }
