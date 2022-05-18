@@ -89,22 +89,62 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".35" />
 
-            <TextView
-                android:id="@+id/country_code_tv"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/countryCodeLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/ic_rectangle_input"
-                android:padding="@dimen/one_and_half_space"
-                android:drawableStart="@drawable/nigerian_flag"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:gravity="center"
-                android:layout_marginEnd="@dimen/one_space"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/Theme.Simplifyd.Normal.Gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:text="+234"/>
+                android:layout_marginEnd="@dimen/one_space"
+                android:background="@drawable/ic_rectangle_input"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/flagImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="@dimen/one_space"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/country_code_tv"
+                    android:src="@drawable/nigerian_flag" />
+
+
+                <TextView
+                    android:id="@+id/country_code_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/one_space"
+                    android:layout_marginStart="@dimen/one_space"
+                    style="@style/Theme.Simplifyd.Normal.Gray"
+                    app:layout_constraintStart_toEndOf="@id/flagImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/arrown_down"
+                    android:text="+234"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrown_down"
+                    android:layout_width="@dimen/one_half_space"
+                    android:layout_height="@dimen/one_space"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/one_space"
+                    app:layout_constraintStart_toEndOf="@id/country_code_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_arrow_down" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

@@ -80,9 +80,24 @@ fun String.isValidPhoneNumber(): Boolean {
 
     val pattern: Pattern = Pattern.compile(regNorm)
     val internationalizedPattern: Pattern = Pattern.compile(regInternationalised)
-    return pattern.matcher(phoneNumber).find()
-        .or(internationalizedPattern.matcher(phoneNumber).find())
+    return pattern.matcher(phoneNumber).find().or(internationalizedPattern.matcher(phoneNumber).find())
 }
+
+fun String.isValidKenyanNumber(): Boolean{
+    val clearDigitsRegex = "[^\\d]"
+    val phoneNumber = replace(clearDigitsRegex.toRegex(), "")
+
+    val regNorm = "^(?:254|\\+254|0)?((?:(?:7(?:(?:[01249][0-9])|(?:5[789])|(?:6[89])))|(?:1(?:[1][0-5])))[0-9]{6})\$"
+    val regInternationalised = "^(?:254|\\+254|0)?((?:(?:7(?:(?:3[0-9])|(?:5[0-6])|(8[5-9])))|(?:1(?:[0][0-2])))[0-9]{6})\$"
+
+    val pattern: Pattern = Pattern.compile(regNorm)
+    val internationalizedPattern: Pattern = Pattern.compile(regInternationalised)
+
+    return pattern.matcher(phoneNumber).find().or(internationalizedPattern.matcher(phoneNumber).find())
+
+}
+
+
 
 
 fun String.isValidDomain(): Boolean {

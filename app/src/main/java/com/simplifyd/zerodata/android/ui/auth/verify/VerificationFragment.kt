@@ -35,7 +35,11 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
 
         observeValidateLogin()
 
-        countdown_timer.setTimeOutMinutes(5)
+        countdown_timer.setTimeOutMinutes(10)
+
+        ic_back.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         countdown_timer.countDownListener = object : CountDownTimerView.CountDownTimerListener{
