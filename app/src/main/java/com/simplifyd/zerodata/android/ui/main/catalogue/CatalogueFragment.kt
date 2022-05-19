@@ -13,6 +13,7 @@ import com.simplifyd.zerodata.android.ui.main.MainActivity
 import com.simplifyd.zerodata.android.utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_catalogue.*
+import java.lang.Exception
 
 class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> Unit {
 
@@ -86,10 +87,11 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     companion object {
         val listedApps = listOf(
             ListedApp(1, "Whatsapp","https://www.whatsapp.com", R.string.social, R.drawable.ic_whatsapp_logo),
-            ListedApp(2, "Wikipedia","https://www.wikipedia.org", R.string.books_ref, R.drawable.ic_wikipedia_logo),
-            ListedApp(3, "Livescore","https://www.livescore.com/en/", R.string.sports, R.drawable.ic_livescore_logo),
-            ListedApp(4, "Nairaland","https://www.nairaland.com", R.string.social, R.drawable.ic_nairaland_logo),
-            ListedApp(5, "Talksay","https://www.talksay.io", R.string.social, R.drawable.ic_talksay_logo),
+            ListedApp(2, "Twitter","https://twitter.com/getzerodata", R.string.social, R.drawable.ic_twitter_logo),
+            ListedApp(3, "Wikipedia","https://www.wikipedia.org", R.string.books_ref, R.drawable.ic_wikipedia_logo),
+            ListedApp(4, "Livescore","https://www.livescore.com/en/", R.string.sports, R.drawable.ic_livescore_logo),
+            ListedApp(5, "Nairaland","https://www.nairaland.com", R.string.social, R.drawable.ic_nairaland_logo),
+            ListedApp(6, "Talksay","https://www.talksay.io", R.string.social, R.drawable.ic_talksay_logo),
         )
 
         val categoryList = listOf(
@@ -102,11 +104,37 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
         )
     }
 
-    override fun invoke(p1: ListedApp) {
-        openWebUrl(p1.url)
+    override fun invoke(listedApp: ListedApp) {
+
+        when(listedApp.title){
+
+             "Whatsapp" ->{
+                 try {
+                     openWebUrl("whatsapp://send?text=Join me in browsing apps and websites Data-Free on Zerodata: https://zerodata.app")
+
+                 }catch (e: Exception){
+                     openWebUrl(listedApp.url)
+                 }
+            }
+            "Twitter" ->{
+                try {
+                    openWebUrl("twitter://user?user_id=1491948907059978242")
+
+                }catch (e: Exception){
+                    openWebUrl(listedApp.url)
+                }
+            }
+
+            else ->{
+                openWebUrl(listedApp.url)
+
+            }
+        }
+
     }
 
     private fun openWebUrl(url: String) {
+
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
