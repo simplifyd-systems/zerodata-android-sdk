@@ -3,14 +3,12 @@ package com.simplifyd.zerodata.android.ui.main.overview
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.os.SystemClock
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.work.Constraints
@@ -21,7 +19,6 @@ import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.scheduling.RestartWorkWM
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
 import com.simplifyd.zerodata.android.ui.main.MainActivity
-import com.simplifyd.zerodata.android.ui.main.MainViewModel
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.AppUpdateDialogFragment
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DataDialog
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DisconnectDialogFragment
@@ -65,7 +62,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             }
         }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,8 +72,6 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
 
-
-
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
 
@@ -86,12 +80,11 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
             }
         }
 
-        if (PreferenceManager.getIsFirstLogin().not()){
+        if (PreferenceManager.getIsFirstLogin().not()) {
 
             DataDialog(requireActivity(), 1).showDialog()
 
         }
-
 
         connect_switch.isEnabled = PreferenceManager.getProfileName() != null
 
@@ -103,12 +96,23 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         startActivity(intent)
     }
 
+
     override fun onResume() {
         super.onResume()
         VpnStatus.addStateListener(this)
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        restartTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveElapsedTime()
+
+    }
 
     override fun onStop() {
         super.onStop()
@@ -211,12 +215,9 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                     viewModel.connect()
 
-
                 }
-
             }
         }
-
     }
 
     fun gotoUpdateScreen() {
@@ -257,7 +258,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 if (progressBar != null)
                     progressBar.isVisible = false
-                connection_time_val.start()
+                startTimer()
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
                 viewModel.connectUrl?.let {
                     if (!PreferenceManager.getIsSeen()) {
@@ -299,8 +300,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 connect_switch.isEnabled = true
                 if (progressBar != null)
                     progressBar.isVisible = false
-                connection_time_val.stop()
-                connection_time_val.base = SystemClock.elapsedRealtime()
+                stopTimer()
                 PreferenceManager.setIsSeen(false)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
             }
@@ -359,6 +359,39 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     }
 
 
+    private fun startTimer() {
+        if (!PreferenceManager.getIsTiming()) {
+            connection_time_val.start()
+            PreferenceManager.setIsTiming(true)
+        }
+    }
+
+    private fun saveElapsedTime() {
+        if (PreferenceManager.getIsTiming()) {
+            val elapsedMillis: Long = SystemClock.elapsedRealtime() - connection_time_val.base
+            val currentTimeMilli = Calendar.getInstance().timeInMillis
+            PreferenceManager.saveCurrentTime(currentTimeMilli)
+            PreferenceManager.saveTimeElapsed(elapsedMillis)
+        }
+    }
+
+    private fun stopTimer() {
+        if (PreferenceManager.getIsTiming()) {
+            connection_time_val.stop()
+            PreferenceManager.setIsTiming(false)
+            connection_time_val.base = SystemClock.elapsedRealtime()
+        }
+    }
+
+    private fun restartTimer() {
+        if (PreferenceManager.getIsTiming()) {
+            val currentTimeMilli = Calendar.getInstance().timeInMillis
+            val timeDiff = currentTimeMilli - PreferenceManager.getLastSavedTime()
+            connection_time_val.base =
+                SystemClock.elapsedRealtime() - (PreferenceManager.getTimeElapsed() + timeDiff)
+            connection_time_val.start()
+        }
+    }
 
     companion object {
         private const val DISCONNECT_FRAGMENT = "DISCONNECT_FRAGMENT"

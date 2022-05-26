@@ -55,9 +55,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), InstallStateUpda
             goToAuthScreen()
         }
 
-      observeData()
-
-
+        observeData()
         appUpdateManager.registerListener(this)
         checkUpdates()
     }

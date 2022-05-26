@@ -14,6 +14,9 @@ object PreferenceManager {
 
     private const val VPN_USERNAME_NAME = "VPN_PROFILE_NAME"
     private const val VPN_PASSWORD = "VPN_PROFILE_PASSWORD"
+    private const val IS_TIMING = "IS_TIMING"
+    private const val TIME_ELAPSED = "TIME_ELAPSED"
+    private const val CURRENT_TIME = "CURRENT_TIME"
 
     lateinit var context: Context
 
@@ -84,6 +87,30 @@ object PreferenceManager {
     }
 
     fun getIsFirstLogin(): Boolean = preferences.getBoolean(IS_FIRST_LOGIN, false)
+
+    fun setIsTiming(isTiming: Boolean) {
+        preferences.edit().apply {
+            putBoolean(IS_TIMING, isTiming)
+        }.apply()
+    }
+
+    fun getIsTiming(): Boolean = preferences.getBoolean(IS_TIMING, false)
+
+    fun saveTimeElapsed(timeElapsed: Long) {
+        preferences.edit().apply {
+            putLong(TIME_ELAPSED, timeElapsed)
+        }.apply()
+    }
+
+    fun saveCurrentTime(currentTime: Long) {
+        preferences.edit().apply {
+            putLong(CURRENT_TIME, currentTime)
+        }.apply()
+    }
+
+    fun getTimeElapsed(): Long = preferences.getLong(TIME_ELAPSED, 0L)
+    fun getLastSavedTime(): Long = preferences.getLong(CURRENT_TIME, 0L)
+
 
 
     fun clearAll() {

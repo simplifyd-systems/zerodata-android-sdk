@@ -129,7 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginStart="@dimen/three_space"
         android:layout_marginEnd="@dimen/three_space"
         android:layout_marginBottom="@dimen/two_half_space"

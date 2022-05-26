@@ -42,11 +42,6 @@
             app:destination="@id/countryCodeDialog"
             />
 
-<!--        <argument-->
-<!--            android:name="countryCode"-->
-<!--            app:argType="com.simplifyd.zerodata.android.ui.auth.countrycode.CountryData"-->
-<!--            app:nullable="true"/>-->
-
         <argument
             android:name="countryCode"
             app:argType="string"
