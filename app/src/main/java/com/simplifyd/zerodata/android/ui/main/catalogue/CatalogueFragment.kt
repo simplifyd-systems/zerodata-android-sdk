@@ -7,15 +7,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.ui.main.MainActivity
+import com.simplifyd.zerodata.android.ui.main.notification.NotificationViewModel
 import com.simplifyd.zerodata.android.utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_catalogue.*
+import kotlinx.android.synthetic.main.fragment_catalogue.swipeRefresh
+import kotlinx.android.synthetic.main.fragment_notification.*
 import java.lang.Exception
 
 class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> Unit {
+    private val viewModel by viewModels<CatalogueViewModel>()
 
     private val listedAppsAdapter by lazy { ListedAppsAdapter(this) }
     private val catalogueFilterAdapter by lazy { CatalogueFilterAdapter{
@@ -24,17 +29,17 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
 
             R.string.social -> {
                 listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == it }
+                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
             }
 
             R.string.sports ->{
                 listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == it }
+                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
             }
 
             R.string.books_ref ->{
                 listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == it }
+                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
             }
             else -> showToast("There are currently no apps in this category")
         }
@@ -44,10 +49,12 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
         super.onViewCreated(view, savedInstanceState)
         listedAppRecyclerView.adapter = listedAppsAdapter
         categoryRecyclerView.adapter = catalogueFilterAdapter
-        listedAppsAdapter.listedApps = listedApps
         catalogueFilterAdapter.filters = categoryList
 
         requireActivity().toolbar_title_.text = getString(R.string.supported_apps)
+
+        observeListedApps()
+        viewModel.fetchListedApps()
 
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
@@ -85,14 +92,7 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
 
 
     companion object {
-        val listedApps = listOf(
-            ListedApp(1, "Whatsapp","https://www.whatsapp.com", R.string.social, R.drawable.ic_whatsapp_logo),
-            ListedApp(2, "Twitter","https://twitter.com/getzerodata", R.string.social, R.drawable.ic_twitter_logo),
-            ListedApp(3, "Wikipedia","https://www.wikipedia.org", R.string.books_ref, R.drawable.ic_wikipedia_logo),
-            ListedApp(4, "Livescore","https://www.livescore.com/en/", R.string.sports, R.drawable.ic_livescore_logo),
-            ListedApp(5, "Nairaland","https://www.nairaland.com", R.string.social, R.drawable.ic_nairaland_logo),
-            ListedApp(6, "Talksay","https://www.talksay.io", R.string.social, R.drawable.ic_talksay_logo),
-        )
+        var listedApps = mutableListOf<ListedApp>()
 
         val categoryList = listOf(
             R.string.all,
@@ -108,7 +108,7 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
 
         when(listedApp.title){
 
-             "Whatsapp" ->{
+             "WhatsApp" ->{
                  try {
                      openWebUrl("whatsapp://send?text=Join me in browsing apps and websites Data-Free on Zerodata: https://zerodata.app")
 
@@ -138,6 +138,45 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        swipeRefresh.isEnabled = isLoading
+        swipeRefresh.isRefreshing = isLoading
+    }
+
+    fun observeListedApps(){
+
+        viewModel.fetchListedApp.observe(viewLifecycleOwner) {
+
+            showLoading(false)
+
+            if (it != null) {
+
+                listedApps = it.toMutableList()
+
+                listedAppsAdapter.listedApps = it
+
+            } else {
+                showToast("You currently don't have any apps")
+            }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            if (it){
+                showLoading(true)
+            }else{
+                showLoading(false)
+            }
+        }
+
+        viewModel.message.observe(viewLifecycleOwner){
+            if (it != null) {
+                showLoading(false)
+                showToast(it)
+            }
+        }
+
     }
 
 

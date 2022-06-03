@@ -1,4 +1,4 @@
-package com.simplifyd.zerodata.android.ui.main.notification.mapper
+package com.simplifyd.zerodata.android.utils
 
 abstract class UIModelMapper<D, U> {
 

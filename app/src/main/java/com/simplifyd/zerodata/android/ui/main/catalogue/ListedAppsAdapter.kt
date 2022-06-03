@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.utils.AutoUpdateRecyclerView
 import kotlinx.android.synthetic.main.item_catalogue.view.*
@@ -32,7 +33,7 @@ class ListedAppsAdapter(
     inner class ListedAppsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(listedApp: ListedApp) {
-            itemView.listedAppLogo.setImageResource(listedApp.imageResourceId)
+            itemView.listedAppLogo.load(listedApp.image)
             itemView.listedAppName.text = listedApp.title
             "Open ${listedApp.title}".also { itemView.btnSubmit.text = it }
             itemView.btnSubmit.setOnClickListener {
