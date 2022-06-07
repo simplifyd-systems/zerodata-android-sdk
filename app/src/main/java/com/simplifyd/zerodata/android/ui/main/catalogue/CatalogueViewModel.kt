@@ -27,34 +27,54 @@ class CatalogueViewModel: ViewModel() {
     val _fetchListedApp = MutableLiveData<List<ListedApp>>()
     val fetchListedApp: LiveData<List<ListedApp>> = _fetchListedApp
 
+    val _fetchCategories = MutableLiveData<List<String>>()
+    val fetchCategories: LiveData<List<String>> = _fetchCategories
+
     fun fetchListedApps(){
         _loading.postValue(true)
-
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 val result: Status<List<ApiRpc.ListedApps.ListedApp>> = catalogueRepository.getListedApps()
 
-
                 when(result){
-
                     is Status.Loading ->{
                         _loading.postValue(true)
                     }
-
                     is Status.Success ->{
                         _loading.postValue(false)
                         val data = result.data
                         _fetchListedApp.postValue(listedAppMapper.mapToUIList(data))
                     }
 
+                    is Status.Error ->{
+                        _loading.postValue(false)
+                        _message.postValue(result.error.localizedMessage)
+                    }
+                }
+            }
+        }
+    }
 
+    fun fetchAppCategories(){
+        _loading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val result: Status<List<String>> = catalogueRepository.getAppCategories()
+
+                when(result){
+                    is Status.Loading ->{
+                        _loading.postValue(true)
+                    }
+                    is Status.Success ->{
+                        _loading.postValue(false)
+                        val data = result.data
+                        _fetchCategories.postValue(data)
+                    }
 
                     is Status.Error ->{
                         _loading.postValue(false)
                         _message.postValue(result.error.localizedMessage)
                     }
-
-
                 }
             }
         }

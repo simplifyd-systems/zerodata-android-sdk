@@ -9,6 +9,20 @@ import zerodata_api.EdgeGrpc
 
 class CatalogueRepository: BaseRepository() {
 
+    fun getAppCategories(): Status<List<String>>{
+        return try {
+            val categoryListRq = ApiRpc.Empty.newBuilder().build()
+            val token = PreferenceManager.getToken()
+            val creds = AuthenticationCallCredentials(token)
+            val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel).withCallCredentials(creds)
+            val response = blockingStub.getAppCategories(categoryListRq)
+            Status.Success(response.categoriesList)
+        }catch (error: Throwable){
+            Status.Error(handleError(error))
+        }
+    }
+
+
     fun getListedApps(): Status<List<ApiRpc.ListedApps.ListedApp>>{
         return try {
             val catalogueRq = ApiRpc.Empty.newBuilder().build()
@@ -16,7 +30,6 @@ class CatalogueRepository: BaseRepository() {
             val creds = AuthenticationCallCredentials(token)
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel).withCallCredentials(creds)
             val response = blockingStub.getListedApps(catalogueRq)
-
             Status.Success(response.listedAppsList)
         }catch (error: Throwable){
             Status.Error(handleError(error))

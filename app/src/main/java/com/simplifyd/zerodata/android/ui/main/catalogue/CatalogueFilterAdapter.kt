@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.item_catalouge_filter.view.*
 import kotlin.properties.Delegates
 
 class CatalogueFilterAdapter(
-    private val onFilterClicked: (Int) -> Unit
+    private val onFilterClicked: (String) -> Unit
 ) : RecyclerView.Adapter<CatalogueFilterAdapter.CatalogueFilterViewHolder>(), AutoUpdateRecyclerView{
 
     private var selectedItemPosition = -1
 
-    var filters: List<Int> by Delegates.observable(emptyList()) { _, _, _ ->
+    var filters: List<String> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -33,11 +33,12 @@ class CatalogueFilterAdapter(
 
     inner class CatalogueFilterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(filterTag: Int, position: Int) {
+        fun bind(filterTag: String, position: Int) {
 
             itemView.btnSubmit.isSelected = position==selectedItemPosition
 
-            itemView.context.getString(filterTag).also { itemView.btnSubmit.text = it }
+//            itemView.context.getString(filterTag).also { itemView.btnSubmit.text = it }
+            itemView.btnSubmit.text = filterTag
 
             itemView.btnSubmit.setOnClickListener {
                 selectedItemPosition = position

@@ -25,23 +25,17 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     private val listedAppsAdapter by lazy { ListedAppsAdapter(this) }
     private val catalogueFilterAdapter by lazy { CatalogueFilterAdapter{
         when(it){
-            R.string.all -> listedAppsAdapter.listedApps = listedApps
-
-            R.string.social -> {
+            "All" -> listedAppsAdapter.listedApps = listedApps
+            else -> {
                 listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
-            }
+                val listedAppsFiltered = listedApps.filter { listedApp -> listedApp.category == it }
 
-            R.string.sports ->{
-                listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
+                if(listedAppsFiltered.isEmpty()){
+                    showToast("There are currently no apps in this category")
+                }else{
+                    listedAppsAdapter.listedApps = listedAppsFiltered
+                }
             }
-
-            R.string.books_ref ->{
-                listedAppsAdapter.listedApps = listedApps
-                listedAppsAdapter.listedApps = listedApps.filter { listedApp -> listedApp.category == getString(it) }
-            }
-            else -> showToast("There are currently no apps in this category")
         }
     } }
 
@@ -49,11 +43,11 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
         super.onViewCreated(view, savedInstanceState)
         listedAppRecyclerView.adapter = listedAppsAdapter
         categoryRecyclerView.adapter = catalogueFilterAdapter
-        catalogueFilterAdapter.filters = categoryList
 
         requireActivity().toolbar_title_.text = getString(R.string.supported_apps)
 
         observeListedApps()
+        viewModel.fetchAppCategories()
         viewModel.fetchListedApps()
 
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
@@ -94,14 +88,15 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     companion object {
         var listedApps = mutableListOf<ListedApp>()
 
-        val categoryList = listOf(
-            R.string.all,
-            R.string.social,
-            R.string.entertainment,
-            R.string.sports,
-            R.string.news,
-            R.string.books_ref
-        )
+        var categoryList =mutableListOf<String>()
+//        val categoryList = listOf(
+//            R.string.all,
+//            R.string.social,
+//            R.string.entertainment,
+//            R.string.sports,
+//            R.string.news,
+//            R.string.books_ref
+//        )
     }
 
     override fun invoke(listedApp: ListedApp) {
@@ -146,6 +141,16 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     }
 
     fun observeListedApps(){
+
+        viewModel.fetchCategories.observe(viewLifecycleOwner){
+            showLoading(false)
+            if (it != null){
+
+                categoryList = it.toMutableList()
+                catalogueFilterAdapter.filters = categoryList
+
+            }
+        }
 
         viewModel.fetchListedApp.observe(viewLifecycleOwner) {
 
