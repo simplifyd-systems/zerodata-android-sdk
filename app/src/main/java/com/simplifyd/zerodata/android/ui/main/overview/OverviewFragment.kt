@@ -1,6 +1,9 @@
 package com.simplifyd.zerodata.android.ui.main.overview
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
@@ -10,6 +13,7 @@ import android.widget.CompoundButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
@@ -23,9 +27,7 @@ import com.simplifyd.zerodata.android.ui.main.overview.dialogs.AppUpdateDialogFr
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DataDialog
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.DisconnectDialogFragment
 import com.simplifyd.zerodata.android.ui.main.overview.dialogs.PauseMode
-import com.simplifyd.zerodata.android.utils.NetworkUtils
-import com.simplifyd.zerodata.android.utils.Status
-import com.simplifyd.zerodata.android.utils.showRetrySnackBar
+import com.simplifyd.zerodata.android.utils.*
 import de.blinkt.openvpn.core.ConnectionStatus
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
@@ -100,6 +102,11 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
     override fun onResume() {
         super.onResume()
         VpnStatus.addStateListener(this)
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            broadcastReceiver, IntentFilter(
+                Constants.APP_INSTALLED
+            )
+        )
     }
 
 
@@ -114,9 +121,16 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(broadcastReceiver)
+
+    }
+
     override fun onStop() {
         super.onStop()
         VpnStatus.removeStateListener(this)
+
     }
 
     private fun setUpSwipeRefresh() {
@@ -397,5 +411,18 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         private const val DISCONNECT_FRAGMENT = "DISCONNECT_FRAGMENT"
         private const val APP_UPDATE_FRAGMENT = "APP_UPDATE_FRAGMENT"
     }
+
+    private val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent != null) {
+                val state = intent.extras?.getString(Constants.PACKAGE_NAME)
+                viewModel.logPackageChange(state!!, state, Calendar.getInstance().timeInMillis)
+            }
+
+
+
+        }
+    }
+
 
 }

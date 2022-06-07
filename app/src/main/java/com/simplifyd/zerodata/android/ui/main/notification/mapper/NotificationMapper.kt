@@ -10,4 +10,8 @@ class NotificationMapper: UIModelMapper<ApiRpc.Notification, NotificationData>()
             NotificationData("", entity.title, entity.body, "")
         }
     }
+
+    override fun mapFromUI(model: NotificationData): ApiRpc.Notification {
+        TODO("Not yet implemented")
+    }
 }

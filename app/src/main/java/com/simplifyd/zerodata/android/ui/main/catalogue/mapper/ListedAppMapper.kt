@@ -10,4 +10,8 @@ class ListedAppMapper: UIModelMapper<ApiRpc.ListedApps.ListedApp, ListedApp>() {
             ListedApp(entity.info, entity.name, entity.url, entity.category, entity.image)
         }
     }
+
+    override fun mapFromUI(model: ListedApp): ApiRpc.ListedApps.ListedApp {
+        TODO("Not yet implemented")
+    }
 }

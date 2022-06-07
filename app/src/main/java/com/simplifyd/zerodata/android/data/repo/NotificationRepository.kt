@@ -16,7 +16,6 @@ class NotificationRepository: BaseRepository() {
             val creds = AuthenticationCallCredentials(token)
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel).withCallCredentials(creds)
             val response = blockingStub.getNotifications(notificationRq)
-
             Status.Success(response.notificationsList)
 
         }catch (error: Throwable) {

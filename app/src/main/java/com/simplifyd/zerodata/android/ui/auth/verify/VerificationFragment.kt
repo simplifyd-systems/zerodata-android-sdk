@@ -1,5 +1,8 @@
 package com.simplifyd.zerodata.android.ui.auth.verify
 
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.BuildConfig
 import com.simplifyd.zerodata.android.R
+import com.simplifyd.zerodata.android.data.model.InstalledAppData
 import com.simplifyd.zerodata.android.ui.auth.getStarted.SharedAuthViewModel
 import com.simplifyd.zerodata.android.utils.*
 import com.wynsbin.vciv.VerificationCodeInputView
@@ -111,6 +115,28 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
         btnSubmit.isEnabled = !isLoading
     }
 
+    fun getallapps() {
+        // get list of all the apps installed
+        val infos: List<ApplicationInfo> = activity?.packageManager!!.getInstalledApplications(PackageManager.GET_META_DATA)
+
+        // create a list with size of total number of apps
+        val apps = arrayOfNulls<String>(infos.size)
+        val listInstalledApps = mutableListOf<InstalledAppData>()
+        var i = 0
+        // add all the app name in string list
+        for (info in infos) {
+            val name = info.name
+            val packageName = info.packageName
+            listInstalledApps.add( InstalledAppData(info.name, info.packageName, ""))
+            i++
+        }
+
+        viewModel.postInstalledApps(listInstalledApps)
+
+
+
+    }
+
 
     private fun validateLogin(code: String) {
 
@@ -140,8 +166,8 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
         viewModel.validateStatus.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Status.Success -> {
-                    showLoading(false)
-                    findNavController().navigate(R.id.action_navigation_verification_to_navigation_referral)
+                    viewModel.postDeviceInfo(Build.MANUFACTURER,Build.BRAND, Build.MODEL )
+
                 }
                 is Status.Loading -> showLoading(true)
                 is Status.Error -> {
@@ -167,6 +193,38 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
                 }
             }
         })
+
+        viewModel.postDeviceInfo.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Status.Success -> {
+                    showLoading(false)
+                    getallapps()
+//                    findNavController().navigate(R.id.action_navigation_verification_to_navigation_referral)
+
+                }
+                is Status.Loading -> showLoading(true)
+                is Status.Error -> {
+                    showLoading(false)
+                    showToast(it.error.localizedMessage)
+                }
+            }
+        })
+
+        viewModel.postInstalledApps.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Status.Success -> {
+                    showLoading(false)
+                    findNavController().navigate(R.id.action_navigation_verification_to_navigation_referral)
+                }
+                is Status.Loading -> showLoading(true)
+                is Status.Error -> {
+                    showLoading(false)
+                    showToast(it.error.localizedMessage)
+                }
+            }
+        })
     }
+
+
 
 }
