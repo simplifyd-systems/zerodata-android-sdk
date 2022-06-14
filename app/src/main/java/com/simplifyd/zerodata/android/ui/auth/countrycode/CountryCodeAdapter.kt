@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.simplifyd.zerodata.android.R
+import com.simplifyd.zerodata.android.ui.main.catalogue.ListedApp
 import com.simplifyd.zerodata.android.utils.AutoUpdateRecyclerView
 import kotlinx.android.synthetic.main.item_country_code.view.*
 import kotlin.properties.Delegates
@@ -52,6 +53,11 @@ class CountryCodeAdapter(
 
         }
 
+    }
+
+    fun filterList(filteredList: List<CountryData>) {
+        countryCodes = filteredList
+        notifyDataSetChanged()
     }
 
 

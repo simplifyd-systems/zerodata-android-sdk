@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.simplifyd.zerodata.android.R
 import com.simplifyd.zerodata.android.common.BaseRoundedBottomSheetDialogFragment
 import com.simplifyd.zerodata.android.ui.auth.LoginActivity
@@ -24,10 +23,9 @@ class MoreFragment : BaseRoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        referalCodeView.setOnClickListener {
-            findNavController().navigate(R.id.action_dialogmore_to_referalFrragment)
-        }
+//        referalCodeView.setOnClickListener {
+//            findNavController().navigate(R.id.action_dialogmore_to_referalFrragment)
+//        }
 
         handle_bar.setOnClickListener {
             dismiss()

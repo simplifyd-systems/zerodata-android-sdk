@@ -3,11 +3,14 @@ package com.simplifyd.zerodata.android.ui.main.broadcastreceiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.simplifyd.zerodata.android.data.local.PreferenceManager
 import com.simplifyd.zerodata.android.utils.Constants
 
 class PackageChangeReceiver : BroadcastReceiver() {
+
 
     override fun onReceive(context: Context?, intent: Intent?) {
         // fetching package names from extras

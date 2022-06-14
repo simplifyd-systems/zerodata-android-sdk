@@ -48,7 +48,6 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
 
         observeListedApps()
         viewModel.fetchAppCategories()
-        viewModel.fetchListedApps()
 
         requireActivity().findViewById<View>(R.id.notifications_link).setOnClickListener {
             (requireActivity() as? MainActivity)?.let {
@@ -141,19 +140,16 @@ class CatalogueFragment : Fragment(R.layout.fragment_catalogue), (ListedApp) -> 
     }
 
     fun observeListedApps(){
-
         viewModel.fetchCategories.observe(viewLifecycleOwner){
             showLoading(false)
             if (it != null){
-
                 categoryList = it.toMutableList()
                 catalogueFilterAdapter.filters = categoryList
-
+                viewModel.fetchListedApps()
             }
         }
 
         viewModel.fetchListedApp.observe(viewLifecycleOwner) {
-
             showLoading(false)
 
             if (it != null) {

@@ -416,7 +416,8 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent != null) {
                 val state = intent.extras?.getString(Constants.PACKAGE_NAME)
-                viewModel.logPackageChange(state!!, state, Calendar.getInstance().timeInMillis)
+                if(connect_switch.isChecked)
+                    viewModel.logPackageChange(state!!, state, Calendar.getInstance().timeInMillis)
             }
 
 

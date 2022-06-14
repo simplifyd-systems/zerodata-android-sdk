@@ -12,7 +12,6 @@ import androidx.annotation.LayoutRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.simplifyd.zerodata.android.R
-import fr.tvbarthel.lib.blurdialogfragment.BlurDialogEngine
 
 /**
  * BottomSheetDialog fragment that uses a custom
@@ -24,7 +23,6 @@ abstract class BaseRoundedBottomSheetDialogFragment : BottomSheetDialogFragment(
 
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
 
-    var blurEngine: BlurDialogEngine? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -54,34 +52,16 @@ abstract class BaseRoundedBottomSheetDialogFragment : BottomSheetDialogFragment(
         return dialog
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        blurEngine = BlurDialogEngine(activity)
-        blurEngine?.setBlurRadius(8)
-        blurEngine?.setDownScaleFactor(8f)
-        blurEngine?.setBlurActionBar(true)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBackPressListener()
     }
 
-    override fun onResume() {
-        super.onResume()
-        blurEngine?.onResume(retainInstance)
-    }
-
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        blurEngine?.onDismiss()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        blurEngine?.onDetach()
-    }
 
     override fun onDestroyView() {
         dialog?.setDismissMessage(null)

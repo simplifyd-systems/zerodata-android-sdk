@@ -12,7 +12,7 @@ class InstalledAppMapper: UIModelMapper<ApiRpc.InstalledApp, InstalledAppData>()
 
     override fun mapFromUI(model: InstalledAppData): ApiRpc.InstalledApp {
         return with(model){
-            ApiRpc.InstalledApp.newBuilder().setName(model.app_name ?: "").setPackageName(model.app_package_name).build()
+            ApiRpc.InstalledApp.newBuilder().setName(model.app_name ?: model.app_package_name).setPackageName(model.app_package_name).build()
         }
 
     }
