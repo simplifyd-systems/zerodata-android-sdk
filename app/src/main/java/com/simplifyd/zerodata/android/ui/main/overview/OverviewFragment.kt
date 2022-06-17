@@ -244,7 +244,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 is Status.Success -> {
 
                     viewModel.dataSaved?.let { usedDatabytes ->
-                        data_saved_val.text =  getString(R.string.data_saved_val,(usedDatabytes/1000000).toDouble())
+                        data_saved_val.text =  getString(R.string.data_saved_val,(usedDatabytes/(1024 * 1024)).toDouble())
 
                     }
 
