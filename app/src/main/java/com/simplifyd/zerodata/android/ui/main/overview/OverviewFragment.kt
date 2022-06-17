@@ -10,6 +10,7 @@ import android.os.SystemClock
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -232,6 +233,25 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 }
             }
         }
+
+        viewModel.getSavedData.observe(viewLifecycleOwner){
+            when (it) {
+
+                is Status.Loading -> {
+
+                }
+
+                is Status.Success -> {
+
+                    viewModel.dataSaved?.let { usedDatabytes ->
+                        data_saved_val.text =  getString(R.string.data_saved_val,(usedDatabytes/1000000).toDouble())
+
+                    }
+
+                }
+
+            }
+        }
     }
 
     fun gotoUpdateScreen() {
@@ -273,6 +293,7 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
                 if (progressBar != null)
                     progressBar.isVisible = false
                 startTimer()
+                data_saved_val.text =  getString(R.string.data_saved_val,0.0)
                 connect_switch.setOnCheckedChangeListener(checkChangedListener)
                 viewModel.connectUrl?.let {
                     if (!PreferenceManager.getIsSeen()) {
@@ -401,8 +422,9 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
         if (PreferenceManager.getIsTiming()) {
             val currentTimeMilli = Calendar.getInstance().timeInMillis
             val timeDiff = currentTimeMilli - PreferenceManager.getLastSavedTime()
-            connection_time_val.base =
-                SystemClock.elapsedRealtime() - (PreferenceManager.getTimeElapsed() + timeDiff)
+            val timeElasped: Long = SystemClock.elapsedRealtime() - (PreferenceManager.getTimeElapsed() + timeDiff)
+            connection_time_val.base = timeElasped
+            viewModel.getDataSaved(timeElasped)
             connection_time_val.start()
         }
     }

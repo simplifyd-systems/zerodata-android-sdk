@@ -141,8 +141,8 @@
         <font color=#4A64FF>Resend in</font> <font color=#4A64FF>%1$s</font>
     ]]>
     </string>
-    <string name="connected_text">Zerodata mode is on. Browse apps for free</string>
-    <string name="unconnected_text">Zerodata mode is off. Connect to browse for free</string>
+    <string name="connected_text">Zerodata mode is on. Browse apps data-free</string>
+    <string name="unconnected_text">Zerodata mode is off. Connect to browse data-free</string>
 
 
     <string name="tap_here">Tap Here</string>
@@ -163,7 +163,7 @@
     <string name="zerodata_free">Zerodata will not use your data. Browsing is 100% free</string>
     <string name="data_saved">Data saved</string>
     <string name="connection_time">Connection time</string>
-    <string name="data_saved_val">%s MB</string>
+    <string name="data_saved_val">%.2f MB</string>
     <string name="no_referral_code">I don\'t have a referral code</string>
     <string name="continue_">Continue</string>
     <string name="enter_code_here">Enter code here</string>

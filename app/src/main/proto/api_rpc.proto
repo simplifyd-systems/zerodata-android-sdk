@@ -4,6 +4,10 @@ package zerodata_api;
 option go_package  = "pb/zerodata_api";
 
 service Edge {
+    rpc InitializeSDK(Initialize) returns (InitializeResponse) {};
+
+    rpc GetConnectProfileSDK(ConnectProfileReq) returns (ConnectProfileResponse) {};
+
     rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
     rpc LoginValidate(LoginValidateRequest) returns (LoginResponse) {};
     rpc IsOnPartnerNetwork(Empty) returns (IsOnPartnerNetworkResponse) {};
@@ -28,6 +32,15 @@ service Edge {
     rpc PostInstalledAppUsingZerodata(InstalledApp) returns (Empty) {};
 }
 
+message Initialize {
+    string package_name = 1;
+    string app_user_id = 2;
+}
+
+message InitializeResponse {
+    string jwt = 1;
+}
+
 message ReferralCode {
     string referral_code = 1;
 }
@@ -45,6 +58,7 @@ message TimeRange {
     optional Range range = 1;
     optional uint64 start_time = 2;
     optional uint64 end_time = 3;
+    optional uint64 since_ms = 4; // since time in milliseconds
 }
 
 message UsedDataBytes {
