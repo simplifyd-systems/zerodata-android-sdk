@@ -20,8 +20,8 @@ android {
         applicationId = "com.simplifyd.zerodata.android"
         minSdkVersion(23)
         targetSdkVersion(31)
-        versionCode = 18
-        versionName = "2.0.0"
+        versionCode = 20
+        versionName = "2.0.1"
         resConfigs(listOf("en"))
     }
 

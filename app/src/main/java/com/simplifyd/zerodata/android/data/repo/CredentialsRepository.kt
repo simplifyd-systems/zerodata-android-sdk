@@ -60,7 +60,7 @@ class CredentialsRepository constructor(
         }
     }
 
-    suspend fun getServiceAvailablity(): Status<Unit>{
+    suspend fun getServiceAvailablity(): Status<Boolean>{
         return try {
             val isOnPartnerNetworkRq = ApiRpc.Empty.newBuilder().build()
             val token = preferenceManager.getToken()
@@ -69,7 +69,7 @@ class CredentialsRepository constructor(
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)
             val response = blockingStub.isOnPartnerNetwork(isOnPartnerNetworkRq)
-             Status.Success(Unit)
+             Status.Success(response.isOnPartnerNetwork)
 
         }catch (error: Throwable) {
             error.printStackTrace()

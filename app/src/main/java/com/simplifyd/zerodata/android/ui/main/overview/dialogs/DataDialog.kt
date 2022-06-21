@@ -69,7 +69,6 @@ class DataDialog (private val activity: Activity, val type: Int = 0) {
 
     private fun bindViews() {
         val closeButton = dialog!!.findViewById<AppCompatButton>(R.id.btnSubmit)
-        val backButton = dialog!!.findViewById<ImageView>(R.id.ic_back)
 
         closeButton.setOnClickListener { v ->
 
@@ -86,10 +85,7 @@ class DataDialog (private val activity: Activity, val type: Int = 0) {
 
 
         }
-
-        backButton.setOnClickListener {
-            dialog!!.dismiss()
-        }
+        
     }
 
     fun showDialog() {

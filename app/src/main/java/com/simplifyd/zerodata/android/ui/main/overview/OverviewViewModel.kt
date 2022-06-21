@@ -21,7 +21,7 @@ class OverviewViewModel : ViewModel() {
     private val dashboardRepository = DashboardRepository()
     val getDashboardDataStatus = MutableLiveData<Status<DashboardData>>()
     val connectProfileStatus = SingleLiveData<Status<String>>()
-    val checkPartnerNetwork = SingleLiveData<Status<Unit>>()
+    val checkPartnerNetwork = SingleLiveData<Status<Boolean>>()
     val logPackageChange = SingleLiveData<Status<Unit>>()
     val getSavedData = SingleLiveData<Status<Long>>()
     private val settingsRepository = SettingsRepository()

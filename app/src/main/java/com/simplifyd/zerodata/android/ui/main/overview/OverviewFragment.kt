@@ -227,8 +227,22 @@ class OverviewFragment : Fragment(R.layout.fragment_dashboard), VpnStatus.StateL
 
                 }
                 is Status.Success -> {
+                    if (it.data){
+                        viewModel.connect()
+                    }else{
+                        zerodata_off.visibility = View.VISIBLE
+                        zerodata_on.visibility = View.GONE
+                        rippleGif.visibility = View.GONE
+                        connectionDetailsCardView.visibility = View.GONE
+                        connect_switch.setOnCheckedChangeListener(null)
+                        connect_switch.isChecked = false
+                        connect_switch.isEnabled = true
+                        if (progressBar != null)
+                            progressBar.isVisible = false
+                        connect_switch.setOnCheckedChangeListener(checkChangedListener)
+                        DataDialog(requireActivity() as MainActivity, 3).showDialog()
+                    }
 
-                    viewModel.connect()
 
                 }
             }

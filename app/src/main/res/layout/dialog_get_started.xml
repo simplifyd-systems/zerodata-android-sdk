@@ -23,15 +23,6 @@
         android:padding="@dimen/three_space"
         >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            app:srcCompat="@drawable/ic_back"
-            android:visibility="gone"
-            />
-
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="100dp"
