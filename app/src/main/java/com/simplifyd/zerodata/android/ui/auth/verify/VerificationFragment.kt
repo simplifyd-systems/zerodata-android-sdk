@@ -127,7 +127,8 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
         for (info in infos) {
             val name = info.name
             val packageName = info.packageName
-            listInstalledApps.add( InstalledAppData(info.name, info.packageName, ""))
+            if (!isSystemPackage(info))
+                listInstalledApps.add( InstalledAppData(info.name, info.packageName, ""))
             i++
         }
 
@@ -136,6 +137,12 @@ class VerificationFragment : Fragment(R.layout.fragment_verification) {
 
 
     }
+
+    private fun isSystemPackage(pkgInfo: ApplicationInfo): Boolean {
+        return pkgInfo.flags and ApplicationInfo.FLAG_SYSTEM !== 0
+    }
+
+
 
 
     private fun validateLogin(code: String) {
