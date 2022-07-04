@@ -7,24 +7,25 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.simplifyd.zerodata.android.R
+import com.simplifyd.zerodata.android.TestActivity
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class TestActivityTest {
 
     @Test
     fun activityLaunchesSuccessfully() {
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(TestActivity::class.java)
 
     }
 
     @Test
     fun appBarisClickable(){
 
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(TestActivity::class.java)
 
-        onView(withId(R.id.app_bar))
+        onView(withId(R.id.imageView))
             .check(ViewAssertions.matches(ViewMatchers.isNotClickable()))
 
     }
