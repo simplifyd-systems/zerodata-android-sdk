@@ -23,6 +23,8 @@ android {
         versionCode = 20
         versionName = "2.0.1"
         resConfigs(listOf("en"))
+        multiDexEnabled = true
+
     }
 
     compileOptions {
