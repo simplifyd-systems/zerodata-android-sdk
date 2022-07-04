@@ -99,6 +99,10 @@ android {
 
     bundle { abi { enableSplit = false } }
 
+    packagingOptions {
+        exclude("META-INF/com.android.tools/proguard/coroutines.pro")
+    }
+
 
 }
 
@@ -209,6 +213,10 @@ dependencies {
 
     dependencies.add("uiImplementation", project(":openvpn"))
     dependencies.add("skeletonImplementation", project(":openvpn"))
+
+    dependencies.add("uiImplementation", project(":zerodatalib"))
+    dependencies.add("skeletonImplementation", project(":zerodatalib"))
+
 
     testImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
     testImplementation("junit:junit:4.13")

@@ -13,6 +13,7 @@ import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
@@ -253,7 +254,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         int icon = getIconByConnectionStatus(status);
 
-        android.app.Notification.Builder nbuilder = new Notification.Builder(this);
+        Notification.Builder nbuilder = new Notification.Builder(this);
 
         int priority;
         if (channel.equals(NOTIFICATION_CHANNEL_BG_ID))
@@ -296,6 +297,13 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //noinspection NewApi
             nbuilder.setChannelId(channel);
+            NotificationChannel channel1 = new NotificationChannel(
+                    channel,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_MIN
+            );
+            mNotificationManager.createNotificationChannel(channel1);
+
             if (mProfile != null)
                 //noinspection NewApi
                 nbuilder.setShortcutId(mProfile.getUUIDString());
@@ -309,6 +317,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         Notification notification = nbuilder.getNotification();
 
         int notificationId = channel.hashCode();
+
 
         mNotificationManager.notify(notificationId, notification);
 
@@ -1328,6 +1337,17 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //noinspection NewApi
             nbuilder.setChannelId(channel);
+
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    channel,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_MIN
+            );
+            channel1.setDescription("This is channel 1");
+            mNotificationManager.createNotificationChannel(channel1);
         }
 
         @SuppressWarnings("deprecation")
@@ -1337,5 +1357,6 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         int notificationId = channel.hashCode();
 
         mNotificationManager.notify(notificationId, notification);
+
     }
 }

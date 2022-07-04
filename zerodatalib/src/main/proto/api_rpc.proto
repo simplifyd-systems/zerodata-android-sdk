@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package zerodata_api;
+option go_package  = "pb/zerodata_api";
+
+service Edge {
+    rpc InitializeSDK(Initialize) returns (InitializeResponse) {};
+
+    rpc GetConnectProfileSDK(ConnectProfileReq) returns (ConnectProfileResponse) {};
+
+    rpc InitiateLogin(Username) returns (InitiateLoginResponse) {};
+    rpc LoginValidate(LoginValidateRequest) returns (LoginResponse) {};
+    rpc IsOnPartnerNetwork(Empty) returns (IsOnPartnerNetworkResponse) {};
+    rpc GetConnectProfile(ConnectProfileReq) returns (ConnectProfileResponse) {};
+    rpc GetAppleDNSMobileConfig(Empty) returns (AppleDNSMobileConfig) {};
+    rpc GetNotifications(Empty) returns (Notifications) {};
+
+    rpc GetListedApps(Empty) returns (ListedApps) {};
+    rpc GetAppCategories(Empty) returns (AppCategories) {};
+
+    rpc PostReferralCode(ReferralCode) returns (Empty) {};
+
+    rpc GetSlug(Empty) returns (Slug) {};
+
+    rpc GetUsedDataBytes(TimeRange) returns (UsedDataBytes) {};
+
+    /*
+        Data Gathering Feature
+    */
+    rpc PostDeviceInfo(DeviceInfo) returns (Empty) {};
+    rpc PostInstalledApps(InstalledApps) returns (Empty) {};
+    rpc PostInstalledAppUsingZerodata(InstalledApp) returns (Empty) {};
+}
+
+message Initialize {
+    string package_name = 1;
+    string app_user_id = 2;
+}
+
+message InitializeResponse {
+    string jwt = 1;
+}
+
+message ReferralCode {
+    string referral_code = 1;
+}
+
+message AppCategories {
+    repeated string categories = 1;
+}
+
+message TimeRange {
+    enum Range {
+        ONE_DAY = 0;
+        ONE_WEEK = 1;
+        ONE_MONTH = 2;
+    }
+    optional Range range = 1;
+    optional uint64 start_time = 2;
+    optional uint64 end_time = 3;
+    optional uint64 since_ms = 4; // since time in milliseconds
+}
+
+message UsedDataBytes {
+    uint64 total_byte_count = 1;
+}
+
+message Slug {
+    string slug = 1;
+}
+
+message Empty {}
+
+message DeviceInfo {
+    string manufacturer = 1;
+    string brand = 2;
+    string model = 3;
+}
+
+message AppleDNSMobileConfig {
+    bytes config = 1;
+}
+
+message InstalledApp {
+    string name = 1;
+    string package_name = 2;
+    uint64 install_time = 3; // unix time in seconds
+}
+
+message InstalledApps {
+    repeated InstalledApp installed_apps = 1;
+}
+
+
+message Notification {
+    string title = 1;
+    string body = 2;
+}
+
+message ListedApps {
+    message ListedApp {
+        string name = 1;
+        string image = 2;
+        string category = 3;
+        string url = 4;
+        string info = 5;
+    }
+
+    repeated ListedApp listed_apps = 1;
+}
+
+message Notifications {
+    repeated Notification notifications = 1;
+}
+
+message IsOnPartnerNetworkResponse {
+    bool is_on_partner_network = 1;
+}
+
+message Username {
+    string mobile = 1;
+}
+message InitiateLoginResponse {
+    string initiate_login_jwt = 1;
+}
+
+message LoginValidateRequest {
+    string otp = 1;
+    string app_version = 2;
+    string platform = 3; // android, ios, macOS, windows
+    string initiate_login_jwt = 4;
+}
+
+message PubKey {
+    bytes x = 1;
+    bytes y = 2;
+}
+message ConnectProfileReq {
+    PubKey client_pub_key = 1;
+}
+
+message ConnectProfileResponse {
+    PubKey server_pub_key = 1; // used to generate ECDH pre key
+    bytes encrypted_connect_profile = 2; // encrypted connect profile using AES
+    bytes nonce = 3; // used for AES decryption
+    string open_browser_to_url = 4; // url to open browser to
+    string unencrypted_connect_profile = 5; // unencrypted connect profile
+}
+
+message User {
+    string fname = 1;
+    string lname = 2;
+    string email = 3;
+    string mobile = 4;
+    string id = 5;
+}
+message LoginResponse {
+    User user = 1;
+    string jwt = 2;
+    bool is_referral_eligible = 3; // controls if we show the user the referral screen
+}
