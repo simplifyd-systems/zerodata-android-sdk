@@ -29,9 +29,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install NDK
-        uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r21
+        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
       - name: Generate Release APK
         run: ./gradlew assembleRelease
       - name: Sign APK
