@@ -205,7 +205,7 @@ dependencies {
     api("io.grpc:grpc-android:1.43.1")
     api("io.grpc:grpc-okhttp:1.43.1")
     api("com.google.protobuf:protobuf-javalite:3.21.2")
-    api("io.grpc:grpc-core:1.27.1")
+    api("io.grpc:grpc-core:1.43.1")
     api("io.grpc:grpc-protobuf-lite:1.43.1") {
         exclude(module = "protobuf-lite")
     }
