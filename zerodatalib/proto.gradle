@@ -1,7 +1,7 @@
 protobuf {
-    protoc { artifact = 'com.google.protobuf:protoc:3.21.2:osx-x86_64' }
+    protoc { artifact = 'com.google.protobuf:protoc:3.21.0:osx-x86_64' }
     plugins {
-        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.46.0:osx-x86_64'}
+        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.43.1:osx-x86_64'}
     }
     generateProtoTasks {
         all().each { task ->
