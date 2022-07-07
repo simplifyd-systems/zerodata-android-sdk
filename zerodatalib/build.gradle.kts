@@ -92,7 +92,7 @@ dependencies {
     val work_version = "2.8.0-alpha02"
     implementation("androidx.work:work-runtime-ktx:$work_version")
 
-    api("com.google.protobuf:protobuf-javalite:3.19.1")
+    api("com.google.protobuf:protobuf-javalite:3.21.2")
 
     implementation("androidx.annotation:annotation:1.4.0")
     api("javax.annotation:javax.annotation-api:1.3.2")
