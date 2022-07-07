@@ -33,24 +33,24 @@ android {
 
     productFlavors {
         create("ui") {
-            buildConfigField("String", "IP_STACK_API_KEY", "\"c1aab8424db6187a6d0e5baa164afc13\"")
-            buildConfigField("String", "IP_STACK_BASE_URL", "\"http://api.ipstack.com/\"")
-            buildConfigField("String", "AWS_IP_BASE_URL", "\"http://checkip.amazonaws.com/\"")
-            buildConfigField("String", "API_URL", "\"https://api2.dns.simplifyd.systems/v1/\"")
-            buildConfigField("String", "ANDROID_APP_LOGIN", "\"66868\"")
-            buildConfigField("String", "ANDROID_APP_PASSWORD", "\"I52nvt29\"")
-            buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-7604868220609576~8057365177\"")
+//            buildConfigField("String", "IP_STACK_API_KEY", "\"c1aab8424db6187a6d0e5baa164afc13\"")
+//            buildConfigField("String", "IP_STACK_BASE_URL", "\"http://api.ipstack.com/\"")
+//            buildConfigField("String", "AWS_IP_BASE_URL", "\"http://checkip.amazonaws.com/\"")
+//            buildConfigField("String", "API_URL", "\"https://api2.dns.simplifyd.systems/v1/\"")
+//            buildConfigField("String", "ANDROID_APP_LOGIN", "\"66868\"")
+//            buildConfigField("String", "ANDROID_APP_PASSWORD", "\"I52nvt29\"")
+//            buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-7604868220609576~8057365177\"")
             dimension = "implementation"
             matchingFallbacks = mutableListOf("uiRelease")
         }
         create("skeleton") {
-            buildConfigField("String", "IP_STACK_API_KEY", "\"c1aab8424db6187a6d0e5baa164afc13\"")
-            buildConfigField("String", "IP_STACK_BASE_URL", "\"http://api.ipstack.com/\"")
-            buildConfigField("String", "AWS_IP_BASE_URL", "\"http://checkip.amazonaws.com/\"")
-            buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-7604868220609576~8057365177\"")
-            buildConfigField("String", "API_URL", "\"https://api2.dns.simplifyd.systems/v1/\"")
-            buildConfigField("String", "ANDROID_APP_LOGIN", "\"66868\"")
-            buildConfigField("String", "ANDROID_APP_PASSWORD", "\"I52nvt29\"")
+//            buildConfigField("String", "IP_STACK_API_KEY", "\"c1aab8424db6187a6d0e5baa164afc13\"")
+//            buildConfigField("String", "IP_STACK_BASE_URL", "\"http://api.ipstack.com/\"")
+//            buildConfigField("String", "AWS_IP_BASE_URL", "\"http://checkip.amazonaws.com/\"")
+//            buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-7604868220609576~8057365177\"")
+//            buildConfigField("String", "API_URL", "\"https://api2.dns.simplifyd.systems/v1/\"")
+//            buildConfigField("String", "ANDROID_APP_LOGIN", "\"66868\"")
+//            buildConfigField("String", "ANDROID_APP_PASSWORD", "\"I52nvt29\"")
             dimension = "implementation"
             matchingFallbacks = mutableListOf("skeletonRelease")
         }

@@ -64,7 +64,7 @@ class ZeroDataSDK(private val activity: Activity) : VpnStatus.StateListener {
         )
     }
 
-    fun turnOnZeroData() {
+    fun connectZeroData() {
         scope.launch {
             val response = connectToZeroData()
             if (response is Status.Success) {
@@ -108,7 +108,7 @@ class ZeroDataSDK(private val activity: Activity) : VpnStatus.StateListener {
         activity.startActivity(intent)
     }
 
-    fun disconnectFromZeroData() {
+    fun disconnectZeroData() {
         disconnectVPN()
     }
 

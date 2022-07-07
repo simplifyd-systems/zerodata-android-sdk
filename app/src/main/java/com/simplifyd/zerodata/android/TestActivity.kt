@@ -1,26 +1,32 @@
 package com.simplifyd.zerodata.android
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import com.simplifyd.zerodata.ZeroDataSDK
 import com.simplifyd.zerodata.settings.ZeroDataSDKSettings
+import com.simplifyd.zerodata.settings.ZeroDataStateListener
+import de.blinkt.openvpn.core.ConnectionStatus
 import kotlinx.android.synthetic.main.activity_test.*
+import java.util.logging.Level
 
-class TestActivity : AppCompatActivity() {
+class TestActivity : AppCompatActivity(), ZeroDataStateListener {
     var isTurnedOn = false
 
     private val checkChangedListener =
         CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked.not()) {
                 connect_switch.isChecked = false
-                ZeroDataSDK(this).disconnectFromZeroData()
+                ZeroDataSDK(this).disconnectZeroData()
 
             } else {
-                ZeroDataSDK(this).turnOnZeroData()
+                ZeroDataSDK(this).connectZeroData()
                 connect_switch.isChecked = true
             }
         }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +38,13 @@ class TestActivity : AppCompatActivity() {
 
         btnSubmit.setOnClickListener {
             if (isTurnedOn) {
-                ZeroDataSDK(this).disconnectFromZeroData()
+                ZeroDataSDK(this).disconnectZeroData()
                 btnSubmit.text = "Turn on"
                 isTurnedOn = false
 
 
             } else {
-                ZeroDataSDK(this).turnOnZeroData()
+                ZeroDataSDK(this).connectZeroData()
 
                 btnSubmit.text = "Connecting.."
                 isTurnedOn = true
@@ -49,6 +55,22 @@ class TestActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun updateState(
+        state: String?,
+        logmessage: String?,
+        localizedResId: Int,
+        level: ConnectionStatus?,
+        Intent: Intent?
+    ) {
+        if (level == ConnectionStatus.LEVEL_NOTCONNECTED){
+
+        }
+    }
+
+    override fun setConnectedVPN(uuid: String?) {
+        TODO("Not yet implemented")
     }
 
 
