@@ -99,4 +99,4 @@ dependencies {
 
 }
 
-apply(from = "${rootProject.rootDir}/app/proto.gradle")
+apply(from = "${rootProject.rootDir}/zerodatalib/proto.gradle")

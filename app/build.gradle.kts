@@ -238,4 +238,3 @@ dependencies {
 
 }
 
-apply(from = "${rootProject.rootDir}/app/proto.gradle")
