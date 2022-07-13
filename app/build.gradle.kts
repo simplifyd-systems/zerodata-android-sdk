@@ -15,6 +15,7 @@ plugins {
 
 android {
     compileSdkVersion(31)
+    ndkVersion = "21.0.6113669"
 
     defaultConfig {
         applicationId = "com.simplifyd.zerodata.android"
