@@ -1,5 +1,4 @@
 plugins {
-    id("com.onesignal.androidsdk.onesignal-gradle-plugin")
     id("com.android.application")
     id("checkstyle")
     id("kotlin-android")
@@ -56,6 +55,7 @@ android {
             keyPassword = "Zerodata01"
         }
     }
+
 
     buildTypes {
         getByName("release") {
@@ -169,7 +169,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.mindorks.android:prdownloader:0.6.0")
-    implementation("com.onesignal:OneSignal:[4.0.0, 4.99.99]")
     implementation("com.github.skydoves:balloon:1.1.5")
     implementation("net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")

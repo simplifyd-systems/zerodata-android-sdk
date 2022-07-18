@@ -1,9 +1,13 @@
+import java.util.*
+import java.io.*
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("com.google.protobuf")
+    id("maven-publish")
 }
 
 android {
@@ -59,7 +63,55 @@ android {
     }
 }
 
+val githubProperties = Properties()
+githubProperties.load(FileInputStream(rootProject.file("github.properties")))
+
+fun getVersionName(): String {
+    return "1.0.0" // Replace with version Name
+}
+
+fun getArtificatId(): String {
+    return "zerodatalib-skeleton" // Replace with library name ID
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("gpr") {
+            run {
+                groupId = "com.zerodata.libraries"
+                artifactId = getArtificatId()
+                version = getVersionName()
+                artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             *  Replace GITHUB_USERID with your/organisation Github userID and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/68160531/zerodata-android-sdk")
+            credentials {
+                /**Create github.properties in root project folder file with gpr.usr=GITHUB_USER_ID  & gpr.key=PERSONAL_ACCESS_TOKEN
+                 * OR
+                 * Set environment variables
+                 */
+                username = githubProperties["gpr.usr"] as String? ?: System.getenv("GPR_USER")
+                password = githubProperties["gpr.key"] as String? ?: System.getenv("GPR_API_KEY")
+
+            }
+        }
+    }
+}
+
 dependencies {
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+
+
+
     implementation("androidx.appcompat:appcompat:1.4.2")
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test.ext:junit:1.1.3")
