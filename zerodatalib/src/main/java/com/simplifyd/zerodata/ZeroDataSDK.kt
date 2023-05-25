@@ -1,11 +1,12 @@
 package com.simplifyd.zerodata
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import com.simplifyd.zerodata.data.config.OpenVpnConfigurator
 import com.simplifyd.zerodata.data.local.PreferenceManager
 import com.simplifyd.zerodata.data.repo.CredentialsRepository
-import com.simplifyd.zerodata.data.repo.UserRepository
+import com.simplifyd.zerodata.data.repo.InitializationRepository
 import com.simplifyd.zerodata.settings.ZeroDataSDKSettings
 import com.simplifyd.zerodata.settings.ZeroDataStateListener
 import com.simplifyd.zerodata.utils.Status
@@ -19,98 +20,94 @@ import kotlinx.coroutines.*
 
 
 @ExperimentalCoroutinesApi
-class ZeroDataSDK(private val activity: Activity) : VpnStatus.StateListener {
+class ZeroDataSDK(private val context: Application, private val listener: ZeroDataStateListener) :
+    VpnStatus.StateListener {
 
-    private var listener: ZeroDataStateListener? = null
     private lateinit var settings: ZeroDataSDKSettings
-    private val userRepository = UserRepository()
     private val credentialsRepository = CredentialsRepository()
+    private val initializationRepository = InitializationRepository()
     private val scope = CoroutineScope(Dispatchers.IO + Job())
 
     init {
-        PreferenceManager.context = activity
-        OpenVpnConfigurator.context = activity
+        PreferenceManager.context = context
+        OpenVpnConfigurator.context = context
     }
 
+    //Initialize SDK, prerequisite for establishing Zerodata connection
     fun configure(settings: ZeroDataSDKSettings) {
         this.settings = settings
-
         scope.launch {
-            val response = initate()
-            if (response is Status.Success) {
-                validate()
+            when (val response = initialize(settings.userID)) {
+                is Status.Success -> listener.initializationSuccess()
+
+                is Status.Error -> listener.initializationFailed(response.error.message.toString())
+
             }
         }
     }
 
-    fun addListener(listener: ZeroDataStateListener) {
-        this.listener = listener
-        VpnStatus.addStateListener(this)
-    }
-
-    fun removeListener() {
-        this.listener = null
-        VpnStatus.removeStateListener(this)
-    }
-
-    private suspend fun initate(): Status<Unit> {
-        return userRepository.loginInitiate("2347234567890")
-    }
-
-    private suspend fun validate() {
-        userRepository.loginValidate(
-            "999999", BuildConfig.VERSION_CODE.toString(),
-            "android"
-        )
-    }
-
-    fun connectZeroData() {
+    //Establish connection with Zerodata
+    fun connectToZerodata(activity: Activity) {
         scope.launch {
-            val response = connectToZeroData()
-            if (response is Status.Success) {
-                PreferenceManager.getProfileName()?.let {
-                    startOrStopOpenVPN(
-                        ProfileManager.get(
-                            activity,
-                            it
-                        )
-                    )
-                }
+            when (val response = connectZeroData()) {
+                is Status.Success -> initiateToggleOpenVPNConnection(activity)
+                is Status.Error -> listener.configureFailed(response.error.message.toString())
+
             }
         }
     }
 
-    private suspend fun connectToZeroData(): Status<String> {
+    //Disconnects established connection with Zerodata
+    fun disconnectFromZerodata(activity: Activity) {
+        disconnectVPNConnection(activity)
+    }
+
+    //Checks if there is an established connection
+    fun status(): Boolean {
+        return isVPNConnected()
+    }
+
+    private suspend fun initialize(userId: String): Status<Unit> {
+        return initializationRepository.initialize(context.packageName, userId)
+    }
+
+
+    private fun initiateToggleOpenVPNConnection(activity: Activity) {
+        PreferenceManager.getProfileName()?.let {
+            toggleOpenVPNConnection(
+                ProfileManager.get(
+                    activity,
+                    it
+                ), activity
+            )
+        }
+    }
+
+    private suspend fun connectZeroData(): Status<String> {
         return credentialsRepository.getConnectProfile()
     }
 
-    private fun startOrStopOpenVPN(profile: VpnProfile) {
+    private fun toggleOpenVPNConnection(profile: VpnProfile, activity: Activity) {
         if (isVPNConnected() && profile.uuidString == VpnStatus.getLastConnectedVPNProfile()) {
-            disconnectVPN()
+            disconnectVPNConnection(activity)
         } else {
-            startOpenVPN(profile)
+            launchOpenVPNConnection(profile, activity)
         }
     }
 
-    private fun disconnectVPN() {
-        val disconnectVPN = Intent(activity, DisconnectVPN::class.java)
-        activity.startActivity(disconnectVPN)
-    }
-
-    private fun isVPNConnected() =
-        VpnStatus.isVPNActive()
-
-
-    private fun startOpenVPN(profile: VpnProfile) {
+    private fun launchOpenVPNConnection(profile: VpnProfile, activity: Activity) {
         val intent = Intent(activity, LaunchVPN::class.java)
         intent.putExtra(LaunchVPN.EXTRA_KEY, profile.uuid.toString())
         intent.action = Intent.ACTION_MAIN
         activity.startActivity(intent)
     }
 
-    fun disconnectZeroData() {
-        disconnectVPN()
+    private fun disconnectVPNConnection(activity: Activity) {
+        val disconnectVPN = Intent(activity, DisconnectVPN::class.java)
+        activity.startActivity(disconnectVPN)
     }
+
+    private fun isVPNConnected() = VpnStatus.isVPNActive()
 
     override fun updateState(
         state: String?,
@@ -119,10 +116,10 @@ class ZeroDataSDK(private val activity: Activity) : VpnStatus.StateListener {
         level: ConnectionStatus?,
         Intent: Intent?
     ) {
-        listener?.updateState(state, logmessage, localizedResId, level, Intent)
+        listener.updateState(state, logmessage, localizedResId, level, Intent)
     }
 
     override fun setConnectedVPN(uuid: String?) {
-        listener?.setConnectedVPN(uuid)
+        listener.setConnectedVPN(uuid)
     }
 }
