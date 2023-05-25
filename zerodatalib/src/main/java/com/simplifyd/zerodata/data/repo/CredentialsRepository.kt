@@ -35,9 +35,6 @@ class CredentialsRepository constructor(
                 .setX(ByteString.copyFrom(affineX.toByteArray()))
                 .setY(ByteString.copyFrom(affineY.toByteArray()))
 
-            Log.d("OVPN:", Arrays.toString(affineX.toByteArray()))
-            Log.d("OVPN:", Arrays.toString(affineY.toByteArray()))
-
             val connectProfileRequest =
                 ApiRpc.ConnectProfileReq.newBuilder().setClientPubKey(pubKey)
                     .build()
@@ -47,8 +44,6 @@ class CredentialsRepository constructor(
             val blockingStub = EdgeGrpc.newBlockingStub(GRPCChannelFactory.grpcChannel)
                 .withCallCredentials(creds)
             val response = blockingStub.getConnectProfile(connectProfileRequest)
-
-            Log.d("getConnectProfile: ", "Response $response")
 
             openVpnConfigurator.configureOVPNServers(profileData = response.unencryptedConnectProfile)
                 .first().let {

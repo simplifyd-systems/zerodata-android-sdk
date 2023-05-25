@@ -30,7 +30,6 @@ public class AuthenticationCallCredentials extends CallCredentials {
                 metadataApplier.fail(Status.UNAUTHENTICATED.withCause(e));
             }
         });
-
     }
 
     @Override
