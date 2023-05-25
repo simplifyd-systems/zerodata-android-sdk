@@ -17,13 +17,13 @@ import de.blinkt.openvpn.core.ConnectionStatus
 import de.blinkt.openvpn.core.ProfileManager
 import de.blinkt.openvpn.core.VpnStatus
 import kotlinx.coroutines.*
-
+/**Created by Moronke Anifowose
+ * Establish a VPN connection to access the internet datafree**/
 
 @ExperimentalCoroutinesApi
 class ZeroDataSDK(private val context: Application, private val listener: ZeroDataStateListener) :
     VpnStatus.StateListener {
 
-    private lateinit var settings: ZeroDataSDKSettings
     private val credentialsRepository = CredentialsRepository()
     private val initializationRepository = InitializationRepository()
     private val scope = CoroutineScope(Dispatchers.IO + Job())
@@ -35,7 +35,6 @@ class ZeroDataSDK(private val context: Application, private val listener: ZeroDa
 
     //Initialize SDK, prerequisite for establishing Zerodata connection
     fun configure(settings: ZeroDataSDKSettings) {
-        this.settings = settings
         scope.launch {
             when (val response = initialize(settings.userID)) {
                 is Status.Success -> listener.initializationSuccess()
